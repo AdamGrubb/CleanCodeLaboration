@@ -22,12 +22,12 @@ namespace CleanCodeLaboration.GameLogic.Strategy
             Guesses = guesses;
         }
 
-        public void Update(int guesses) //Flytta ut till en annan klass.
+        public void Update(int guesses)
         {
             Guesses += guesses;
             NumberOfGames++;
         }
-        public double GetAverageScore() //Flytta ut till en annan klass.
+        public double GetAverageScore()
         {
             return (double)Guesses / NumberOfGames;
         }

@@ -35,7 +35,7 @@ namespace CleanCodeLaboration.GameLogic.Strategy
         {
             this.userName = userName;
         }
-        public string GenerateRandomGoal() //Ska man ha en generate random goal och en makerandomgoal?
+        public string GenerateRandomGoal()
         {
             string goal = "";
             Random random = new Random();
@@ -125,7 +125,7 @@ namespace CleanCodeLaboration.GameLogic.Strategy
 
             return formatedPlayerScores;
         }
-        private List<Player> ConvertToPlayer(List<IPlayer> playersDTO) //Kolla av namnändringen.
+        private List<Player> ConvertToPlayer(List<IPlayer> playersDTO)
         {
             List<Player> players = new List<Player>();
             foreach (IPlayer playerDTO in playersDTO)
