@@ -1,14 +1,8 @@
-﻿using CleanCodeLaboration.GameDAO;
-using CleanCodeLaboration.GameDAO.Interface;
-using CleanCodeLaboration.GameLogic.Strategy.Interface;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
+﻿using CleanCodeLaboration.Model.GameDAO;
+using CleanCodeLaboration.Model.GameDAO.Interface;
+using CleanCodeLaboration.Model.GameLogic.Strategy.Interface;
 
-namespace CleanCodeLaboration.GameLogic.Strategy
+namespace CleanCodeLaboration.Model.GameLogic.Strategy
 {
     public class MooGameStrategy : IGameStrategy
     {
@@ -47,7 +41,7 @@ namespace CleanCodeLaboration.GameLogic.Strategy
             }
             return goal;
         }
-        public void SetGoal(string goal) 
+        public void SetGoal(string goal)
         {
             this.goal = goal;
         }
@@ -84,7 +78,7 @@ namespace CleanCodeLaboration.GameLogic.Strategy
             {
                 IsGameActive = false;
             }
-            string bullsAndCows = new String('B', bulls) + "," + new String('C', cows);
+            string bullsAndCows = new string('B', bulls) + "," + new string('C', cows);
             return bullsAndCows;
         }
         private void IncrementGuess()

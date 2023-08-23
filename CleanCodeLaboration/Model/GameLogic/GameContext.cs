@@ -1,13 +1,8 @@
-﻿using CleanCodeLaboration.GameDAO.Interface;
-using CleanCodeLaboration.GameLogic.Strategy;
-using CleanCodeLaboration.GameLogic.Strategy.Interface;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CleanCodeLaboration.Model.GameDAO.Interface;
+using CleanCodeLaboration.Model.GameLogic.Strategy;
+using CleanCodeLaboration.Model.GameLogic.Strategy.Interface;
 
-namespace CleanCodeLaboration.GameLogic
+namespace CleanCodeLaboration.Model.GameLogic
 {
     public class GameContext
     {

@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CleanCodeLaboration.GameDAO.Interface;
-using CleanCodeLaboration.GameLogic.Strategy;
+﻿using CleanCodeLaboration.Model.GameDAO.Interface;
 
-namespace CleanCodeLaboration.GameDAO
+namespace CleanCodeLaboration.Model.GameDAO
 {
     public class LocalFileDAO : IGameDAO
     {

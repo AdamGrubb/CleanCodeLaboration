@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CleanCodeLaboration.GameDAO.Interface;
-
-namespace CleanCodeLaboration.GameLogic.Strategy
+﻿namespace CleanCodeLaboration.Model.GameLogic.Strategy
 {
     public class Player
     {

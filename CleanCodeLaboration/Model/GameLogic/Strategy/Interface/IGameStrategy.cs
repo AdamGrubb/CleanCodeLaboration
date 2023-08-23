@@ -1,4 +1,4 @@
-﻿namespace CleanCodeLaboration.GameLogic.Strategy.Interface
+﻿namespace CleanCodeLaboration.Model.GameLogic.Strategy.Interface
 {
     public interface IGameStrategy
     {

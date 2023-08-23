@@ -1,4 +1,4 @@
-﻿namespace CleanCodeLaboration.GameDAO.Interface
+﻿namespace CleanCodeLaboration.Model.GameDAO.Interface
 {
     public interface IGameDAO
     {
