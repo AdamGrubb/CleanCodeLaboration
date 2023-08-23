@@ -1,10 +1,11 @@
 ﻿using CleanCodeLaboration.Model.GameDAO.Interface;
+using CleanCodeLaboration.Model.GameLogic.Interface;
 using CleanCodeLaboration.Model.GameLogic.Strategy;
 using CleanCodeLaboration.Model.GameLogic.Strategy.Interface;
 
 namespace CleanCodeLaboration.Model.GameLogic
 {
-    public class GameContext
+    public class GameContext : IGameContext
     {
         private IGameStrategy gameStrategy;
         private IGameDAO gameDAO;
