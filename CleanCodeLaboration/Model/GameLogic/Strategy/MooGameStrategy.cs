@@ -92,7 +92,7 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy
         }
         public void SaveGame()
         {
-            IPlayer playerScore = new PlayerDTO(userName, numberOfGuesses);
+            IPlayerScore playerScore = new PlayerScoreDTO(userName, numberOfGuesses);
             gameDAO.SavePlayerScore(gameName, playerScore);
         }
 
@@ -107,7 +107,7 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy
         {
             string formatedPlayerScores = "";
 
-            List<IPlayer> players = gameDAO.GetAllPlayerScores(gameName);
+            List<IPlayerScore> players = gameDAO.GetAllPlayerScores(gameName);
 
             List<Player> highScore = ConvertToPlayer(players);
 
@@ -115,10 +115,10 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy
 
             return formatedPlayerScores;
         }
-        private List<Player> ConvertToPlayer(List<IPlayer> playersDTO)
+        private List<Player> ConvertToPlayer(List<IPlayerScore> playersDTO)
         {
             List<Player> players = new List<Player>();
-            foreach (IPlayer playerDTO in playersDTO)
+            foreach (IPlayerScore playerDTO in playersDTO)
             {
                 Player pd = new Player(playerDTO.Name, playerDTO.Guesses);
                 int pos = players.IndexOf(pd);

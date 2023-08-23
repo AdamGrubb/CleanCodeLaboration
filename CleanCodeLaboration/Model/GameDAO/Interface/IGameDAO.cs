@@ -2,7 +2,7 @@
 {
     public interface IGameDAO
     {
-        List<IPlayer> GetAllPlayerScores(string gameName);
-        void SavePlayerScore(string gameName, IPlayer player);
+        List<IPlayerScore> GetAllPlayerScores(string gameName);
+        void SavePlayerScore(string gameName, IPlayerScore player);
     }
 }

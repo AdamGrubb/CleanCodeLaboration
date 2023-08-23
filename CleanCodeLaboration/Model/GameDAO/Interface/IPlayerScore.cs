@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CleanCodeLaboration.Model.GameDAO.Interface
 {
-    public interface IPlayer
+    public interface IPlayerScore
     {
         public string Name { get; set; }
         public int Guesses { get; set; }
