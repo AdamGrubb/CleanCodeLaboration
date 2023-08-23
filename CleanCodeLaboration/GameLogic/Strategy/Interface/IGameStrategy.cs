@@ -11,7 +11,6 @@
         void SetGoal(string goal);
         string GetHighScore();
         string GetPlayAgainMessage();
-        string GetPlayerNameQuestion();
         string GetPracticeRun();
         void PlayAgain(string answer);
         void SaveGame();

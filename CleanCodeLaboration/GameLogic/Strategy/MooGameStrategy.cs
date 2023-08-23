@@ -27,10 +27,6 @@ namespace CleanCodeLaboration.GameLogic.Strategy
         {
             IsGameActive = true;
         }
-        public string GetPlayerNameQuestion()
-        {
-            return "Enter your user name\n";
-        }
         public void SetPlayerName(string userName)
         {
             this.userName = userName;
