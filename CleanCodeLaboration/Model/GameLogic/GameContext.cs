@@ -24,9 +24,30 @@ namespace CleanCodeLaboration.Model.GameLogic
         }
         public void SetGameStrategy(IGameStrategy gameStrategy) //Kanske ha en menyklass som stoppar in en strategy i GameContext? Typ en intern klass inom controllern som spottar ut menyval efter en loop och sen tar fram rätt strategy till GameContext.
         {
-            this.gameStrategy = new MooGameStrategy(gameDAO);
+            this.gameStrategy = gameStrategy;
+            ConfigureGameStrategy();
+            StartGameStrategy();
+            SetPlayerNameForStrategy();
+            GenerateAndSetGoalForStrategy();
+        }
+
+        private void ConfigureGameStrategy()
+        {
+            gameStrategy.SetGameDAO(gameDAO);
+        }
+
+        private void StartGameStrategy()
+        {
             gameStrategy.StartGame();
+        }
+
+        private void SetPlayerNameForStrategy()
+        {
             gameStrategy.SetPlayerName(playerName);
+        }
+
+        private void GenerateAndSetGoalForStrategy()
+        {
             string goal = gameStrategy.GenerateRandomGoal();
             gameStrategy.SetGoal(goal);
         }

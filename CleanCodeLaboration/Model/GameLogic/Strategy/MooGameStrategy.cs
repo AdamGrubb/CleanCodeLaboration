@@ -10,10 +10,10 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy
         private int numberOfGuesses = 0;
         private bool IsGameActive { get; set; }
         private const string gameName = "MooGame";
-        private readonly IGameDAO gameDAO;
+        private IGameDAO gameDAO;
         private string userName = "";
 
-        public MooGameStrategy(IGameDAO gameDAO)
+        public void SetGameDAO(IGameDAO gameDAO)
         {
             this.gameDAO = gameDAO;
         }
