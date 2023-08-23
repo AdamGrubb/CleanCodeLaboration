@@ -23,14 +23,14 @@ namespace CleanCodeLaboration.GameDAO
         public List<IPlayer> GetAllPlayerScores(string gameName)
         {
             StreamReader streamReader = new StreamReader(gameName + fileFormat);
-            List<Player> playerScores = new List<Player>();
+            List<IPlayer> playerScores = new List<IPlayer>();
             string line;
             while ((line = streamReader.ReadLine()) != null)
             {
                 string[] nameAndScore = line.Split(new string[] { nameAndScoreSeperator }, StringSplitOptions.None);
                 string name = nameAndScore[0];
                 int score = Convert.ToInt32(nameAndScore[1]);
-                playerScores.Add(new Player(name, score));
+                playerScores.Add(new PlayerDTO(name, score));
             }
             streamReader.Close();
 
