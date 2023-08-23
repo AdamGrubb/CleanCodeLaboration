@@ -8,6 +8,7 @@
         string GetGameIntroduction();
         bool GetGameStatus();
         string GetGoal();
+        void SetGoal(string goal);
         string GetHighScore();
         string GetPlayAgainMessage();
         string GetPlayerNameQuestion();

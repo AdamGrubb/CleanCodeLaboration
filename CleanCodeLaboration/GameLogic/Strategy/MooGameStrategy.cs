@@ -51,6 +51,11 @@ namespace CleanCodeLaboration.GameLogic.Strategy
             }
             return goal;
         }
+        public void SetGoal(string goal) 
+        {
+            this.goal = goal;
+        }
+
         public string GetGameIntroduction()
         {
             return "New game:\n";
