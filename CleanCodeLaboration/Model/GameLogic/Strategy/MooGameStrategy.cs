@@ -113,9 +113,9 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy
             string highScores = "Player   games average\n"; //Lägga in i en egen metod eller inte.
 
             List<IPlayerScore> playerScores = GetPlayerScores();
-            List<Player> players = ConvertToPlayer(playerScores);
-            SortPlayersByScore(players);
-            string formatedPlayer = GetFormattedPlayerScores(players);
+            List<Player> players = StrategyUtilitys.ConvertToPlayer(playerScores);
+            StrategyUtilitys.SortPlayersByScore(players);
+            string formatedPlayer = StrategyUtilitys.GetFormattedPlayerScores(players);
             highScores += formatedPlayer;
 
             return highScores;
@@ -127,37 +127,7 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy
 
             return playerScores;
         }
-        private List<Player> ConvertToPlayer(List<IPlayerScore> playersDTO)
-        {
-            List<Player> players = new List<Player>();
-            foreach (IPlayerScore playerDTO in playersDTO)
-            {
-                Player pd = new Player(playerDTO.Name, playerDTO.Guesses);
-                int pos = players.IndexOf(pd);
-                if (pos < 0)
-                {
-                    players.Add(pd);
-                }
-                else
-                {
-                    players[pos].Update(playerDTO.Guesses);
-                }
-            }
-            return players;
-        }
-        private void SortPlayersByScore(List<Player> players) //Är det här en utparametergrej som 
-        {
-            players.Sort((p1, p2) => p1.GetAverageScore().CompareTo(p2.GetAverageScore()));
-        }
-        private string GetFormattedPlayerScores(List<Player> players)
-        {
-            string formatedPlayerScores = "";
-            foreach (Player player in players)
-            {
-                formatedPlayerScores += string.Format("{0,-9}{1,5:D}{2,9:F2}\n", player.Name, player.NumberOfGames, player.GetAverageScore());
-            }
-            return formatedPlayerScores;
-        }
+
         public string GetFinishedGameMessage()
         {
             string gameOverMessages = "Correct, it took " + numberOfGuesses + " guesses";
