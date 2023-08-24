@@ -1,6 +1,8 @@
-﻿using CleanCodeLaboration.Model.GameDAO.Interface;
+﻿using CleanCodeLaboration.Model.GameDAO;
+using CleanCodeLaboration.Model.GameDAO.Interface;
 using CleanCodeLaboration.Model.GameLogic.Strategy;
 using CleanCodeLaboration.Model.GameLogic.Strategy.Interface;
+using Moq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -122,14 +124,39 @@ namespace CleanCodeLaborationTest.Model.GameLogic
             goal = gameStrategy.GenerateRandomGoal();
 
             //Assert
-            for (int i = 0; i< lengthOfGoal; i++)
+            for (int i = 0; i < lengthOfGoal; i++)
             {
-                for (int j = i+1; j < lengthOfGoal; j++)
+                for (int j = i + 1; j < lengthOfGoal; j++)
                 {
                     Assert.IsFalse(goal[i] == goal[j]);
                 }
             }
             Assert.AreEqual(lengthOfGoal, goal.Length);
+        }
+        [TestMethod]
+        public void TestHighScore()
+        {
+            //Arrange 
+            var mockDAO = new Mock<IGameDAO>();
+            string expectedHighScores = "Player   games average\n";
+            string recivedHighScores;
+
+            List<IPlayerScore> testPlayersScores = new List<IPlayerScore> { new PlayerScoreDTO("Bananaman", 15), new PlayerScoreDTO("Korven Senap", 15) };
+
+            List<Player> players = StrategyUtilitys.ConvertToPlayer(testPlayersScores);
+
+            StrategyUtilitys.SortPlayersByScore(players);
+            expectedHighScores += StrategyUtilitys.GetFormattedPlayerScores(players);
+
+            mockDAO.Setup(dao => dao.GetAllPlayerScores(It.IsAny<string>())).Returns(testPlayersScores);
+
+
+            //Act
+            gameStrategy.SetGameDAO(mockDAO.Object);
+            recivedHighScores = gameStrategy.GetHighScore();
+
+            //Assert
+            Assert.AreEqual(expectedHighScores, recivedHighScores);
         }
         [TestCleanup]
         public void TestCleanup() //Kanske jätteonödigt att göra, tar massa kraft??
