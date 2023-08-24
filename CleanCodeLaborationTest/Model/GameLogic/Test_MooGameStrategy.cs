@@ -22,7 +22,7 @@ namespace CleanCodeLaborationTest.Model.GameLogic
             bool beforeStartGame;
 
             //Act
-            beforeStartGame = gameStrategy.GetGameStatus(); 
+            beforeStartGame = gameStrategy.GetGameStatus();
             gameStrategy.StartGame();
             afterStartGame = gameStrategy.GetGameStatus();
 
@@ -111,6 +111,26 @@ namespace CleanCodeLaborationTest.Model.GameLogic
             Assert.IsTrue(correctGuess);
             Assert.IsFalse(wrongGuess);
         }
+        [TestMethod]
+        public void TestGenerateRandomGoal()
+        {
+            //Arrange
+            string goal;
+            int lengthOfGoal = 4;
+
+            //Act
+            goal = gameStrategy.GenerateRandomGoal();
+
+            //Assert
+            for (int i = 0; i< lengthOfGoal; i++)
+            {
+                for (int j = i+1; j < lengthOfGoal; j++)
+                {
+                    Assert.IsFalse(goal[i] == goal[j]);
+                }
+            }
+            Assert.AreEqual(lengthOfGoal, goal.Length);
+        }
         [TestCleanup]
         public void TestCleanup() //Kanske jätteonödigt att göra, tar massa kraft??
         {
@@ -119,15 +139,18 @@ namespace CleanCodeLaborationTest.Model.GameLogic
 
 
         /*
-        void SetGameDAO(IGameDAO gameDAO);
-        string GenerateRandomGoal();
-        bool GetGameStatus();
-        string GetGoal();
-        void SetGoal(string goal);
-        string GetHighScore();
-        string 
-        void SetPlayerName(string userName);
-        void StartGame();
+        void SetGameDAO;
+
+        GetGoal?
+
+        GetHighScore
+
+        SetPlayerName?
+
+        SaveGame(),
+
+        EndGame.
+
         */
 
         //Arrange
