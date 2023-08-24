@@ -13,10 +13,7 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.Interface
         string GetGoal();
         void SetGoal(string goal);
         string GetHighScore();
-        string GetPlayAgainMessage();
         string GetPracticeRun();
-        void PlayAgain(string answer);
-        void SaveGame();
         void SetPlayerName(string userName);
         void StartGame();
     }
