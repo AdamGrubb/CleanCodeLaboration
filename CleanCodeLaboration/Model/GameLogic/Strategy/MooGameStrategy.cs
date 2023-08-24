@@ -102,7 +102,7 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy
         }
 
 
-        public string GetHighScore()
+        public string GetHighScore()  //Jag skulle kunna mocka en gameDAO och sen förutse hur den kommer ut baserat på de privata metoderna. Sen jämföra strängarna i guess? Alternativet är att brya upp privata strängarna o publica och mocka dom?
         {
             string highScores = "Player   games average\n";
 
