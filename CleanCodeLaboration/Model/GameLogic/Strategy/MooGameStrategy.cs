@@ -46,7 +46,7 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy
             this.goal = goal;
         }
 
-        public string GetGameIntroduction()
+        public string GetGameIntroduction() //Här får du kolla upp, antagligen så lägger du den tillsammans med GetPracticeRun så att de blir på samma console.writeline
         {
             return "New game:\n";
         }
@@ -56,7 +56,6 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy
         }
         public string EvaluateGuess(string guess)
         {
-            IncrementGuess();
             string padding = "    ";
             int lenghtOfGoal = 4;
             int cows = 0;
@@ -74,19 +73,23 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy
                     cows++;
                 }
             }
-            if (bulls == lenghtOfGoal)
-            {
-                SaveGame();
-                IsGameActive = false;
-            }
             string bullsAndCows = new string('B', bulls) + "," + new string('C', cows);
             return bullsAndCows;
         }
-        private void IncrementGuess()
+        public void IncrementGuess()
         {
             numberOfGuesses++;
         }
-        private void SaveGame()
+        public bool IsCorrectGuess(string evaluatedGuess)
+        {
+            string correctEvaluatedAnswer = "BBBB,";
+            return evaluatedGuess == correctEvaluatedAnswer;
+        }
+        public void EndGame()
+        {
+            IsGameActive = false;
+        }
+        public void SaveGame()
         {
             IPlayerScore playerScore = new PlayerScoreDTO(userName, numberOfGuesses);
             gameDAO.SavePlayerScore(gameName, playerScore);

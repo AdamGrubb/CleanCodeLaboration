@@ -53,22 +53,25 @@ namespace CleanCodeLaboration.Model.GameLogic
         }
         public string GetGameIntroduction()
         {
-            return gameStrategy.GetGameIntroduction() + gameStrategy.GetPracticeRun();
+            return gameStrategy.GetGameIntroduction() + gameStrategy.GetPracticeRun(); //Denna får du göra om det blir konstigt med formatet.
         }
-        public string EvaluateGuess(string guess) //Denna ska kalla på incrementGuess, EvaluateGuess och sen ta värdet och lägga in det i en metod som avgör om spelet är klart eller inte? Slutligen returnera 
+        public string EvaluateGuess(string guess)
         {
-            /*gameStrategy.IncrementGuess();
-             * string response = gameStrategy.EvaluateGuess(guess)
-             * gameStrategy.CheckIfWon() eller nått som kollar ifall spelet är uppnått.
-             * return response;
-             */
-            return gameStrategy.EvaluateGuess(guess);
+            gameStrategy.IncrementGuess();
+            string evaluatedGuess = gameStrategy.EvaluateGuess(guess);
+            bool correctGuess = gameStrategy.IsCorrectGuess(evaluatedGuess);
+            if (correctGuess)
+            {
+                gameStrategy.SaveGame();
+                gameStrategy.EndGame();
+            }
+            return evaluatedGuess;
         }
         public bool IsGameActive()
         {
             return gameStrategy.GetGameStatus();
         }
-        public string GetHighScore()
+        public string GetHighScore() //Här får du också bryta ut alla funktioner och använda dem en efter en som du gjort i evaluateGuess.
         {
             return gameStrategy.GetHighScore();
         }
