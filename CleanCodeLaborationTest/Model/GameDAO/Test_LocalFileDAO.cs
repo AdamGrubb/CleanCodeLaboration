@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace CleanCodeLaborationTest.Model.GameDAO
 {
     [TestClass]
-    public class LocalFileDAOTest
+    public class Test_LocalFileDAO
     {
         const string localFileDAOFormat = ".txt";
         const string nameAndScoreSeperator = "#&#";
