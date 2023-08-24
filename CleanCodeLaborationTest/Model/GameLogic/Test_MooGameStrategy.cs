@@ -15,6 +15,23 @@ namespace CleanCodeLaborationTest.Model.GameLogic
         IGameStrategy gameStrategy = new MooGameStrategy();
 
         [TestMethod]
+        public void TestStartGame()
+        {
+            //Arrange
+            bool afterStartGame;
+            bool beforeStartGame;
+
+            //Act
+            beforeStartGame = gameStrategy.GetGameStatus(); 
+            gameStrategy.StartGame();
+            afterStartGame = gameStrategy.GetGameStatus();
+
+            //Assert
+            Assert.IsFalse(beforeStartGame);
+            Assert.IsTrue(afterStartGame);
+        }
+
+        [TestMethod]
         public void TestGetGameIntroduction()
         {
             //Arrange
@@ -78,6 +95,21 @@ namespace CleanCodeLaborationTest.Model.GameLogic
 
             //Assert
             Assert.AreEqual(@expectedResult, recivedResult);
+        }
+        [TestMethod]
+        public void TestIsCorrectGuess()
+        {
+            //Arrange
+            string rightEvaluatedGuess = "BBBB,";
+            string wrongEvaluatedGuess = "BB,CCCCCCC";
+
+            //Act
+            bool correctGuess = gameStrategy.IsCorrectGuess(rightEvaluatedGuess);
+            bool wrongGuess = gameStrategy.IsCorrectGuess(wrongEvaluatedGuess);
+
+            //Assert
+            Assert.IsTrue(correctGuess);
+            Assert.IsFalse(wrongGuess);
         }
         [TestCleanup]
         public void TestCleanup() //Kanske jätteonödigt att göra, tar massa kraft??
