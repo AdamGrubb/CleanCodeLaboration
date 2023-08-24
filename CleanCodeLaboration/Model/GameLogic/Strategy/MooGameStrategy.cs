@@ -1,6 +1,7 @@
 ﻿using CleanCodeLaboration.Model.GameDAO;
 using CleanCodeLaboration.Model.GameDAO.Interface;
 using CleanCodeLaboration.Model.GameLogic.Strategy.Interface;
+using System.Collections.Generic;
 
 namespace CleanCodeLaboration.Model.GameLogic.Strategy
 {
@@ -104,21 +105,21 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy
         public string GetHighScore()
         {
             string highScores = "Player   games average\n";
-            highScores += GetPlayerTopList();
+
+            List<IPlayerScore> playerScores = GetPlayerScores();
+            List<Player> players = ConvertToPlayer(playerScores);
+            SortPlayersByScore(players);
+            string formatedPlayer = GetFormattedPlayerScores(players);
+            highScores += formatedPlayer;
 
             return highScores;
         }
-        private string GetPlayerTopList()
+        private List<IPlayerScore> GetPlayerScores()
         {
-            string formatedPlayerScores = "";
 
-            List<IPlayerScore> players = gameDAO.GetAllPlayerScores(gameName);
+            List<IPlayerScore> playerScores = gameDAO.GetAllPlayerScores(gameName);
 
-            List<Player> highScore = ConvertToPlayer(players);
-
-            formatedPlayerScores = FormatPlayerScores(highScore);
-
-            return formatedPlayerScores;
+            return playerScores;
         }
         private List<Player> ConvertToPlayer(List<IPlayerScore> playersDTO)
         {
@@ -138,20 +139,18 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy
             }
             return players;
         }
-        private string FormatPlayerScores(List<Player> highScore)
+        private void SortPlayersByScore(List<Player> players) //Är det här en utparametergrej som 
+        {
+            players.Sort((p1, p2) => p1.GetAverageScore().CompareTo(p2.GetAverageScore()));
+        }
+        private string GetFormattedPlayerScores(List<Player> players)
         {
             string formatedPlayerScores = "";
-            highScore.Sort((p1, p2) => p1.GetAverageScore().CompareTo(p2.GetAverageScore()));
-
-            foreach (Player player in highScore)
+            foreach (Player player in players)
             {
-                formatedPlayerScores += FormatPlayer(player);
+                formatedPlayerScores += string.Format("{0,-9}{1,5:D}{2,9:F2}\n", player.Name, player.NumberOfGames, player.GetAverageScore());
             }
             return formatedPlayerScores;
-        }
-        private string FormatPlayer(Player player)
-        {
-            return string.Format("{0,-9}{1,5:D}{2,9:F2}\n", player.Name, player.NumberOfGames, player.GetAverageScore());
         }
         public string GetFinishedGameMessage()
         {
