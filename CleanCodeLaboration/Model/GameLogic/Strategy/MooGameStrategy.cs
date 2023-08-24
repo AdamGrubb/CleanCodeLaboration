@@ -10,10 +10,10 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy
         private int numberOfGuesses = 0;
         private bool IsGameActive { get; set; }
         private const string gameName = "MooGame";
-        private readonly IGameDAO gameDAO;
+        private IGameDAO gameDAO;
         private string userName = "";
 
-        public MooGameStrategy(IGameDAO gameDAO)
+        public void SetGameDAO(IGameDAO gameDAO)
         {
             this.gameDAO = gameDAO;
         }
@@ -76,6 +76,7 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy
             }
             if (bulls == lenghtOfGoal)
             {
+                SaveGame();
                 IsGameActive = false;
             }
             string bullsAndCows = new string('B', bulls) + "," + new string('C', cows);
@@ -85,16 +86,17 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy
         {
             numberOfGuesses++;
         }
+        private void SaveGame()
+        {
+            IPlayerScore playerScore = new PlayerScoreDTO(userName, numberOfGuesses);
+            gameDAO.SavePlayerScore(gameName, playerScore);
+        }
 
         public bool GetGameStatus()
         {
             return IsGameActive;
         }
-        public void SaveGame()
-        {
-            IPlayerScore playerScore = new PlayerScoreDTO(userName, numberOfGuesses);
-            gameDAO.SavePlayerScore(gameName, playerScore);
-        }
+
 
         public string GetHighScore()
         {
@@ -153,22 +155,9 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy
             string gameOverMessages = "Correct, it took " + numberOfGuesses + " guesses";
             return gameOverMessages;
         }
-        public string GetPlayAgainMessage()
-        {
-            return "Continue?";
-        }
-        public void PlayAgain(string answer)
-        {
-            if (answer != null && answer != "" && answer.Substring(0, 1) == "n")
-            {
-                IsGameActive = true;
-            }
-        }
         public string GetGoal()
         {
             return goal;
         }
-
-
     }
 }

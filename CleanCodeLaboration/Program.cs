@@ -1,1 +1,15 @@
-﻿Console.WriteLine("Hej!");
+﻿using CleanCodeLaboration.Controller;
+using CleanCodeLaboration.Model.GameDAO.Interface;
+using CleanCodeLaboration.Model.GameDAO;
+using CleanCodeLaboration.Model.GameLogic.Interface;
+using CleanCodeLaboration.Model.GameLogic;
+using CleanCodeLaboration.View.Interface;
+using CleanCodeLaboration.View;
+
+IView view = new ConsoleView();
+IGameDAO gameDAO = new LocalFileDAO();
+IGameContext gameContext = new GameContext(gameDAO);
+GameController controller = new GameController(gameContext, view);
+
+
+controller.StartCleanCodeGameLoop();
