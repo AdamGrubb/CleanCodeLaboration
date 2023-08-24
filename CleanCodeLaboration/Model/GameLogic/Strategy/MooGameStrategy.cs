@@ -102,9 +102,15 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy
         }
 
 
-        public string GetHighScore()  //Jag skulle kunna mocka en gameDAO och sen förutse hur den kommer ut baserat på de privata metoderna. Sen jämföra strängarna i guess? Alternativet är att brya upp privata strängarna o publica och mocka dom?
+        public string GetHighScore()  
         {
-            string highScores = "Player   games average\n";
+            /*
+             * //Jag skulle kunna mocka en gameDAO och sen förutse hur den kommer ut baserat på de privata metoderna. 
+             * Sen jämföra strängarna i guess? Alternativet är att brya upp privata strängarna o publica och mocka dom?
+             * Hela GetHighScore skulle kunna vara en metod i GameContext Sen kanske även string-highscore-biten antar jag.
+             * Så kan du mocka varenda metod.
+             */
+            string highScores = "Player   games average\n"; //Lägga in i en egen metod eller inte.
 
             List<IPlayerScore> playerScores = GetPlayerScores();
             List<Player> players = ConvertToPlayer(playerScores);
@@ -157,9 +163,6 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy
             string gameOverMessages = "Correct, it took " + numberOfGuesses + " guesses";
             return gameOverMessages;
         }
-        public string GetGoal()
-        {
-            return goal;
-        }
+
     }
 }

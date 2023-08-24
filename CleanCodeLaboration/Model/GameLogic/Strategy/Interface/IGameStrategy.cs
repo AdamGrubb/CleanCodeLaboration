@@ -10,7 +10,6 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.Interface
         string GetFinishedGameMessage();
         string GetGameIntroduction();
         bool GetGameStatus();
-        string GetGoal();
         void SetGoal(string goal);
         string GetHighScore();
         string GetPracticeRun();
