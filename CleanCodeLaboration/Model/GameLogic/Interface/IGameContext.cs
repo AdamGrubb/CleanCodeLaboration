@@ -10,9 +10,9 @@ namespace CleanCodeLaboration.Model.GameLogic.Interface
         string GetHighScore();
         string GetPlayerNameQuestion();
         bool IsGameActive();
-        void PlayAgain(string answer);
-        void SaveGame();
         void SetGameStrategy(IGameStrategy gameStrategy);
         void SetPlayerName(string playerName);
+        bool KeepPlaying(string answer);
+        string GetPlayAgainMessage();
     }
 }

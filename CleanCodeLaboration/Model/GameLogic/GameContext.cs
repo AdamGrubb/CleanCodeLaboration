@@ -55,17 +55,18 @@ namespace CleanCodeLaboration.Model.GameLogic
         {
             return gameStrategy.GetGameIntroduction() + gameStrategy.GetPracticeRun();
         }
-        public string EvaluateGuess(string guess)
+        public string EvaluateGuess(string guess) //Denna ska kalla på incrementGuess, EvaluateGuess och sen ta värdet och lägga in det i en metod som avgör om spelet är klart eller inte? Slutligen returnera 
         {
+            /*gameStrategy.IncrementGuess();
+             * string response = gameStrategy.EvaluateGuess(guess)
+             * gameStrategy.CheckIfWon() eller nått som kollar ifall spelet är uppnått.
+             * return response;
+             */
             return gameStrategy.EvaluateGuess(guess);
         }
         public bool IsGameActive()
         {
             return gameStrategy.GetGameStatus();
-        }
-        public void SaveGame()
-        {
-            gameStrategy.SaveGame();
         }
         public string GetHighScore()
         {
@@ -73,11 +74,19 @@ namespace CleanCodeLaboration.Model.GameLogic
         }
         public string GetFinishedGameMessage()
         {
-            return gameStrategy.GetFinishedGameMessage();
+           return gameStrategy.GetFinishedGameMessage();
         }
-        public void PlayAgain(string answer)
+        public bool KeepPlaying(string answer)
         {
-            gameStrategy.PlayAgain(answer);
+            if (answer != null && answer != "" && answer.Substring(0, 1) == "n")
+            {
+                return false;
+            }
+            return true;
+        }
+        public string GetPlayAgainMessage()
+        {
+            return "Continue?";
         }
     }
 }
