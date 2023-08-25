@@ -1,6 +1,7 @@
 ﻿using CleanCodeLaboration.Model.GameLogic.Strategy;
 using CleanCodeLaboration.Model.GameLogic.Strategy.Interface;
 using CleanCodeLaboration.Model.GameLogic.Strategy.MooGameStrategy;
+using CleanCodeLaboration.Model.GameLogic.Strategy.QuizGameStrategy;
 using CleanCodeLaboration.Model.GameMenu.Interface;
 using System;
 using System.Collections.Generic;
@@ -17,7 +18,7 @@ namespace CleanCodeLaboration.Model.GameMenu
         bool validSelection;
         public string GetMenu()
         {
-            string games = "1. MooGame\n";
+            string games = "1. MooGame\n2. QuizGame\n";
             return games;
         }
         public bool IsValidSelection()
@@ -34,6 +35,12 @@ namespace CleanCodeLaboration.Model.GameMenu
                         strategy = new MooGameStrategy();
                         break;
                     }
+                case "2":
+                    {
+                        strategy = new QuizGameStrategy ();
+                        break;
+                    }
+
                 default:
                     {
                         validSelection = false;
