@@ -42,6 +42,7 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy
             }
             return players;
         }
+        
 
     }
 }
