@@ -3,7 +3,7 @@ using CleanCodeLaboration.Model.GameDAO.Interface;
 using CleanCodeLaboration.Model.GameLogic.Strategy.Interface;
 using System.Collections.Generic;
 
-namespace CleanCodeLaboration.Model.GameLogic.Strategy
+namespace CleanCodeLaboration.Model.GameLogic.Strategy.MooGameStrategy
 {
     public class MooGameStrategy : IGameStrategy
     {
@@ -101,7 +101,7 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy
             return IsGameActive;
         }
 
-        public string GetHighScore()  
+        public string GetHighScore()
         {
             string highScores = "Player   games average\n";
 

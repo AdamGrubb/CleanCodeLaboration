@@ -1,5 +1,6 @@
 ﻿using CleanCodeLaboration.Model.GameLogic.Strategy;
 using CleanCodeLaboration.Model.GameLogic.Strategy.Interface;
+using CleanCodeLaboration.Model.GameLogic.Strategy.MooGameStrategy;
 using System;
 using System.Collections.Generic;
 using System.Linq;
