@@ -1,6 +1,7 @@
 ﻿using CleanCodeLaboration.Model.GameLogic.Strategy;
 using CleanCodeLaboration.Model.GameLogic.Strategy.Interface;
 using CleanCodeLaboration.Model.GameLogic.Strategy.MooGameStrategy;
+using CleanCodeLaboration.Model.GameMenu.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Security.AccessControl;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CleanCodeLaboration.Model
+namespace CleanCodeLaboration.Model.GameMenu
 {
     public class GameMenu : IGameMenu
     {

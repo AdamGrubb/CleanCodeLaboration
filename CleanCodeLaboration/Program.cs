@@ -5,7 +5,8 @@ using CleanCodeLaboration.Model.GameLogic.Interface;
 using CleanCodeLaboration.Model.GameLogic;
 using CleanCodeLaboration.View.Interface;
 using CleanCodeLaboration.View;
-using CleanCodeLaboration.Model;
+using CleanCodeLaboration.Model.GameMenu;
+using CleanCodeLaboration.Model.GameMenu.Interface;
 
 IView view = new ConsoleView();
 IGameDAO gameDAO = new LocalFileDAO();

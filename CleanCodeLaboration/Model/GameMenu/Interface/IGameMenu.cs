@@ -1,6 +1,6 @@
 ﻿using CleanCodeLaboration.Model.GameLogic.Strategy.Interface;
 
-namespace CleanCodeLaboration.Model
+namespace CleanCodeLaboration.Model.GameMenu.Interface
 {
     public interface IGameMenu
     {

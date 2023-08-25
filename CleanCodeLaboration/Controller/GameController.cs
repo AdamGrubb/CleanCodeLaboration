@@ -1,8 +1,8 @@
-﻿using CleanCodeLaboration.Model;
-using CleanCodeLaboration.Model.GameDAO.Interface;
+﻿using CleanCodeLaboration.Model.GameDAO.Interface;
 using CleanCodeLaboration.Model.GameLogic.Interface;
 using CleanCodeLaboration.Model.GameLogic.Strategy;
 using CleanCodeLaboration.Model.GameLogic.Strategy.Interface;
+using CleanCodeLaboration.Model.GameMenu.Interface;
 using CleanCodeLaboration.View.Interface;
 using System;
 using System.Collections.Generic;
