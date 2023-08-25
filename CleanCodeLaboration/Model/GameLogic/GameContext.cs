@@ -28,7 +28,7 @@ namespace CleanCodeLaboration.Model.GameLogic
             ConfigureGameStrategy();
             StartGameStrategy();
             SetPlayerNameForStrategy();
-            GenerateAndSetGoalForStrategy();
+            SetStrategyGoal();
         }
 
         private void ConfigureGameStrategy()
@@ -46,7 +46,7 @@ namespace CleanCodeLaboration.Model.GameLogic
             gameStrategy.SetPlayerName(playerName);
         }
 
-        private void GenerateAndSetGoalForStrategy()
+        private void SetStrategyGoal()
         {
             string goal = gameStrategy.GenerateRandomGoal();
             gameStrategy.SetGoal(goal);
