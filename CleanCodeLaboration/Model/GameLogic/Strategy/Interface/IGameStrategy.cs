@@ -9,12 +9,15 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.Interface
         string GenerateRandomGoal();
         string GetFinishedGameMessage();
         string GetGameIntroduction();
-        bool GetGameStatus();
-        string GetGoal();
+        bool GetGameStatus(); //Denna behöver bytas namn på.
         void SetGoal(string goal);
         string GetHighScore();
         string GetPracticeRun();
         void SetPlayerName(string userName);
-        void StartGame();
+        void StartGame(); //Denna behöver bytas namn på.
+        void SaveGame();
+        void IncrementGuess(); //Denna kanske behöver bytas namn på
+        bool IsCorrectGuess(string guess);
+        void EndGame(); //Denna behöver bytas namn på.
     }
 }

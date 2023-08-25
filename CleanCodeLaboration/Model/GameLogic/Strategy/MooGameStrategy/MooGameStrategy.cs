@@ -1,8 +1,9 @@
 ﻿using CleanCodeLaboration.Model.GameDAO;
 using CleanCodeLaboration.Model.GameDAO.Interface;
 using CleanCodeLaboration.Model.GameLogic.Strategy.Interface;
+using System.Collections.Generic;
 
-namespace CleanCodeLaboration.Model.GameLogic.Strategy
+namespace CleanCodeLaboration.Model.GameLogic.Strategy.MooGameStrategy
 {
     public class MooGameStrategy : IGameStrategy
     {
@@ -46,7 +47,7 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy
             this.goal = goal;
         }
 
-        public string GetGameIntroduction()
+        public string GetGameIntroduction() //Här får du kolla upp, antagligen så lägger du den tillsammans med GetPracticeRun så att de blir på samma console.writeline
         {
             return "New game:\n";
         }
@@ -56,7 +57,6 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy
         }
         public string EvaluateGuess(string guess)
         {
-            IncrementGuess();
             string padding = "    ";
             int lenghtOfGoal = 4;
             int cows = 0;
@@ -74,19 +74,23 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy
                     cows++;
                 }
             }
-            if (bulls == lenghtOfGoal)
-            {
-                SaveGame();
-                IsGameActive = false;
-            }
             string bullsAndCows = new string('B', bulls) + "," + new string('C', cows);
             return bullsAndCows;
         }
-        private void IncrementGuess()
+        public void IncrementGuess()
         {
             numberOfGuesses++;
         }
-        private void SaveGame()
+        public bool IsCorrectGuess(string evaluatedGuess)
+        {
+            string correctEvaluatedAnswer = "BBBB,";
+            return evaluatedGuess == correctEvaluatedAnswer;
+        }
+        public void EndGame()
+        {
+            IsGameActive = false;
+        }
+        public void SaveGame()
         {
             IPlayerScore playerScore = new PlayerScoreDTO(userName, numberOfGuesses);
             gameDAO.SavePlayerScore(gameName, playerScore);
@@ -97,67 +101,31 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy
             return IsGameActive;
         }
 
-
         public string GetHighScore()
         {
             string highScores = "Player   games average\n";
-            highScores += GetPlayerTopList();
+
+            List<IPlayerScore> playerScores = GetPlayerScores();
+            List<Player> players = StrategyUtilitys.ConvertToPlayer(playerScores);
+            StrategyUtilitys.SortPlayersByScore(players);
+            string formatedPlayer = StrategyUtilitys.GetFormattedPlayerScores(players);
+            highScores += formatedPlayer;
 
             return highScores;
         }
-        private string GetPlayerTopList()
+        private List<IPlayerScore> GetPlayerScores()
         {
-            string formatedPlayerScores = "";
 
-            List<IPlayerScore> players = gameDAO.GetAllPlayerScores(gameName);
+            List<IPlayerScore> playerScores = gameDAO.GetAllPlayerScores(gameName);
 
-            List<Player> highScore = ConvertToPlayer(players);
-
-            formatedPlayerScores = FormatPlayerScores(highScore);
-
-            return formatedPlayerScores;
+            return playerScores;
         }
-        private List<Player> ConvertToPlayer(List<IPlayerScore> playersDTO)
-        {
-            List<Player> players = new List<Player>();
-            foreach (IPlayerScore playerDTO in playersDTO)
-            {
-                Player pd = new Player(playerDTO.Name, playerDTO.Guesses);
-                int pos = players.IndexOf(pd);
-                if (pos < 0)
-                {
-                    players.Add(pd);
-                }
-                else
-                {
-                    players[pos].Update(playerDTO.Guesses);
-                }
-            }
-            return players;
-        }
-        private string FormatPlayerScores(List<Player> highScore)
-        {
-            string formatedPlayerScores = "";
-            highScore.Sort((p1, p2) => p1.GetAverageScore().CompareTo(p2.GetAverageScore()));
 
-            foreach (Player player in highScore)
-            {
-                formatedPlayerScores += FormatPlayer(player);
-            }
-            return formatedPlayerScores;
-        }
-        private string FormatPlayer(Player player)
-        {
-            return string.Format("{0,-9}{1,5:D}{2,9:F2}\n", player.Name, player.NumberOfGames, player.GetAverageScore());
-        }
         public string GetFinishedGameMessage()
         {
             string gameOverMessages = "Correct, it took " + numberOfGuesses + " guesses";
             return gameOverMessages;
         }
-        public string GetGoal()
-        {
-            return goal;
-        }
+
     }
 }

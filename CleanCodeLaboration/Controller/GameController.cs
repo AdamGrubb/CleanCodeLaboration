@@ -2,6 +2,7 @@
 using CleanCodeLaboration.Model.GameLogic.Interface;
 using CleanCodeLaboration.Model.GameLogic.Strategy;
 using CleanCodeLaboration.Model.GameLogic.Strategy.Interface;
+using CleanCodeLaboration.Model.GameMenu.Interface;
 using CleanCodeLaboration.View.Interface;
 using System;
 using System.Collections.Generic;
@@ -15,11 +16,16 @@ namespace CleanCodeLaboration.Controller
     {
         private readonly IGameContext gameContext;
         private readonly IView view;
+        private IGameMenu gameMenu;
 
         public GameController(IGameContext gameContext, IView view)
         {
             this.gameContext = gameContext;
             this.view = view;
+        }
+        public void SetGameMenu(IGameMenu gameMenu)
+        {
+            this.gameMenu = gameMenu;
         }
         public void StartCleanCodeGameLoop()
         {
@@ -37,18 +43,26 @@ namespace CleanCodeLaboration.Controller
         }
         public void StartGameLoop()
         {
-            do
+            do //Varför en do-while-loop här?
             {
                 GetGameMenu();
                 GetGameLoop();
             } while (ContinuePlaying());
 
         }
-        public void GetGameMenu() //Här kommer du implementera meny-klassen. Mest troligt via dependency injection.
+        public void GetGameMenu()
         {
-            //Dummy-metod. DAO sätts inom SetGameStrategy - möjligen via en builder?
-            //Här har du en stänga av funktion också.
-            gameContext.SetGameStrategy(new MooGameStrategy());
+            do //Varför göra en do-while-loop här?
+            {
+                string showGameMenu = gameMenu.GetMenu();
+                view.GameOutput(showGameMenu);
+                string answer = view.GetUserInput();
+                gameMenu.SelectedGame(answer);
+
+            } while (!gameMenu.IsValidSelection());
+            IGameStrategy chosenStrategy = gameMenu.GetGameStrategy();
+            gameContext.SetGameStrategy(chosenStrategy);
+ 
         }
         public void GetGameLoop()
         {
@@ -56,7 +70,7 @@ namespace CleanCodeLaboration.Controller
 
             view.GameOutput(gameIntroduction);
 
-            while (gameContext.IsGameActive())
+            while (gameContext.GetGameStatus())
             {
                 string userGuess = view.GetUserInput();
                 string gameUpdateMessage = gameContext.EvaluateGuess(userGuess);
