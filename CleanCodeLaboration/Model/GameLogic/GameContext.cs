@@ -67,7 +67,7 @@ namespace CleanCodeLaboration.Model.GameLogic
             }
             return evaluatedGuess;
         }
-        public bool IsGameActive()
+        public bool GetGameStatus()
         {
             return gameStrategy.GetGameStatus();
         }

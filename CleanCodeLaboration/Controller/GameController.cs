@@ -70,7 +70,7 @@ namespace CleanCodeLaboration.Controller
 
             view.GameOutput(gameIntroduction);
 
-            while (gameContext.IsGameActive())
+            while (gameContext.GetGameStatus())
             {
                 string userGuess = view.GetUserInput();
                 string gameUpdateMessage = gameContext.EvaluateGuess(userGuess);
