@@ -1,4 +1,5 @@
-﻿using CleanCodeLaboration.Model.GameDAO.Interface;
+﻿using CleanCodeLaboration.Model;
+using CleanCodeLaboration.Model.GameDAO.Interface;
 using CleanCodeLaboration.Model.GameLogic.Interface;
 using CleanCodeLaboration.Model.GameLogic.Strategy;
 using CleanCodeLaboration.Model.GameLogic.Strategy.Interface;
@@ -15,11 +16,16 @@ namespace CleanCodeLaboration.Controller
     {
         private readonly IGameContext gameContext;
         private readonly IView view;
+        private IGameMenu gameMenu;
 
         public GameController(IGameContext gameContext, IView view)
         {
             this.gameContext = gameContext;
             this.view = view;
+        }
+        public void SetGameMenu(IGameMenu gameMenu)
+        {
+            this.gameMenu = gameMenu;
         }
         public void StartCleanCodeGameLoop()
         {
@@ -46,9 +52,17 @@ namespace CleanCodeLaboration.Controller
         }
         public void GetGameMenu() //Här kommer du implementera meny-klassen. Mest troligt via dependency injection.
         {
-            //Dummy-metod. DAO sätts inom SetGameStrategy - möjligen via en builder?
-            //Här har du en stänga av funktion också.
-            gameContext.SetGameStrategy(new MooGameStrategy());
+            do
+            {
+                string showGameMenu = gameMenu.GetMenu();
+                view.GameOutput(showGameMenu);
+                string answer = view.GetUserInput();
+                gameMenu.SelectedGame(answer);
+
+            } while (!gameMenu.IsValidSelection());
+            IGameStrategy chosenStrategy = gameMenu.GetGameStrategy();
+            gameContext.SetGameStrategy(chosenStrategy);
+ 
         }
         public void GetGameLoop()
         {
