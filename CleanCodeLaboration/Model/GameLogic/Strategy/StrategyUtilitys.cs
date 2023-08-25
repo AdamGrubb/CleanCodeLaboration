@@ -9,7 +9,7 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy
 {
     public static class StrategyUtilitys
     {
-        public static string GetFormattedPlayerScores(List<Player> players)
+        public static string GetFormattedPlayerScores(List<Player> players) //Denna behöver ett tydligare namn
         {
             string formatedPlayerScores = "";
             foreach (Player player in players)
@@ -18,10 +18,12 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy
             }
             return formatedPlayerScores;
         }
+
         public static void SortPlayersByScore(List<Player> players)
         {
             players.Sort((p1, p2) => p1.GetAverageScore().CompareTo(p2.GetAverageScore()));
         }
+
         public static List<Player> ConvertToPlayer(List<IPlayerScore> playersDTO)
         {
             List<Player> players = new List<Player>();

@@ -43,16 +43,16 @@ namespace CleanCodeLaboration.Controller
         }
         public void StartGameLoop()
         {
-            do
+            do //Varför en do-while-loop här?
             {
                 GetGameMenu();
                 GetGameLoop();
             } while (ContinuePlaying());
 
         }
-        public void GetGameMenu() //Här kommer du implementera meny-klassen. Mest troligt via dependency injection.
+        public void GetGameMenu()
         {
-            do
+            do //Varför göra en do-while-loop här?
             {
                 string showGameMenu = gameMenu.GetMenu();
                 view.GameOutput(showGameMenu);
