@@ -53,7 +53,7 @@ namespace CleanCodeLaboration.Model.GameLogic
         }
         public string GetGameIntroduction()
         {
-            return gameStrategy.GetGameIntroduction() + gameStrategy.GetPracticeRun(); //Denna får du göra om det blir konstigt med formatet.
+            return gameStrategy.GetGameIntroduction(); //Här kan man lägga in practiceRun.
         }
         public string EvaluateGuess(string guess)
         {
