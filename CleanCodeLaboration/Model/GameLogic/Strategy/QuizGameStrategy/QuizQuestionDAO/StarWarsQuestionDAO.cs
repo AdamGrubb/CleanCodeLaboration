@@ -18,6 +18,14 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.QuizGameStrategy.QuizQues
             new QuizQuestionDTO("What is the Sith name of Emperor Palpatine?", "Darth Sidious"),
             new QuizQuestionDTO("What color is Mace Windu's lightsaber?", "Purple"),
             new QuizQuestionDTO("What is the name of the crime lord who is the leader of the Hutt Clan?", "Jabba the Hutt"),
+            new QuizQuestionDTO("What year did the first Star Wars movie come out", "1977"),
+            new QuizQuestionDTO("What's the name of Boba Fett's ship?", "Slave I"),
+            new QuizQuestionDTO("According to Yoda, there are always how many Sith Lords...no more, no less?", "Two"),
+            new QuizQuestionDTO("On Tatooine, what name did Obi-Wan go by?", "Ben"),
+            new QuizQuestionDTO("What species is Jar Jar Binks?", "Gungan"),
+            new QuizQuestionDTO("Who killed Mace Windu?", "Darth Sidious"),
+            new QuizQuestionDTO("Which actor played Lando Calrissian?", "Billy Dee Williams"),
+            new QuizQuestionDTO("According to Luke, confronting what is the destiny of a Jedi?", "Fear"),
         };
 
         public IQuizQuestion GetQuizRandomQuestion()
