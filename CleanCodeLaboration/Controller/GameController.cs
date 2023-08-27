@@ -15,13 +15,13 @@ namespace CleanCodeLaboration.Controller
     public class GameController
     {
         private readonly IGameContext gameContext;
-        private readonly IView view;
+        private readonly IIO iO;
         private IGameMenu gameMenu;
 
-        public GameController(IGameContext gameContext, IView view)
+        public GameController(IGameContext gameContext, IIO iO)
         {
             this.gameContext = gameContext;
-            this.view = view;
+            this.iO = iO;
         }
         public void SetGameMenu(IGameMenu gameMenu)
         {
@@ -37,8 +37,8 @@ namespace CleanCodeLaboration.Controller
         {
 
             string playerNameQuestion = gameContext.GetPlayerNameQuestion();
-            view.GameOutput(playerNameQuestion);
-            string playerName = view.GetUserInput();
+            iO.GameOutput(playerNameQuestion);
+            string playerName = iO.GetUserInput();
             gameContext.SetPlayerName(playerName);
         }
         public void StartGameLoop()
@@ -55,38 +55,38 @@ namespace CleanCodeLaboration.Controller
             do //Varför göra en do-while-loop här?
             {
                 string showGameMenu = gameMenu.GetMenu();
-                view.GameOutput(showGameMenu);
-                string answer = view.GetUserInput();
+                iO.GameOutput(showGameMenu);
+                string answer = iO.GetUserInput();
                 gameMenu.SelectedGame(answer);
 
             } while (!gameMenu.IsValidSelection());
             IGameStrategy chosenStrategy = gameMenu.GetGameStrategy();
             gameContext.SetGameStrategy(chosenStrategy);
- 
+
         }
         public void GetGameLoop()
         {
             string gameIntroduction = gameContext.GetGameIntroduction();
 
-            view.GameOutput(gameIntroduction);
+            iO.GameOutput(gameIntroduction);
 
             while (gameContext.GetGameStatus())
             {
-                string userGuess = view.GetUserInput();
+                string userGuess = iO.GetUserInput();
                 string gameUpdateMessage = gameContext.EvaluateGuess(userGuess);
-                view.GameOutput(gameUpdateMessage);
+                iO.GameOutput(gameUpdateMessage);
             }
             string highScore = gameContext.GetHighScore();
-            view.GameOutput(highScore);
+            iO.GameOutput(highScore);
 
             string finishedGameMessage = gameContext.GetFinishedGameMessage();
-            view.GameOutput(finishedGameMessage);
+            iO.GameOutput(finishedGameMessage);
         }
         private bool ContinuePlaying()
         {
             string askIfKeepPlaying = gameContext.GetPlayAgainMessage();
-            view.GameOutput(askIfKeepPlaying);
-            string answer = view.GetUserInput();
+            iO.GameOutput(askIfKeepPlaying);
+            string answer = iO.GetUserInput();
             return gameContext.KeepPlaying(answer);
         }
     }

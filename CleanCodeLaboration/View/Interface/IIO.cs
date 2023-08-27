@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CleanCodeLaboration.View.Interface
 {
-    public interface IView
+    public interface IIO
     {
         void GameOutput(string gameOutput);
         string GetUserInput();

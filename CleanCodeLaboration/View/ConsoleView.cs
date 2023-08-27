@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CleanCodeLaboration.View
 {
-    public class ConsoleView : IView
+    public class ConsoleView : IIO
     {
         public void GameOutput(string gameOutput)
         {
