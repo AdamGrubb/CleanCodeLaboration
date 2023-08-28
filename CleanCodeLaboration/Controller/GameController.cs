@@ -43,7 +43,7 @@ namespace CleanCodeLaboration.Controller
         }
         public void StartGameLoop()
         {
-            do //Varför en do-while-loop här?
+            do 
             {
                 GetGameMenu();
                 GetGameLoop();
@@ -52,7 +52,7 @@ namespace CleanCodeLaboration.Controller
         }
         public void GetGameMenu()
         {
-            do //Varför göra en do-while-loop här?
+            do
             {
                 string showGameMenu = gameMenu.GetMenu();
                 iO.GameOutput(showGameMenu);
