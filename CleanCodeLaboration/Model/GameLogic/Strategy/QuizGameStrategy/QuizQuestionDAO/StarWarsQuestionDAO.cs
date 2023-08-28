@@ -9,6 +9,11 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.QuizGameStrategy.QuizQues
 {
     public class StarWarsQuestionDAO : IQuizQuestionDAO
     {
+        private Random randomIndex;
+        public StarWarsQuestionDAO()
+        {
+            randomIndex = new Random();
+        }
         private IQuizQuestion[] quizQuestions = new IQuizQuestion[]
         {
             new QuizQuestionDTO("What is the real name of the actor who played Han Solo?", "Harrison Ford" ),
@@ -26,15 +31,16 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.QuizGameStrategy.QuizQues
             new QuizQuestionDTO("Who killed Mace Windu?", "Darth Sidious"),
             new QuizQuestionDTO("Which actor played Lando Calrissian?", "Billy Dee Williams"),
             new QuizQuestionDTO("According to Luke, confronting what is the destiny of a Jedi?", "Fear"),
+            new QuizQuestionDTO("What is the name of the desert planet that is home to Anakin Skywalker?", "Tatooine"),
+            new QuizQuestionDTO("What is the subtitle of Episode VI in the Star Wars saga?", "Return of the Jedi"),
+            new QuizQuestionDTO("What is the main weapon used by Jedi and Sith?", "Lightsaber"),
+            new QuizQuestionDTO("Who trained Obi-Wan Kenobi as a Jedi?", "Qui-Gon Jinn"),
         };
-
         public IQuizQuestion GetQuizRandomQuestion()
         {
-            Random randomIndex = new Random();
             int indexOfQuestion = randomIndex.Next(0, quizQuestions.Length);
             IQuizQuestion randomQuestion = quizQuestions[indexOfQuestion];
             return randomQuestion;
-
         }
     }
 }
