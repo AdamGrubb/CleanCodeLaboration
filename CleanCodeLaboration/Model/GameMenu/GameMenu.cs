@@ -31,21 +31,16 @@ namespace CleanCodeLaboration.Model.GameMenu
             switch (userAnswer)
             {
                 case "1":
-                    {
                         strategy = new MooGameStrategy();
                         break;
-                    }
+
                 case "2":
-                    {
                         strategy = new QuizGameStrategy ();
                         break;
-                    }
 
                 default:
-                    {
                         validSelection = false;
                         break;
-                    }
             }
         }
         public IGameStrategy GetGameStrategy()
