@@ -16,7 +16,7 @@ namespace CleanCodeLaboration.Model.GameLogic
         }
         public string GetPlayerNameQuestion()
         {
-            return "Enter your user name\n";
+            return "Enter your user name";
         }
         public void SetPlayerName(string playerName)
         {

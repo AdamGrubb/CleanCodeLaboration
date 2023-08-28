@@ -107,7 +107,8 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.QuizGameStrategy
 
         public string GetHighScore()
         {
-            string highScores = "Player   games average\n";
+            string spacing = "\n";
+            string highScores = "Player   games average" + spacing;
             List<Player> players = GetSortedPlayers();
             string formatedPlayers = GetFormatedPlayerScores(players);
             highScores += formatedPlayers;
