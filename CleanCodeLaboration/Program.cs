@@ -13,7 +13,6 @@ IGameDAO gameDAO = new LocalFileDAO();
 IGameContext gameContext = new GameContext(gameDAO);
 IGameMenu gameMenu = new GameMenu();
 GameController controller = new GameController(gameContext, iO);
-controller.SetGameMenu(gameMenu);
 
 
 controller.StartCleanCodeGameLoop();

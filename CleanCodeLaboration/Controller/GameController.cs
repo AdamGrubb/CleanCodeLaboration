@@ -2,6 +2,7 @@
 using CleanCodeLaboration.Model.GameLogic.Interface;
 using CleanCodeLaboration.Model.GameLogic.Strategy;
 using CleanCodeLaboration.Model.GameLogic.Strategy.Interface;
+using CleanCodeLaboration.Model.GameMenu;
 using CleanCodeLaboration.Model.GameMenu.Interface;
 using CleanCodeLaboration.View.Interface;
 using System;
@@ -22,6 +23,7 @@ namespace CleanCodeLaboration.Controller
         {
             this.gameContext = gameContext;
             this.iO = iO;
+            this.gameMenu = new GameMenu();
         }
         public void SetGameMenu(IGameMenu gameMenu)
         {
@@ -31,11 +33,9 @@ namespace CleanCodeLaboration.Controller
         {
             SetUserName();
             StartGameLoop();
-
         }
         public void SetUserName()
         {
-
             string playerNameQuestion = gameContext.GetPlayerNameQuestion();
             iO.GameOutput(playerNameQuestion);
             string playerName = iO.GetUserInput();
@@ -48,7 +48,6 @@ namespace CleanCodeLaboration.Controller
                 GetGameMenu();
                 GetGameLoop();
             } while (ContinuePlaying());
-
         }
         public void GetGameMenu()
         {
@@ -57,12 +56,11 @@ namespace CleanCodeLaboration.Controller
                 string showGameMenu = gameMenu.GetMenu();
                 iO.GameOutput(showGameMenu);
                 string answer = iO.GetUserInput();
-                gameMenu.SelectedGame(answer);
+                gameMenu.SelectGame(answer);
 
             } while (!gameMenu.IsValidSelection());
             IGameStrategy chosenStrategy = gameMenu.GetGameStrategy();
             gameContext.SetGameStrategy(chosenStrategy);
-
         }
         public void GetGameLoop()
         {
