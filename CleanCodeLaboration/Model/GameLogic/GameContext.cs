@@ -22,34 +22,15 @@ namespace CleanCodeLaboration.Model.GameLogic
         {
             this.playerName = playerName;
         }
-        public void SetGameStrategy(IGameStrategy gameStrategy) //Kanske ha en menyklass som stoppar in en strategy i GameContext? Typ en intern klass inom controllern som spottar ut menyval efter en loop och sen tar fram rätt strategy till GameContext.
+        public void SetGameStrategy(IGameStrategy gameStrategy) //Här ta in ett enum istället och skapa en bulder här eller nått? Ersätta alla funktioner här i SetGameStrategy till en builder.
         {
-            this.gameStrategy = gameStrategy;
-            ConfigureGameStrategy();
-            StartGameStrategy();
-            SetPlayerNameForStrategy();
-            SetStrategyGoal();
-        }
+            IGameStrategyBuilder gameStrategyBuilder = new GameStrategyBuilder(gameStrategy)
+            .ConfigureGameDAO(gameDAO)
+            .StartGame()
+            .SetPlayerName(playerName)
+            .SetGoal();
 
-        private void ConfigureGameStrategy()
-        {
-            gameStrategy.SetGameDAO(gameDAO);
-        }
-
-        private void StartGameStrategy()
-        {
-            gameStrategy.StartGame();
-        }
-
-        private void SetPlayerNameForStrategy()
-        {
-            gameStrategy.SetPlayerName(playerName);
-        }
-
-        private void SetStrategyGoal()
-        {
-            string goal = gameStrategy.GenerateRandomGoal();
-            gameStrategy.SetGoal(goal);
+            this.gameStrategy = gameStrategyBuilder.Build();
         }
         public string GetGameIntroduction()
         {
