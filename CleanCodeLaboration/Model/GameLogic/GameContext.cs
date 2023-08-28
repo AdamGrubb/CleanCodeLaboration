@@ -55,6 +55,10 @@ namespace CleanCodeLaboration.Model.GameLogic
         {
             return gameStrategy.GetGameIntroduction(); //Här kan man lägga in practiceRun.
         }
+        public string GetRightAnswer()
+        {
+            return gameStrategy.GetRightAnswer();
+        }
         public string EvaluateGuess(string guess)
         {
             gameStrategy.IncrementGuess();

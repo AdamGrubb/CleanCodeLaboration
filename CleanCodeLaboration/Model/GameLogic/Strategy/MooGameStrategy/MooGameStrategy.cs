@@ -51,7 +51,7 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.MooGameStrategy
         {
             return "New game:\n";
         }
-        public string GetPracticeRun() //Vad skulle den kunna heta?
+        public string GetRightAnswer() //Vad skulle den kunna heta?
         {
             return "For practice, number is: " + goal + "\n";
         }
@@ -104,14 +104,18 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.MooGameStrategy
         public string GetHighScore()
         {
             string highScores = "Player   games average\n";
+            List<Player> players = GetSortedPlayers();
+            string formatedPlayers = GetFormatedPlayerScores(players);
+            highScores += formatedPlayers;
 
+            return highScores;
+        }
+        private List<Player> GetSortedPlayers()
+        {
             List<IPlayerScore> playerScores = GetPlayerScores();
             List<Player> players = StrategyUtilitys.ConvertToPlayer(playerScores);
             StrategyUtilitys.SortPlayersByScore(players);
-            string formatedPlayer = StrategyUtilitys.GetFormattedPlayerScores(players);
-            highScores += formatedPlayer;
-
-            return highScores;
+            return players;
         }
         private List<IPlayerScore> GetPlayerScores()
         {
@@ -119,6 +123,11 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.MooGameStrategy
             List<IPlayerScore> playerScores = gameDAO.GetAllPlayerScores(gameName);
 
             return playerScores;
+        }
+        private string GetFormatedPlayerScores(List<Player> players)
+        {
+            string formatedPLayerScores = StrategyUtilitys.GetFormattedPlayerScores(players);
+            return formatedPLayerScores;
         }
 
         public string GetFinishedGameMessage()

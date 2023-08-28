@@ -70,6 +70,10 @@ namespace CleanCodeLaboration.Controller
 
             iO.GameOutput(gameIntroduction);
 
+            string rightAnswer = gameContext.GetRightAnswer();
+
+            iO.GameOutput(rightAnswer);
+
             while (gameContext.GetGameStatus())
             {
                 string userGuess = iO.GetUserInput();

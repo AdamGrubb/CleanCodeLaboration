@@ -28,41 +28,48 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.QuizGameStrategy
         {
             this.playerName = playerName;
         }
+
         public string GenerateRandomGoal()
         {
             SetQuizQuestion();
             string goal = GetQuizAnswer();
             return goal;
-
         }
+
         private void SetQuizQuestion()
         {
             quizQuestion = questionDAO.GetQuizRandomQuestion();
         }
+
         private string GetQuizAnswer()
         {
             string quizAnswer = quizQuestion.Answer;
             return quizAnswer;
         }
+
         public void SetGoal(string goal)
         {
             this.goal = goal;
         }
+
         public string GetGameIntroduction()
         {
             string question = GetQuestion();
             string introduction = "Welcome to QuizGame, the question is: " + question;
             return introduction;
         }
+
         private string GetQuestion()
         {
             return quizQuestion.Question;
         }
+
         public string EvaluateGuess(string guess)
         {
             string response = CompareGuessToGoal(guess) ? correctAnswerResponse : inCorrectAnswerResponse;
             return response;
         }
+
         private bool CompareGuessToGoal(string guess)
         {
             return goal.ToLower() == guess.ToLower();
@@ -72,7 +79,6 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.QuizGameStrategy
         {
             numberOfGuesses++;
         }
-
 
         public bool IsCorrectGuess(string evaluatedGuess)
         {
@@ -102,14 +108,18 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.QuizGameStrategy
         public string GetHighScore()
         {
             string highScores = "Player   games average\n";
+            List<Player> players = GetSortedPlayers();
+            string formatedPlayers = GetFormatedPlayerScores(players);
+            highScores += formatedPlayers;
 
+            return highScores;
+        }
+        private List<Player> GetSortedPlayers()
+        {
             List<IPlayerScore> playerScores = GetPlayerScores();
             List<Player> players = StrategyUtilitys.ConvertToPlayer(playerScores);
             StrategyUtilitys.SortPlayersByScore(players);
-            string formatedPlayer = StrategyUtilitys.GetFormattedPlayerScores(players);
-            highScores += formatedPlayer;
-
-            return highScores;
+            return players;
         }
         private List<IPlayerScore> GetPlayerScores()
         {
@@ -118,8 +128,13 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.QuizGameStrategy
 
             return playerScores;
         }
+        private string GetFormatedPlayerScores(List<Player> players)
+        {
+            string formatedPLayerScores = StrategyUtilitys.GetFormattedPlayerScores(players);
+            return formatedPLayerScores;
+        }
 
-        public string GetPracticeRun()
+        public string GetRightAnswer()
         {
             string rightAnswer = "The right answer is: " + goal;
             return rightAnswer;
