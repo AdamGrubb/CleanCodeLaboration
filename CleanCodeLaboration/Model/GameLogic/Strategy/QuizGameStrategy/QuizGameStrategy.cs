@@ -11,28 +11,28 @@ using System.Threading.Tasks;
 
 namespace CleanCodeLaboration.Model.GameLogic.Strategy.QuizGameStrategy
 {
-    public class QuizGameStrategy : IGameStrategy //Här kan du göra en QuizDTO som du kan skicka från en quizklass, kolla den du gjorde med gameOfThronesApiet. Det vore väl skojigt. Vilken gubbe som tillhör vilket hus.
+    public class QuizGameStrategy : IGameStrategy
     {
         private string playerName;
         private IQuizQuestionDAO questionDAO = new StarWarsQuestionDAO();
         private IQuizQuestion quizQuestion;
         private string goal;
-        private const string correctAnswer = "Correct Answer!";
-        private const string inCorrectAnswer = "Incorrect Answer, try again";
+        private const string correctAnswerResponse = "Correct Answer!";
+        private const string inCorrectAnswerResponse = "Incorrect Answer, try again";
         private int numberOfGuesses = 0;
         private bool isGameActive;
         private IGameDAO gameDAO;
         private const string gameName = "QuizGame";
 
-        public void SetPlayerName(string userName)
+        public void SetPlayerName(string playerName)
         {
-            playerName = userName;
+            this.playerName = playerName;
         }
         public string GenerateRandomGoal()
         {
             SetQuizQuestion();
-            string correctAnswer = GetQuizAnswer();
-            return correctAnswer;
+            string goal = GetQuizAnswer();
+            return goal;
 
         }
         private void SetQuizQuestion()
@@ -60,8 +60,12 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.QuizGameStrategy
         }
         public string EvaluateGuess(string guess)
         {
-            string response = goal.ToLower() == guess.ToLower() ? correctAnswer : inCorrectAnswer;
+            string response = CompareGuessToGoal(guess) ? correctAnswerResponse : inCorrectAnswerResponse;
             return response;
+        }
+        private bool CompareGuessToGoal(string guess)
+        {
+            return goal.ToLower() == guess.ToLower();
         }
 
         public void IncrementGuess()
@@ -70,9 +74,9 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.QuizGameStrategy
         }
 
 
-        public bool IsCorrectGuess(string guess)
+        public bool IsCorrectGuess(string evaluatedGuess)
         {
-            bool isCorrect = guess == correctAnswer;
+            bool isCorrect = evaluatedGuess == correctAnswerResponse;
             return isCorrect;
         }
 
