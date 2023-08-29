@@ -27,9 +27,9 @@ namespace CleanCodeLaborationTest.Model.GameLogic
             bool beforeStartGame;
 
             //Act
-            beforeStartGame = gameStrategy.GetGameStatus();
+            beforeStartGame = gameStrategy.IsGameActive();
             gameStrategy.StartGame();
-            afterStartGame = gameStrategy.GetGameStatus();
+            afterStartGame = gameStrategy.IsGameActive();
 
             //Assert
             Assert.IsFalse(beforeStartGame);

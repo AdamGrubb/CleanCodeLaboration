@@ -100,7 +100,7 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.QuizGameStrategy
             return winMessage;
         }
 
-        public bool GetGameStatus()
+        public bool IsGameActive()
         {
             return isGameActive;
         }

@@ -9,7 +9,7 @@ namespace CleanCodeLaboration.Model.GameLogic.Interface
         string GetGameIntroduction();
         string GetHighScore();
         string GetPlayerNameQuestion();
-        bool GetGameStatus();
+        bool IsGameActive();
         void SetGameStrategy(IGameStrategy gameStrategy);
         void SetPlayerName(string playerName);
         bool KeepPlaying(string answer);

@@ -52,9 +52,9 @@ namespace CleanCodeLaboration.Model.GameLogic
             }
             return evaluatedGuess;
         }
-        public bool GetGameStatus()
+        public bool IsGameActive()
         {
-            return gameStrategy.GetGameStatus();
+            return gameStrategy.IsGameActive();
         }
         public string GetHighScore() //Här får du också bryta ut alla funktioner och använda dem en efter en som du gjort i evaluateGuess.
         {

@@ -9,7 +9,7 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.Interface
         string GenerateRandomGoal();
         string GetFinishedGameMessage();
         string GetGameIntroduction();
-        bool GetGameStatus(); //Denna behöver bytas namn på.
+        bool IsGameActive();
         void SetGoal(string goal);
         string GetHighScore();
         void SetPlayerName(string userName);

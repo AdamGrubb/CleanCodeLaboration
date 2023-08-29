@@ -81,7 +81,7 @@ namespace CleanCodeLaboration.Controller
 
             iO.GameOutput(rightAnswer);
 
-            while (gameContext.GetGameStatus())
+            while (gameContext.IsGameActive())
             {
                 string userGuess = iO.GetUserInput();
                 string gameUpdateMessage = gameContext.EvaluateGuess(userGuess);
