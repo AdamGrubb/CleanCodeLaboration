@@ -18,12 +18,12 @@ namespace CleanCodeLaboration.Model.GameDAO
         {
             StreamReader streamReader = new StreamReader(gameName + fileFormat);
             List<IPlayerScore> playerScores = new List<IPlayerScore>();
-            string line;
+            string line; //Line?
             while ((line = streamReader.ReadLine()) != null)
             {
                 string[] nameAndScore = line.Split(new string[] { nameAndScoreSeperator }, StringSplitOptions.None);
                 string name = nameAndScore[0];
-                int score = Convert.ToInt32(nameAndScore[1]);
+                int score = Convert.ToInt32(nameAndScore[1]); //Här finns ju ingen felhantering, men whatever!?!?!?!?
                 playerScores.Add(new PlayerScoreDTO(name, score));
             }
             streamReader.Close();
