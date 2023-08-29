@@ -1,16 +1,8 @@
-﻿using CleanCodeLaboration.Model.GameDAO.Interface;
-using CleanCodeLaboration.Model.GameLogic.Interface;
-using CleanCodeLaboration.Model.GameLogic.Strategy;
+﻿using CleanCodeLaboration.Model.GameLogic.Interface;
 using CleanCodeLaboration.Model.GameLogic.Strategy.Interface;
 using CleanCodeLaboration.Model.GameMenu;
 using CleanCodeLaboration.Model.GameMenu.Interface;
 using CleanCodeLaboration.View.Interface;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.ExceptionServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CleanCodeLaboration.Controller
 {
@@ -24,7 +16,7 @@ namespace CleanCodeLaboration.Controller
         {
             this.gameContext = gameContext;
             this.iO = iO;
-            this.gameMenu = new GameMenu();
+            gameMenu = new GameMenu();
         }
         public void SetGameMenu(IGameMenu gameMenu)
         {
@@ -67,8 +59,9 @@ namespace CleanCodeLaboration.Controller
             List<string> showGameMenu = gameMenu.GetMenu();
             for (int i = 0; i < showGameMenu.Count; i++)
             {
-                string menyNumber = i+1+". "; //Magic number?
-                iO.GameOutput(menyNumber + showGameMenu[i]);
+                int displayNumber = i + 1;
+                string menuNumber = $"{displayNumber}. ";
+                iO.GameOutput(menuNumber + showGameMenu[i]);
             }
         }
         public void GetGameLoop()
