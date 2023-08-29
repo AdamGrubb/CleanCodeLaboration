@@ -9,13 +9,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
+using System.Xml;
 
 namespace CleanCodeLaborationTest.Model.GameLogic
 {
     [TestClass]
     public class Test_MooGameStrategy
     {
-        IGameStrategy gameStrategy = new MooGameStrategy();
+        MooGameStrategy gameStrategy = new MooGameStrategy();
 
         [TestMethod]
         public void TestStartGame()
@@ -62,9 +64,10 @@ namespace CleanCodeLaborationTest.Model.GameLogic
             gameStrategy.SetGoal(goal);
 
 
+
             //Assert
-            Assert.AreEqual(rightGuessResponse, gameStrategy.EvaluateGuess(rightGuess));
-            Assert.AreEqual(wrongGuessResponse, gameStrategy.EvaluateGuess(wrongGuess));
+            Assert.AreEqual(rightGuessResponse, gameStrategy.EvaluateGuess(rightGuess)); //Plocka ut dem till egna variabler
+            Assert.AreEqual(wrongGuessResponse, gameStrategy.EvaluateGuess(wrongGuess)); //Plocka ut dem till egna variabler
         }
         [TestMethod]
         public void TestGetPracticeRun()
@@ -76,7 +79,7 @@ namespace CleanCodeLaborationTest.Model.GameLogic
             string recivedResult;
 
             //Act
-            recivedResult = gameStrategy.GetPracticeRun();
+            recivedResult = gameStrategy.GetRightAnswer();
 
             //Assert
             Assert.AreEqual(@expectedResult, recivedResult);
@@ -116,6 +119,7 @@ namespace CleanCodeLaborationTest.Model.GameLogic
         }
         [TestMethod]
         public void TestGenerateRandomGoal()
+
         {
             //Arrange
             string goal;
@@ -125,6 +129,7 @@ namespace CleanCodeLaborationTest.Model.GameLogic
             goal = gameStrategy.GenerateRandomGoal();
 
             //Assert
+            // The loop iterates over the goal to check if every element of the goal is unique, which is the premise of MooGame.
             for (int i = 0; i < lengthOfGoal; i++)
             {
                 for (int j = i + 1; j < lengthOfGoal; j++)
@@ -135,7 +140,7 @@ namespace CleanCodeLaborationTest.Model.GameLogic
             Assert.AreEqual(lengthOfGoal, goal.Length);
         }
         [TestMethod]
-        public void TestHighScore()
+        public void TestHighScore() //Denna skulle du kunna strukturera mer ordentligt, speciellt mock-delen.
         {
             //Arrange 
             var mockDAO = new Mock<IGameDAO>();
@@ -165,27 +170,13 @@ namespace CleanCodeLaborationTest.Model.GameLogic
             gameStrategy = new MooGameStrategy();
         }
 
-
-        /*
-        void SetGameDAO;
-
-        GetGoal?
-
-        GetHighScore
-
-        SetPlayerName?
-
-        SaveGame(),
-
-        EndGame.
-
-        */
-
-        //Arrange
-
-        //Act
-
-        //Assert
+        /*Dessa är kvar att testa:
+         *EndGame
+         *
+         *Dessa två skulle jag kunna testa med en mock-dao. Göra SetPlayerName och sen incrementa 3 gånger, sen köra en Savegame typ?
+         *SaveGame()
+         *SetPlayerName
+         */
 
     }
 }

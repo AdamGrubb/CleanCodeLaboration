@@ -8,12 +8,11 @@ using CleanCodeLaboration.View;
 using CleanCodeLaboration.Model.GameMenu;
 using CleanCodeLaboration.Model.GameMenu.Interface;
 
-IView view = new ConsoleView();
+IIO iO = new ConsoleView();
 IGameDAO gameDAO = new LocalFileDAO();
 IGameContext gameContext = new GameContext(gameDAO);
 IGameMenu gameMenu = new GameMenu();
-GameController controller = new GameController(gameContext, view);
-controller.SetGameMenu(gameMenu);
+GameController controller = new GameController(gameContext, iO);
 
 
 controller.StartCleanCodeGameLoop();

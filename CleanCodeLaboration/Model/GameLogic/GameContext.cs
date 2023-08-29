@@ -16,44 +16,29 @@ namespace CleanCodeLaboration.Model.GameLogic
         }
         public string GetPlayerNameQuestion()
         {
-            return "Enter your user name\n";
+            return "Enter your user name";
         }
         public void SetPlayerName(string playerName)
         {
             this.playerName = playerName;
         }
-        public void SetGameStrategy(IGameStrategy gameStrategy) //Kanske ha en menyklass som stoppar in en strategy i GameContext? Typ en intern klass inom controllern som spottar ut menyval efter en loop och sen tar fram rätt strategy till GameContext.
+        public void SetGameStrategy(IGameStrategy gameStrategy) //Här ta in ett enum istället och skapa en bulder här eller nått? Ersätta alla funktioner här i SetGameStrategy till en builder.
         {
-            this.gameStrategy = gameStrategy;
-            ConfigureGameStrategy();
-            StartGameStrategy();
-            SetPlayerNameForStrategy();
-            GenerateAndSetGoalForStrategy();
-        }
+            IGameStrategyBuilder gameStrategyBuilder = new GameStrategyBuilder(gameStrategy)
+            .ConfigureGameDAO(gameDAO)
+            .StartGame()
+            .SetPlayerName(playerName)
+            .SetGoal();
 
-        private void ConfigureGameStrategy()
-        {
-            gameStrategy.SetGameDAO(gameDAO);
-        }
-
-        private void StartGameStrategy()
-        {
-            gameStrategy.StartGame();
-        }
-
-        private void SetPlayerNameForStrategy()
-        {
-            gameStrategy.SetPlayerName(playerName);
-        }
-
-        private void GenerateAndSetGoalForStrategy()
-        {
-            string goal = gameStrategy.GenerateRandomGoal();
-            gameStrategy.SetGoal(goal);
+            this.gameStrategy = gameStrategyBuilder.Build();
         }
         public string GetGameIntroduction()
         {
-            return gameStrategy.GetGameIntroduction() + gameStrategy.GetPracticeRun(); //Denna får du göra om det blir konstigt med formatet.
+            return gameStrategy.GetGameIntroduction(); //Här kan man lägga in practiceRun.
+        }
+        public string GetRightAnswer()
+        {
+            return gameStrategy.GetRightAnswer();
         }
         public string EvaluateGuess(string guess)
         {
