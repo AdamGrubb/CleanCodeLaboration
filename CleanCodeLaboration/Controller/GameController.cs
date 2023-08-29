@@ -54,7 +54,7 @@ namespace CleanCodeLaboration.Controller
         {
             do
             {
-                GetMenu(); //Ett annat namn för denna, typ Output menu eller nått.
+                OutputMenu(); //Ett annat namn för denna, typ Output menu eller nått.
                 string answer = iO.GetUserInput();
                 gameMenu.SelectGame(answer);
 
@@ -62,7 +62,7 @@ namespace CleanCodeLaboration.Controller
             IGameStrategy chosenStrategy = gameMenu.GetGameStrategy();
             gameContext.SetGameStrategy(chosenStrategy);
         }
-        private void GetMenu()
+        private void OutputMenu()
         {
             List<string> showGameMenu = gameMenu.GetMenu();
             for (int i = 0; i < showGameMenu.Count; i++)
