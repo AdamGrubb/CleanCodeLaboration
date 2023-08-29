@@ -40,7 +40,7 @@ namespace CleanCodeLaborationTest.Model.GameLogic
         public void TestGetGameIntroduction()
         {
             //Arrange
-            const string expectedMessage = "New game:\n";
+            const string expectedMessage = "New game:";
             string recivedMessage;
 
             //Act
@@ -75,7 +75,7 @@ namespace CleanCodeLaborationTest.Model.GameLogic
             //Arrange
             string goal = "3724";
             gameStrategy.SetGoal(goal);
-            string expectedResult = "For practice, number is: " + goal + "\n";
+            string expectedResult = "For practice, number is: " + goal;
             string recivedResult;
 
             //Act
