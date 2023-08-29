@@ -41,7 +41,7 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.QuizGameStrategy
 
         private void SetQuizQuestion()
         {
-            quizQuestion = questionDAO.GetQuizRandomQuestion();
+            quizQuestion = questionDAO.GetRandomQuizQuestion();
         }
 
         private string GetQuizAnswer()

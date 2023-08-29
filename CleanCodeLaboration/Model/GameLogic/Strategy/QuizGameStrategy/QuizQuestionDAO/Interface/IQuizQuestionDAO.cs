@@ -8,6 +8,6 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.QuizGameStrategy.QuizQues
 {
     public interface IQuizQuestionDAO
     {
-        IQuizQuestion GetQuizRandomQuestion();
+        IQuizQuestion GetRandomQuizQuestion();
     }
 }
