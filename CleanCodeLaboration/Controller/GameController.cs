@@ -46,7 +46,7 @@ namespace CleanCodeLaboration.Controller
                 string answer = iO.GetUserInput();
                 gameMenu.SelectGame(answer);
 
-            } while (!gameMenu.IsValidSelection());
+            } while (!gameMenu.IsValidSelection()); //Ändra namn till MadeValidSelection?
             IGameStrategy chosenStrategy = gameMenu.GetGameStrategy();
             gameContext.SetGameStrategy(chosenStrategy);
         }
