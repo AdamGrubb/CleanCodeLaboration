@@ -14,19 +14,19 @@ namespace CleanCodeLaboration.Model.GameLogic
         {
             this.gameDAO = gameDAO;
         }
-        public string GetPlayerNameQuestion()
+        public string GetPlayerNameQuestion() //Ska man göra en const här?
         {
-            return "Enter your user name";
+            string askForPLayerName = "Enter your user name"; //Är detta ett bra namn? playerNameQuestion?
+            return askForPLayerName;
         }
         public void SetPlayerName(string playerName)
         {
             this.playerName = playerName;
         }
-        public void SetGameStrategy(IGameStrategy gameStrategy)
+        public void SetGameStrategy(IGameStrategy gameStrategy) //Frågan är ju här ifall det är för många metoder för en SetGameStrategy?
         {
             gameStrategy.SetGameDAO(gameDAO);
             gameStrategy.SetPlayerName(playerName);
-
             String goal = gameStrategy.GenerateRandomGoal();
             gameStrategy.SetGoal(goal);
             gameStrategy.ActivateGame();
@@ -40,7 +40,7 @@ namespace CleanCodeLaboration.Model.GameLogic
         {
             return gameStrategy.GetRightAnswer();
         }
-        public string EvaluateGuess(string guess)
+        public string EvaluateGuess(string guess) //Är det tokigt att IncrementGuess ligger här? Bryta ut till fler metoder kanske?
         {
             gameStrategy.IncrementGuess();
             string evaluatedGuess = gameStrategy.EvaluateGuess(guess);
@@ -56,7 +56,7 @@ namespace CleanCodeLaboration.Model.GameLogic
         {
             return gameStrategy.IsGameActive();
         }
-        public string GetHighScore() //Här får du också bryta ut alla funktioner och använda dem en efter en som du gjort i evaluateGuess.
+        public string GetHighScore()
         {
             return gameStrategy.GetHighScore();
         }
@@ -66,7 +66,7 @@ namespace CleanCodeLaboration.Model.GameLogic
         }
         public bool KeepPlaying(string answer)
         {
-            if (answer != null && answer != "" && answer.Substring(0, 1) == "n")
+            if (answer != null && answer != "" && answer.Substring(0, 1) == "n") //Här har du magic number
             {
                 return false;
             }
@@ -74,7 +74,8 @@ namespace CleanCodeLaboration.Model.GameLogic
         }
         public string GetPlayAgainMessage()
         {
-            return "Continue?";
+            string askIfWantToPlayAgain = "Continue?"; //Denna får du byta namn på. Men till vad!?
+            return askIfWantToPlayAgain;
         }
     }
 }
