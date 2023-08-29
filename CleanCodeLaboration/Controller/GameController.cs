@@ -30,7 +30,7 @@ namespace CleanCodeLaboration.Controller
             string playerName = iO.GetUserInput();
             gameContext.SetPlayerName(playerName);
         }
-        public void StartGameLoop()
+        public void StartGameLoop() //Egentligen borde GetGameLoop kanske heta StartGameLoop. Ska man kanske plocka in SetUserName här ínnan? Så döper jag den till StartGame()? Och tar bort StartCleanCodeGameLoop
         {
             do 
             {
@@ -38,7 +38,7 @@ namespace CleanCodeLaboration.Controller
                 GetGameLoop();
             } while (ContinuePlaying());
         }
-        public void GetGameMenu()
+        public void GetGameMenu() //Start GameMenu or something? Det är ju Void?
         {
             do
             {
@@ -60,7 +60,7 @@ namespace CleanCodeLaboration.Controller
                 iO.GameOutput(menuNumber + showGameMenu[i]);
             }
         }
-        public void GetGameLoop()
+        public void GetGameLoop() //Lista ut vad den här ska heta, 
         {
             string gameIntroduction = gameContext.GetGameIntroduction();
 
