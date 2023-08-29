@@ -48,7 +48,7 @@ namespace CleanCodeLaboration.Model.GameLogic
             if (correctGuess)
             {
                 gameStrategy.SaveGame();
-                gameStrategy.ActivateGame();
+                gameStrategy.DeactivateGame();
             }
             return evaluatedGuess;
         }
