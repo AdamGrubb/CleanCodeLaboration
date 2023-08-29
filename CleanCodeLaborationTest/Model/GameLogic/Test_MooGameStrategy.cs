@@ -20,7 +20,7 @@ namespace CleanCodeLaborationTest.Model.GameLogic
         MooGameStrategy gameStrategy = new MooGameStrategy();
 
         [TestMethod]
-        public void TestStartGame()
+        public void TestActivate()
         {
             //Arrange
             bool afterStartGame;
@@ -28,7 +28,7 @@ namespace CleanCodeLaborationTest.Model.GameLogic
 
             //Act
             beforeStartGame = gameStrategy.IsGameActive();
-            gameStrategy.StartGame();
+            gameStrategy.ActivateGame();
             afterStartGame = gameStrategy.IsGameActive();
 
             //Assert

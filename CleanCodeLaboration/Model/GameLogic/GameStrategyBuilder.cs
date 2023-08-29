@@ -29,9 +29,9 @@ namespace CleanCodeLaboration.Model.GameLogic
             return this;
         }
 
-        public IGameStrategyBuilder StartGame()
+        public IGameStrategyBuilder ActivateGame()
         {
-            gameStrategy.StartGame();
+            gameStrategy.ActivateGame();
             return this;
         }
 

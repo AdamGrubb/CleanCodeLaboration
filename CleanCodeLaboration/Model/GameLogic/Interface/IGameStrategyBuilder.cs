@@ -12,7 +12,7 @@ namespace CleanCodeLaboration.Model.GameLogic.Interface
     {
         IGameStrategy Build();
         IGameStrategyBuilder ConfigureGameDAO(IGameDAO gameDAO);
-        IGameStrategyBuilder StartGame();
+        IGameStrategyBuilder ActivateGame();
         IGameStrategyBuilder SetPlayerName(string playerName);
         IGameStrategyBuilder SetGoal();
     }

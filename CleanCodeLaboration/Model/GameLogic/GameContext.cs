@@ -26,7 +26,7 @@ namespace CleanCodeLaboration.Model.GameLogic
         {
             IGameStrategyBuilder gameStrategyBuilder = new GameStrategyBuilder(gameStrategy)
             .ConfigureGameDAO(gameDAO)
-            .StartGame()
+            .ActivateGame()
             .SetPlayerName(playerName)
             .SetGoal();
 
@@ -48,7 +48,7 @@ namespace CleanCodeLaboration.Model.GameLogic
             if (correctGuess)
             {
                 gameStrategy.SaveGame();
-                gameStrategy.EndGame();
+                gameStrategy.ActivateGame();
             }
             return evaluatedGuess;
         }

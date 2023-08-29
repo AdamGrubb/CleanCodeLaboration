@@ -13,11 +13,11 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.Interface
         void SetGoal(string goal);
         string GetHighScore();
         void SetPlayerName(string userName);
-        void StartGame(); //Denna behöver bytas namn på.
+        void ActivateGame();
         void SaveGame();
         void IncrementGuess(); //Denna kanske behöver bytas namn på
         bool IsCorrectGuess(string guess);
-        void EndGame(); //Denna behöver bytas namn på.
+        void DeactivateGame();
         string GetRightAnswer();
     }
 }

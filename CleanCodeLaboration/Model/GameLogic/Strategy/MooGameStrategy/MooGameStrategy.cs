@@ -18,7 +18,7 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.MooGameStrategy
         {
             this.gameDAO = gameDAO;
         }
-        public void StartGame()
+        public void ActivateGame()
         {
             isGameActive = true;
         }
@@ -86,7 +86,7 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.MooGameStrategy
             string correctEvaluatedAnswer = "BBBB,";
             return evaluatedGuess == correctEvaluatedAnswer;
         }
-        public void EndGame()
+        public void DeactivateGame()
         {
             isGameActive = false;
         }
