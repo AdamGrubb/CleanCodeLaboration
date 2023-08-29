@@ -24,16 +24,17 @@ namespace CleanCodeLaboration.Model.GameLogic
         }
         public void SetGameStrategy(IGameStrategy gameStrategy)
         {
-                gameStrategy.SetGameDAO(gameDAO);
-                gameStrategy.ActivateGame();
-                gameStrategy.SetPlayerName(playerName);
-                String goal = gameStrategy.GenerateRandomGoal();
-                gameStrategy.SetGoal(goal);
-                this.gameStrategy = gameStrategy;
+            gameStrategy.SetGameDAO(gameDAO);
+            gameStrategy.SetPlayerName(playerName);
+
+            String goal = gameStrategy.GenerateRandomGoal();
+            gameStrategy.SetGoal(goal);
+            gameStrategy.ActivateGame();
+            this.gameStrategy = gameStrategy;
         }
         public string GetGameIntroduction()
         {
-            return gameStrategy.GetGameIntroduction(); //Här kan man lägga in practiceRun.
+            return gameStrategy.GetGameIntroduction();
         }
         public string GetRightAnswer()
         {
@@ -61,7 +62,7 @@ namespace CleanCodeLaboration.Model.GameLogic
         }
         public string GetFinishedGameMessage()
         {
-           return gameStrategy.GetFinishedGameMessage();
+            return gameStrategy.GetFinishedGameMessage();
         }
         public bool KeepPlaying(string answer)
         {
