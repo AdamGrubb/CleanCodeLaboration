@@ -18,10 +18,6 @@ namespace CleanCodeLaboration.Controller
             this.iO = iO;
             gameMenu = new GameMenu();
         }
-        public void SetGameMenu(IGameMenu gameMenu)
-        {
-            this.gameMenu = gameMenu;
-        }
         public void StartCleanCodeGameLoop()
         {
             SetUserName();
