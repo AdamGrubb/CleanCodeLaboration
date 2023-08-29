@@ -22,19 +22,19 @@ namespace CleanCodeLaboration.Model.GameLogic
         {
             this.playerName = playerName;
         }
-        public void SetGameStrategy(IGameStrategy gameStrategy) //Här ta in ett enum istället och skapa en bulder här eller nått? Ersätta alla funktioner här i SetGameStrategy till en builder.
+        public void SetGameStrategy(IGameStrategy gameStrategy)
         {
-            IGameStrategyBuilder gameStrategyBuilder = new GameStrategyBuilder(gameStrategy)
-            .ConfigureGameDAO(gameDAO)
-            .StartGame()
-            .SetPlayerName(playerName)
-            .SetGoal();
+            gameStrategy.SetGameDAO(gameDAO);
+            gameStrategy.SetPlayerName(playerName);
 
-            this.gameStrategy = gameStrategyBuilder.Build();
+            String goal = gameStrategy.GenerateRandomGoal();
+            gameStrategy.SetGoal(goal);
+            gameStrategy.ActivateGame();
+            this.gameStrategy = gameStrategy;
         }
         public string GetGameIntroduction()
         {
-            return gameStrategy.GetGameIntroduction(); //Här kan man lägga in practiceRun.
+            return gameStrategy.GetGameIntroduction();
         }
         public string GetRightAnswer()
         {
@@ -48,13 +48,13 @@ namespace CleanCodeLaboration.Model.GameLogic
             if (correctGuess)
             {
                 gameStrategy.SaveGame();
-                gameStrategy.EndGame();
+                gameStrategy.DeactivateGame();
             }
             return evaluatedGuess;
         }
-        public bool GetGameStatus()
+        public bool IsGameActive()
         {
-            return gameStrategy.GetGameStatus();
+            return gameStrategy.IsGameActive();
         }
         public string GetHighScore() //Här får du också bryta ut alla funktioner och använda dem en efter en som du gjort i evaluateGuess.
         {
@@ -62,7 +62,7 @@ namespace CleanCodeLaboration.Model.GameLogic
         }
         public string GetFinishedGameMessage()
         {
-           return gameStrategy.GetFinishedGameMessage();
+            return gameStrategy.GetFinishedGameMessage();
         }
         public bool KeepPlaying(string answer)
         {

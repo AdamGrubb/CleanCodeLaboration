@@ -28,7 +28,10 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.QuizGameStrategy
         {
             this.playerName = playerName;
         }
-
+        public void ActivateGame()
+        {
+            isGameActive = true;
+        }
         public string GenerateRandomGoal()
         {
             SetQuizQuestion();
@@ -87,7 +90,7 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.QuizGameStrategy
         }
 
 
-        public void EndGame()
+        public void DeactivateGame()
         {
             isGameActive = false;
         }
@@ -100,7 +103,7 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.QuizGameStrategy
             return winMessage;
         }
 
-        public bool GetGameStatus()
+        public bool IsGameActive()
         {
             return isGameActive;
         }
@@ -148,10 +151,6 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.QuizGameStrategy
         public void SetGameDAO(IGameDAO gameDAO)
         {
             this.gameDAO = gameDAO;
-        }
-        public void StartGame()
-        {
-            isGameActive = true;
         }
     }
 }

@@ -2,10 +2,12 @@
 using CleanCodeLaboration.Model.GameLogic.Strategy.Interface;
 using CleanCodeLaboration.Model.GameLogic.Strategy.MooGameStrategy;
 using CleanCodeLaboration.Model.GameLogic.Strategy.QuizGameStrategy;
+using CleanCodeLaboration.Model.GameMenu.Commands;
 using CleanCodeLaboration.Model.GameMenu.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Security.AccessControl;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,12 +16,19 @@ namespace CleanCodeLaboration.Model.GameMenu
 {
     public class GameMenu : IGameMenu
     {
-        IGameStrategy strategy;
-        bool validSelection;
-        public string GetMenu()
+        private IGameStrategy strategy;
+        private bool validSelection;
+        private int commandIndex;
+        ICommand[] commands = new ICommand[]
         {
-            string games = "1. MooGame\n2. QuizGame\n";
-            return games;
+            new Game ("Moogame", new MooGameStrategy()),
+            new Game ("QuizGame", new QuizGameStrategy())
+        };
+
+        public List<string> GetMenu()
+        {
+            var commandDescriptions = commands.Select(command => command.Description).ToList();
+            return commandDescriptions;
         }
         public bool IsValidSelection()
         {
@@ -27,21 +36,15 @@ namespace CleanCodeLaboration.Model.GameMenu
         }
         public void SelectGame(string userAnswer)
         {
-            validSelection = true;
-            switch (userAnswer)
+            if (isValidChoice(userAnswer)) 
             {
-                case "1":
-                        strategy = new MooGameStrategy();
-                        break;
-
-                case "2":
-                        strategy = new QuizGameStrategy ();
-                        break;
-
-                default:
-                        validSelection = false;
-                        break;
+                strategy = commands[commandIndex - 1].Execute();
             }
+        }
+        private bool isValidChoice(string userAnswer)
+        {
+            validSelection = !int.TryParse(userAnswer, out commandIndex) || commandIndex > commands.Length ? false : true;
+            return validSelection;
         }
         public IGameStrategy GetGameStrategy()
         {

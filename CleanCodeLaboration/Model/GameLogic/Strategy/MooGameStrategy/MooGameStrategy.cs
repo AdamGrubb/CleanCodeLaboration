@@ -9,7 +9,7 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.MooGameStrategy
     {
         private string goal = "";
         private int numberOfGuesses = 0;
-        private bool IsGameActive { get; set; }
+        private bool isGameActive { get; set; }
         private const string gameName = "MooGame";
         private IGameDAO gameDAO;
         private string userName = "";
@@ -18,9 +18,9 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.MooGameStrategy
         {
             this.gameDAO = gameDAO;
         }
-        public void StartGame()
+        public void ActivateGame()
         {
-            IsGameActive = true;
+            isGameActive = true;
         }
         public void SetPlayerName(string userName)
         {
@@ -86,9 +86,9 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.MooGameStrategy
             string correctEvaluatedAnswer = "BBBB,";
             return evaluatedGuess == correctEvaluatedAnswer;
         }
-        public void EndGame()
+        public void DeactivateGame()
         {
-            IsGameActive = false;
+            isGameActive = false;
         }
         public void SaveGame()
         {
@@ -96,9 +96,9 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.MooGameStrategy
             gameDAO.SavePlayerScore(gameName, playerScore);
         }
 
-        public bool GetGameStatus()
+        public bool IsGameActive()
         {
-            return IsGameActive;
+            return isGameActive;
         }
 
         public string GetHighScore()
