@@ -54,7 +54,7 @@ namespace CleanCodeLaboration.Controller
         {
             do
             {
-                OutputMenu(); //Ett annat namn för denna, typ Output menu eller nått.
+                OutputMenu(); 
                 string answer = iO.GetUserInput();
                 gameMenu.SelectGame(answer);
 
