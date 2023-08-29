@@ -22,15 +22,14 @@ namespace CleanCodeLaboration.Model.GameLogic
         {
             this.playerName = playerName;
         }
-        public void SetGameStrategy(IGameStrategy gameStrategy) //Här ta in ett enum istället och skapa en bulder här eller nått? Ersätta alla funktioner här i SetGameStrategy till en builder.
+        public void SetGameStrategy(IGameStrategy gameStrategy)
         {
-            IGameStrategyBuilder gameStrategyBuilder = new GameStrategyBuilder(gameStrategy)
-            .ConfigureGameDAO(gameDAO)
-            .ActivateGame()
-            .SetPlayerName(playerName)
-            .SetGoal();
-
-            this.gameStrategy = gameStrategyBuilder.Build();
+                gameStrategy.SetGameDAO(gameDAO);
+                gameStrategy.ActivateGame();
+                gameStrategy.SetPlayerName(playerName);
+                String goal = gameStrategy.GenerateRandomGoal();
+                gameStrategy.SetGoal(goal);
+                this.gameStrategy = gameStrategy;
         }
         public string GetGameIntroduction()
         {
