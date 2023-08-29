@@ -13,9 +13,9 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.Interface
         void SetGoal(string goal);
         string GetHighScore();
         void SetPlayerName(string userName);
-        void ActivateGame();
+        void ActivateGame(); //Fortfarande kanske otydligt vad den gör? För abstrakt?
         void SaveGame();
-        void IncrementGuess(); //Denna kanske behöver bytas namn på
+        void IncrementGuess(); //Denna kanske behöver bytas namn på, kanske borde heta något i stil med incrementNumberOfGuesses?
         bool IsCorrectGuess(string guess);
         void DeactivateGame();
         string GetRightAnswer();
