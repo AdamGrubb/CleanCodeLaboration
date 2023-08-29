@@ -5,7 +5,7 @@ namespace CleanCodeLaboration.Model.GameMenu.Interface
     public interface IGameMenu
     {
         IGameStrategy GetGameStrategy();
-        string GetMenu();
+        List<string> GetMenu();
         void SelectGame(string userAnswer);
         bool IsValidSelection();
     }
