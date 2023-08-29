@@ -8,6 +8,7 @@ using CleanCodeLaboration.View.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.ExceptionServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -53,14 +54,22 @@ namespace CleanCodeLaboration.Controller
         {
             do
             {
-                string showGameMenu = gameMenu.GetMenu();
-                iO.GameOutput(showGameMenu);
+                GetMenu(); //Ett annat namn för denna, typ Output menu eller nått.
                 string answer = iO.GetUserInput();
                 gameMenu.SelectGame(answer);
 
             } while (!gameMenu.IsValidSelection());
             IGameStrategy chosenStrategy = gameMenu.GetGameStrategy();
             gameContext.SetGameStrategy(chosenStrategy);
+        }
+        private void GetMenu()
+        {
+            List<string> showGameMenu = gameMenu.GetMenu();
+            for (int i = 0; i < showGameMenu.Count; i++)
+            {
+                string menyNumber = i+1+". "; //Magic number?
+                iO.GameOutput(menyNumber + showGameMenu[i]);
+            }
         }
         public void GetGameLoop()
         {
