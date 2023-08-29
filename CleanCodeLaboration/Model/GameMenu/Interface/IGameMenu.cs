@@ -7,6 +7,6 @@ namespace CleanCodeLaboration.Model.GameMenu.Interface
         IGameStrategy GetGameStrategy();
         List<string> GetMenu();
         void SelectGame(string userAnswer);
-        bool IsValidSelection();
+        bool IsValidSelection(); //Här skulle du kunna ha ett namn som typ madeValidSelection?
     }
 }
