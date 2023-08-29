@@ -9,13 +9,13 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy
 {
     public static class StrategyUtilitys
     {
-        public static string GetFormattedPlayerScores(List<Player> players)
+        public static string GetFormattedPlayerScores(List<Player> players) //GetFormattedPlayerScores? Kanske nått mer beskrivande namn.
         {
             string spacing = "\n";
             string formatedPlayerScores = "";
             foreach (Player player in players)
             {
-                formatedPlayerScores += string.Format("{0,-9}{1,5:D}{2,9:F2}"+ spacing, player.Name, player.NumberOfGames, player.GetAverageScore());
+                formatedPlayerScores += string.Format("{0,-9}{1,5:D}{2,9:F2}"+ spacing, player.Name, player.NumberOfGames, player.GetAverageScore()); //Ska du bryta ut formaten till ints eller nått? typ "int LeftOrientation = -9, osv"
             }
             return formatedPlayerScores;
         }
@@ -30,8 +30,8 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy
             List<Player> players = new List<Player>();
             foreach (IPlayerScore playerDTO in playersDTO)
             {
-                Player pd = new Player(playerDTO.Name, playerDTO.Guesses);
-                int pos = players.IndexOf(pd);
+                Player pd = new Player(playerDTO.Name, playerDTO.Guesses); //Här har du player som Pd
+                int pos = players.IndexOf(pd); //Här har du en förkortning för pos, det är icke sa nicke.
                 if (pos < 0)
                 {
                     players.Add(pd);
