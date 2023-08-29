@@ -9,12 +9,13 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy
 {
     public static class StrategyUtilitys
     {
-        public static string GetFormattedPlayerScores(List<Player> players) //Denna behöver ett tydligare namn
+        public static string GetFormattedPlayerScores(List<Player> players)
         {
+            string spacing = "\n";
             string formatedPlayerScores = "";
             foreach (Player player in players)
             {
-                formatedPlayerScores += string.Format("{0,-9}{1,5:D}{2,9:F2}\n", player.Name, player.NumberOfGames, player.GetAverageScore());
+                formatedPlayerScores += string.Format("{0,-9}{1,5:D}{2,9:F2}"+ spacing, player.Name, player.NumberOfGames, player.GetAverageScore());
             }
             return formatedPlayerScores;
         }

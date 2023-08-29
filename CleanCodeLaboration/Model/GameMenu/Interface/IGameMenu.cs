@@ -6,7 +6,7 @@ namespace CleanCodeLaboration.Model.GameMenu.Interface
     {
         IGameStrategy GetGameStrategy();
         string GetMenu();
-        void SelectedGame(string userAnswer);
+        void SelectGame(string userAnswer);
         bool IsValidSelection();
     }
 }

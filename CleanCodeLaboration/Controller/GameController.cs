@@ -2,6 +2,7 @@
 using CleanCodeLaboration.Model.GameLogic.Interface;
 using CleanCodeLaboration.Model.GameLogic.Strategy;
 using CleanCodeLaboration.Model.GameLogic.Strategy.Interface;
+using CleanCodeLaboration.Model.GameMenu;
 using CleanCodeLaboration.Model.GameMenu.Interface;
 using CleanCodeLaboration.View.Interface;
 using System;
@@ -15,13 +16,14 @@ namespace CleanCodeLaboration.Controller
     public class GameController
     {
         private readonly IGameContext gameContext;
-        private readonly IView view;
+        private readonly IIO iO;
         private IGameMenu gameMenu;
 
-        public GameController(IGameContext gameContext, IView view)
+        public GameController(IGameContext gameContext, IIO iO)
         {
             this.gameContext = gameContext;
-            this.view = view;
+            this.iO = iO;
+            this.gameMenu = new GameMenu();
         }
         public void SetGameMenu(IGameMenu gameMenu)
         {
@@ -31,62 +33,62 @@ namespace CleanCodeLaboration.Controller
         {
             SetUserName();
             StartGameLoop();
-
         }
         public void SetUserName()
         {
-
             string playerNameQuestion = gameContext.GetPlayerNameQuestion();
-            view.GameOutput(playerNameQuestion);
-            string playerName = view.GetUserInput();
+            iO.GameOutput(playerNameQuestion);
+            string playerName = iO.GetUserInput();
             gameContext.SetPlayerName(playerName);
         }
         public void StartGameLoop()
         {
-            do //Varför en do-while-loop här?
+            do 
             {
                 GetGameMenu();
                 GetGameLoop();
             } while (ContinuePlaying());
-
         }
         public void GetGameMenu()
         {
-            do //Varför göra en do-while-loop här?
+            do
             {
                 string showGameMenu = gameMenu.GetMenu();
-                view.GameOutput(showGameMenu);
-                string answer = view.GetUserInput();
-                gameMenu.SelectedGame(answer);
+                iO.GameOutput(showGameMenu);
+                string answer = iO.GetUserInput();
+                gameMenu.SelectGame(answer);
 
             } while (!gameMenu.IsValidSelection());
             IGameStrategy chosenStrategy = gameMenu.GetGameStrategy();
             gameContext.SetGameStrategy(chosenStrategy);
- 
         }
         public void GetGameLoop()
         {
             string gameIntroduction = gameContext.GetGameIntroduction();
 
-            view.GameOutput(gameIntroduction);
+            iO.GameOutput(gameIntroduction);
+
+            string rightAnswer = gameContext.GetRightAnswer();
+
+            iO.GameOutput(rightAnswer);
 
             while (gameContext.GetGameStatus())
             {
-                string userGuess = view.GetUserInput();
+                string userGuess = iO.GetUserInput();
                 string gameUpdateMessage = gameContext.EvaluateGuess(userGuess);
-                view.GameOutput(gameUpdateMessage);
+                iO.GameOutput(gameUpdateMessage);
             }
             string highScore = gameContext.GetHighScore();
-            view.GameOutput(highScore);
+            iO.GameOutput(highScore);
 
             string finishedGameMessage = gameContext.GetFinishedGameMessage();
-            view.GameOutput(finishedGameMessage);
+            iO.GameOutput(finishedGameMessage);
         }
         private bool ContinuePlaying()
         {
             string askIfKeepPlaying = gameContext.GetPlayAgainMessage();
-            view.GameOutput(askIfKeepPlaying);
-            string answer = view.GetUserInput();
+            iO.GameOutput(askIfKeepPlaying);
+            string answer = iO.GetUserInput();
             return gameContext.KeepPlaying(answer);
         }
     }

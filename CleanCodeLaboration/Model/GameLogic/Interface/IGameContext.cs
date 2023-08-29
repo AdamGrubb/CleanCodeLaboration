@@ -14,5 +14,6 @@ namespace CleanCodeLaboration.Model.GameLogic.Interface
         void SetPlayerName(string playerName);
         bool KeepPlaying(string answer);
         string GetPlayAgainMessage();
+        string GetRightAnswer();
     }
 }

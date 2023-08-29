@@ -17,7 +17,7 @@ namespace CleanCodeLaborationTest.Model.GameLogic
     [TestClass]
     public class Test_MooGameStrategy
     {
-        IGameStrategy gameStrategy = new MooGameStrategy();
+        MooGameStrategy gameStrategy = new MooGameStrategy();
 
         [TestMethod]
         public void TestStartGame()
@@ -79,7 +79,7 @@ namespace CleanCodeLaborationTest.Model.GameLogic
             string recivedResult;
 
             //Act
-            recivedResult = gameStrategy.GetPracticeRun();
+            recivedResult = gameStrategy.GetRightAnswer();
 
             //Assert
             Assert.AreEqual(@expectedResult, recivedResult);

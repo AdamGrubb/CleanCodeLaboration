@@ -25,27 +25,22 @@ namespace CleanCodeLaboration.Model.GameMenu
         {
             return validSelection;
         }
-        public void SelectedGame(string userAnswer) //Gör om det här till en factory? Vad avgör då Valet?
+        public void SelectGame(string userAnswer)
         {
             validSelection = true;
             switch (userAnswer)
             {
                 case "1":
-                    {
                         strategy = new MooGameStrategy();
                         break;
-                    }
+
                 case "2":
-                    {
                         strategy = new QuizGameStrategy ();
                         break;
-                    }
 
                 default:
-                    {
                         validSelection = false;
                         break;
-                    }
             }
         }
         public IGameStrategy GetGameStrategy()

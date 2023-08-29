@@ -49,11 +49,11 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.MooGameStrategy
 
         public string GetGameIntroduction() //Här får du kolla upp, antagligen så lägger du den tillsammans med GetPracticeRun så att de blir på samma console.writeline
         {
-            return "New game:\n";
+            return "New game:";
         }
-        public string GetPracticeRun() //Vad skulle den kunna heta?
+        public string GetRightAnswer() //Vad skulle den kunna heta?
         {
-            return "For practice, number is: " + goal + "\n";
+            return "For practice, number is: " + goal;
         }
         public string EvaluateGuess(string guess)
         {
@@ -103,15 +103,20 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.MooGameStrategy
 
         public string GetHighScore()
         {
-            string highScores = "Player   games average\n";
+            string spacing = "\n";
+            string highScores = "Player   games average"+ spacing;
+            List<Player> players = GetSortedPlayers();
+            string formatedPlayers = GetFormatedPlayerScores(players);
+            highScores += formatedPlayers;
 
+            return highScores;
+        }
+        private List<Player> GetSortedPlayers()
+        {
             List<IPlayerScore> playerScores = GetPlayerScores();
             List<Player> players = StrategyUtilitys.ConvertToPlayer(playerScores);
             StrategyUtilitys.SortPlayersByScore(players);
-            string formatedPlayer = StrategyUtilitys.GetFormattedPlayerScores(players);
-            highScores += formatedPlayer;
-
-            return highScores;
+            return players;
         }
         private List<IPlayerScore> GetPlayerScores()
         {
@@ -119,6 +124,11 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.MooGameStrategy
             List<IPlayerScore> playerScores = gameDAO.GetAllPlayerScores(gameName);
 
             return playerScores;
+        }
+        private string GetFormatedPlayerScores(List<Player> players)
+        {
+            string formatedPLayerScores = StrategyUtilitys.GetFormattedPlayerScores(players);
+            return formatedPLayerScores;
         }
 
         public string GetFinishedGameMessage()
