@@ -66,7 +66,8 @@ namespace CleanCodeLaboration.Model.GameLogic
         }
         public bool KeepPlaying(string answer)
         {
-            if (answer != null && answer != "" && answer.Substring(0, 1) == "n") //Här har du magic number
+            const string exitWord = "n"; //Här får du också välja ett nytt namn för variabeln som låter bra.
+            if (!string.IsNullOrWhiteSpace(answer) && answer.Substring(0, 1) == exitWord)
             {
                 return false;
             }
