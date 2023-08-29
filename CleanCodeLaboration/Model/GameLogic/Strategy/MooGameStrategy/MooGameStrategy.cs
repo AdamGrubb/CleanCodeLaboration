@@ -9,7 +9,7 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.MooGameStrategy
     {
         private string goal = "";
         private int numberOfGuesses = 0;
-        private bool isGameActive { get; set; }
+        private bool isGameActive;
         private const string gameName = "MooGame";
         private IGameDAO gameDAO;
         private string userName = "";
@@ -47,21 +47,21 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.MooGameStrategy
             this.goal = goal;
         }
 
-        public string GetGameIntroduction() //Här får du kolla upp, antagligen så lägger du den tillsammans med GetPracticeRun så att de blir på samma console.writeline
+        public string GetGameIntroduction()
         {
             return "New game:";
         }
-        public string GetRightAnswer() //Vad skulle den kunna heta?
+        public string GetRightAnswer() //Get correctAnswer?
         {
             return "For practice, number is: " + goal;
         }
-        public string EvaluateGuess(string guess)
+        public string EvaluateGuess(string guess) //Här skulle du kunna extrahera 2 metoder som tar ut cows och ut bulls. Kanske nån generisk metod? Eller delegat där du lägger in jämförelsen.
         {
             string padding = "    ";
             int lenghtOfGoal = 4;
             int cows = 0;
             int bulls = 0;
-            guess += padding;     // if player entered less than 4 chars.
+            guess += padding;
 
             for (int i = 0; i < lenghtOfGoal; i++)
             {
@@ -74,7 +74,7 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.MooGameStrategy
                     cows++;
                 }
             }
-            string bullsAndCows = new string('B', bulls) + "," + new string('C', cows);
+            string bullsAndCows = new string('B', bulls) + "," + new string('C', cows); //Här har vi verkligen magiska ord alla 3 saker måste extraheras.
             return bullsAndCows;
         }
         public void IncrementGuess()
@@ -83,7 +83,7 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.MooGameStrategy
         }
         public bool IsCorrectGuess(string evaluatedGuess)
         {
-            string correctEvaluatedAnswer = "BBBB,";
+            const string correctEvaluatedAnswer = "BBBB,";
             return evaluatedGuess == correctEvaluatedAnswer;
         }
         public void DeactivateGame()
@@ -104,7 +104,7 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.MooGameStrategy
         public string GetHighScore()
         {
             string spacing = "\n";
-            string highScores = "Player   games average"+ spacing;
+            string highScores = "Player   games average" + spacing;
             List<Player> players = GetSortedPlayers();
             string formatedPlayers = GetFormatedPlayerScores(players);
             highScores += formatedPlayers;
