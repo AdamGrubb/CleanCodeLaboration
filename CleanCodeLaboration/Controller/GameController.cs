@@ -6,6 +6,19 @@ using CleanCodeLaboration.View.Interface;
 
 namespace CleanCodeLaboration.Controller
 {
+
+    /*
+     * Kolla över om du använder denna standard:
+    Use Get prefix for methods that return a single value or object.
+    Use Set prefix for methods that assign a value or object to a property or field.
+    Use Add prefix for methods that add an item to a collection.
+    Use Remove prefix for methods that remove an item from a collection.
+    Use Create prefix for methods that create and return a new instance of a type.
+    Use Find prefix for methods that search for an item in a collection and return it or its index.
+    Use Is, Has, or Can prefixes for methods that return a boolean value indicating a condition or capability.
+
+    Sid. 80 Vertical Distance kolla på det.
+     */
     public class GameController
     {
         private readonly IGameContext gameContext;
@@ -18,11 +31,13 @@ namespace CleanCodeLaboration.Controller
             this.iO = iO;
             gameMenu = new GameMenu();
         }
+
         public void StartCleanCodeGameLoop()
         {
             SetUserName();
             StartGameLoop();
         }
+
         public void SetUserName()
         {
             string playerNameQuestion = gameContext.GetPlayerNameQuestion();
@@ -30,6 +45,7 @@ namespace CleanCodeLaboration.Controller
             string playerName = iO.GetUserInput();
             gameContext.SetPlayerName(playerName);
         }
+
         public void StartGameLoop() //Egentligen borde GetGameLoop kanske heta StartGameLoop. Ska man kanske plocka in SetUserName här ínnan? Så döper jag den till StartGame()? Och tar bort StartCleanCodeGameLoop
         {
             do 
@@ -38,6 +54,7 @@ namespace CleanCodeLaboration.Controller
                 GetGameLoop();
             } while (ContinuePlaying());
         }
+
         public void GetGameMenu() //Start GameMenu or something? Det är ju Void?
         {
             do
@@ -50,6 +67,7 @@ namespace CleanCodeLaboration.Controller
             IGameStrategy chosenStrategy = gameMenu.GetGameStrategy();
             gameContext.SetGameStrategy(chosenStrategy);
         }
+
         private void OutputMenu()
         {
             List<string> showGameMenu = gameMenu.GetMenu();
@@ -60,6 +78,7 @@ namespace CleanCodeLaboration.Controller
                 iO.GameOutput(menuNumber + showGameMenu[i]);
             }
         }
+
         public void GetGameLoop() //Lista ut vad den här ska heta, 
         {
             string gameIntroduction = gameContext.GetGameIntroduction();
@@ -82,6 +101,7 @@ namespace CleanCodeLaboration.Controller
             string finishedGameMessage = gameContext.GetFinishedGameMessage();
             iO.GameOutput(finishedGameMessage);
         }
+
         private bool ContinuePlaying()
         {
             string askIfKeepPlaying = gameContext.GetPlayAgainMessage();

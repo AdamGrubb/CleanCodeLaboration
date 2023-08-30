@@ -15,7 +15,7 @@ using System.Xml;
 namespace CleanCodeLaborationTest.Model.GameLogic
 {
     [TestClass]
-    public class Test_MooGameStrategy
+    public class Test_MooGameStrategy //Borde jag kanske ta bort alla arrange act och assert?
     {
         MooGameStrategy gameStrategy = new MooGameStrategy();
 
@@ -50,7 +50,7 @@ namespace CleanCodeLaborationTest.Model.GameLogic
             Assert.AreEqual(expectedMessage, recivedMessage);
         }
         [TestMethod]
-        public void TestEvaluateGuess()
+        public void TestEvaluateGuess() //testa DataTestMethod för att snygga till det.
         {
             //Arrange
             string goal = "3724";
