@@ -5,7 +5,7 @@ using CleanCodeLaboration.Model.GameLogic.Strategy.Interface;
 
 namespace CleanCodeLaboration.Model.GameLogic
 {
-    public class GameContext : IGameContext
+    public class GameContext : IGameContext //Vad är GameContext? Du borde döpa om den här och fundera ut vad den har för ansvar. Läs på om strategy.
     {
         private IGameStrategy gameStrategy;
         private IGameDAO gameDAO;
@@ -14,22 +14,22 @@ namespace CleanCodeLaboration.Model.GameLogic
         {
             this.gameDAO = gameDAO;
         }
-        public string GetPlayerNameQuestion()
+        public string GetPlayerNameQuestion() //Ska man göra en const här?
         {
-            return "Enter your user name";
+            string askForPLayerName = "Enter your user name"; //Är detta ett bra namn? playerNameQuestion?
+            return askForPLayerName;
         }
         public void SetPlayerName(string playerName)
         {
             this.playerName = playerName;
         }
-        public void SetGameStrategy(IGameStrategy gameStrategy)
+        public void SetGameStrategy(IGameStrategy gameStrategy) //Frågan är ju här ifall det är för många metoder för en SetGameStrategy? Bryt ut en funktion som är StartGame?
         {
             gameStrategy.SetGameDAO(gameDAO);
             gameStrategy.SetPlayerName(playerName);
-
             String goal = gameStrategy.GenerateRandomGoal();
             gameStrategy.SetGoal(goal);
-            gameStrategy.ActivateGame();
+            gameStrategy.StartNewGame();
             this.gameStrategy = gameStrategy;
         }
         public string GetGameIntroduction()
@@ -40,10 +40,10 @@ namespace CleanCodeLaboration.Model.GameLogic
         {
             return gameStrategy.GetRightAnswer();
         }
-        public string EvaluateGuess(string guess)
+        public string EvaluateGuess(string guess) //Är det tokigt att IncrementGuess ligger här? Bryta ut till fler metoder kanske?
         {
             gameStrategy.IncrementGuess();
-            string evaluatedGuess = gameStrategy.EvaluateGuess(guess);
+            string evaluatedGuess = gameStrategy.GetEvaluatedGuess(guess);
             bool correctGuess = gameStrategy.IsCorrectGuess(evaluatedGuess);
             if (correctGuess)
             {
@@ -56,7 +56,7 @@ namespace CleanCodeLaboration.Model.GameLogic
         {
             return gameStrategy.IsGameActive();
         }
-        public string GetHighScore() //Här får du också bryta ut alla funktioner och använda dem en efter en som du gjort i evaluateGuess.
+        public string GetHighScore()
         {
             return gameStrategy.GetHighScore();
         }
@@ -66,7 +66,8 @@ namespace CleanCodeLaboration.Model.GameLogic
         }
         public bool KeepPlaying(string answer)
         {
-            if (answer != null && answer != "" && answer.Substring(0, 1) == "n")
+            const string exitWord = "n"; //Här får du också välja ett nytt namn för variabeln som låter bra.
+            if (!string.IsNullOrWhiteSpace(answer) && answer.Substring(0, 1) == exitWord)
             {
                 return false;
             }
@@ -74,7 +75,8 @@ namespace CleanCodeLaboration.Model.GameLogic
         }
         public string GetPlayAgainMessage()
         {
-            return "Continue?";
+            string askIfWantToPlayAgain = "Continue?"; //Denna får du byta namn på. Men till vad!?
+            return askIfWantToPlayAgain;
         }
     }
 }

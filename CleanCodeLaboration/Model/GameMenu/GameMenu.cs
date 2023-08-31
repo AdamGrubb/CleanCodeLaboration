@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace CleanCodeLaboration.Model.GameMenu
 {
-    public class GameMenu : IGameMenu
+    public class GameMenu : IGameMenu //Nu jobbar den ju med samma Games här i command-listan. 
     {
         private IGameStrategy strategy;
         private bool validSelection;
@@ -30,11 +30,11 @@ namespace CleanCodeLaboration.Model.GameMenu
             var commandDescriptions = commands.Select(command => command.Description).ToList();
             return commandDescriptions;
         }
-        public bool IsValidSelection()
+        public bool IsValidSelection() //Som skrivit i interfacet, här borde du ha ett namn som speglar att ett valid selection är gjort. Typ madeValidSelection eller userValidSelection. Och duplikation i isValidChoice-metoden.
         {
             return validSelection;
         }
-        public void SelectGame(string userAnswer)
+        public void SelectGame(string userAnswer) //Ska jag göra denna till validSelectionOfGame? och sen bryta ut strategy = command-grejen till en privat metod?
         {
             if (isValidChoice(userAnswer)) 
             {

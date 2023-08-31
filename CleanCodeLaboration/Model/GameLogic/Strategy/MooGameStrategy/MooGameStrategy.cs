@@ -8,19 +8,35 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.MooGameStrategy
     public class MooGameStrategy : IGameStrategy
     {
         private string goal = "";
-        private int numberOfGuesses = 0;
-        private bool isGameActive { get; set; }
+        private int numberOfGuesses;
+        private bool isGameActive;
         private const string gameName = "MooGame";
         private IGameDAO gameDAO;
         private string userName = "";
+        private const int lenghtOfGoal = 4;
+        private const char bull = 'B';
+        private const char cow = 'C';
+        private const char separator = ',';
+
 
         public void SetGameDAO(IGameDAO gameDAO)
         {
             this.gameDAO = gameDAO;
         }
-        public void ActivateGame()
+        public void StartNewGame() //Borde denna kanske lyftas ut till GameContext och den har en metod som använder dessa? Tror det vore klokt
+        {
+            ActivateGame(); //Strategy nytt i interfacet
+            ResetGuesses(); //Strategy nytt i interfacet
+        }
+
+        private void ActivateGame()
         {
             isGameActive = true;
+        }
+
+        private void ResetGuesses()
+        {
+            numberOfGuesses = 0;
         }
         public void SetPlayerName(string userName)
         {
@@ -30,7 +46,7 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.MooGameStrategy
         {
             string goal = "";
             Random random = new Random();
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < lenghtOfGoal; i++)
             {
                 string randomDigit = "";
                 do
@@ -47,35 +63,61 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.MooGameStrategy
             this.goal = goal;
         }
 
-        public string GetGameIntroduction() //Här får du kolla upp, antagligen så lägger du den tillsammans med GetPracticeRun så att de blir på samma console.writeline
+        public string GetGameIntroduction()
         {
             return "New game:";
         }
-        public string GetRightAnswer() //Vad skulle den kunna heta?
+        public string GetRightAnswer() //Get correctAnswer?
         {
             return "For practice, number is: " + goal;
         }
-        public string EvaluateGuess(string guess)
+        public string GetEvaluatedGuess(string guess)
         {
-            string padding = "    ";
-            int lenghtOfGoal = 4;
-            int cows = 0;
-            int bulls = 0;
-            guess += padding;     // if player entered less than 4 chars.
+            string bullsAndCows = EvaluateGuess(guess);//Här får du fundera på vad variabeln för B ska vara? istället för bull, bulls.
+            return bullsAndCows;
+        }
 
+        private string EvaluateGuess(string guess) //EvaluateGuess?
+        {
+            guess = AddPadding(guess); //Vad säger man om "Add" padding? Har jag något liknande koncept men med annat "prefix"
+            int cows = CountContainingNumbers(guess); //Ska det kanske vara så att calculateCow ska heta typ GetContainingNumber?
+            int bulls = CountMatchingNumbers(guess); //Ska det kanske vara så att calculateCow ska heta typ GetMatchingNumber?
+            string formatedAnswer = FormatGuess(cows, bulls); //Samma här, leta upp liknande koncept och välj ett ord. Har för mig att du haft Format sen tidigare.
+            return formatedAnswer;
+        }
+        private string AddPadding(string guess)
+        {
+            guess += new string(' ', lenghtOfGoal);
+            return guess;
+        }
+        private int CountContainingNumbers(string guess)
+        {
+            int containingNumber = 0;
+            for (int i = 0; i < lenghtOfGoal; i++)
+            {
+                if (goal.Contains(guess[i]) && goal[i] != guess[i])
+                {
+                    containingNumber++;
+                }
+            }
+            return containingNumber;
+        }
+        private int CountMatchingNumbers(string guess)
+        {
+            int matchingNumber = 0;
             for (int i = 0; i < lenghtOfGoal; i++)
             {
                 if (goal[i] == guess[i])
                 {
-                    bulls++;
-                }
-                else if (goal.Contains(guess[i]))
-                {
-                    cows++;
+                    matchingNumber++;
                 }
             }
-            string bullsAndCows = new string('B', bulls) + "," + new string('C', cows);
-            return bullsAndCows;
+            return matchingNumber;
+        }
+        private string FormatGuess(int cows, int bulls)
+        {
+            string formatedAnswer = new string(bull, bulls) + separator + new string(cow, cows);
+            return formatedAnswer;
         }
         public void IncrementGuess()
         {
@@ -83,8 +125,15 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.MooGameStrategy
         }
         public bool IsCorrectGuess(string evaluatedGuess)
         {
-            string correctEvaluatedAnswer = "BBBB,";
+            string correctEvaluatedAnswer = GetCorrectGuess();
+            
             return evaluatedGuess == correctEvaluatedAnswer;
+        }
+        private string GetCorrectGuess()
+        {
+            string correctBulls = new string(bull, lenghtOfGoal);
+            correctBulls += separator;
+            return correctBulls;
         }
         public void DeactivateGame()
         {
@@ -104,7 +153,7 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.MooGameStrategy
         public string GetHighScore()
         {
             string spacing = "\n";
-            string highScores = "Player   games average"+ spacing;
+            string highScores = "Player   games average" + spacing;
             List<Player> players = GetSortedPlayers();
             string formatedPlayers = GetFormatedPlayerScores(players);
             highScores += formatedPlayers;

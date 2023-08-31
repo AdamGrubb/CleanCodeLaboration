@@ -9,7 +9,7 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.QuizGameStrategy.QuizQues
 {
     public class StarWarsQuestionDAO : IQuizQuestionDAO
     {
-        private Random randomIndex;
+        private Random randomIndex; //Hur namnsätter man random, är detta bra?
         public StarWarsQuestionDAO()
         {
             randomIndex = new Random();
@@ -36,7 +36,7 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.QuizGameStrategy.QuizQues
             new QuizQuestionDTO("What is the main weapon used by Jedi and Sith?", "Lightsaber"),
             new QuizQuestionDTO("Who trained Obi-Wan Kenobi as a Jedi?", "Qui-Gon Jinn"),
         };
-        public IQuizQuestion GetQuizRandomQuestion()
+        public IQuizQuestion GetRandomQuizQuestion()
         {
             int indexOfQuestion = randomIndex.Next(0, quizQuestions.Length);
             IQuizQuestion randomQuestion = quizQuestions[indexOfQuestion];

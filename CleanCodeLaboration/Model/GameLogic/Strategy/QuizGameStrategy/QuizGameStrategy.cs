@@ -17,8 +17,8 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.QuizGameStrategy
         private IQuizQuestionDAO questionDAO = new StarWarsQuestionDAO();
         private IQuizQuestion quizQuestion;
         private string goal;
-        private const string correctAnswerResponse = "Correct Answer!";
-        private const string inCorrectAnswerResponse = "Incorrect Answer, try again";
+        private const string correctAnswerResponse = "Correct Answer!"; //Är de för långa, är "response" redundant?
+        private const string incorrectAnswerResponse = "Incorrect Answer, try again";
         private int numberOfGuesses = 0;
         private bool isGameActive;
         private IGameDAO gameDAO;
@@ -28,9 +28,20 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.QuizGameStrategy
         {
             this.playerName = playerName;
         }
-        public void ActivateGame()
+        public void StartNewGame()
+        {
+            ActivateGame();
+            ResetGuesses();
+        }
+
+        private void ActivateGame()
         {
             isGameActive = true;
+        }
+
+        private void ResetGuesses()
+        {
+            numberOfGuesses = 0;
         }
         public string GenerateRandomGoal()
         {
@@ -39,9 +50,9 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.QuizGameStrategy
             return goal;
         }
 
-        private void SetQuizQuestion()
+        private void SetQuizQuestion() //Här borde du ha en try catch.
         {
-            quizQuestion = questionDAO.GetQuizRandomQuestion();
+            quizQuestion = questionDAO.GetRandomQuizQuestion();
         }
 
         private string GetQuizAnswer()
@@ -67,9 +78,9 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.QuizGameStrategy
             return quizQuestion.Question;
         }
 
-        public string EvaluateGuess(string guess)
+        public string GetEvaluatedGuess(string guess)
         {
-            string response = CompareGuessToGoal(guess) ? correctAnswerResponse : inCorrectAnswerResponse;
+            string response = CompareGuessToGoal(guess) ? correctAnswerResponse : incorrectAnswerResponse; //Är responsedelen ett noiceword?
             return response;
         }
 
@@ -98,7 +109,7 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.QuizGameStrategy
 
         public string GetFinishedGameMessage()
         {
-            string winMessage = "You won!!";
+            string winMessage = "You won!! You guessed : " + numberOfGuesses + "times!"; //winMessage är det rätt namn?
 
             return winMessage;
         }
