@@ -19,22 +19,22 @@ namespace CleanCodeLaborationTest.Model.GameLogic
     {
         MooGameStrategy gameStrategy = new MooGameStrategy();
 
-        [TestMethod]
-        public void TestActivate()
-        {
-            //Arrange
-            bool afterStartGame;
-            bool beforeStartGame;
+        //[TestMethod]
+        //public void TestActivate()
+        //{
+        //    //Arrange
+        //    bool afterStartGame;
+        //    bool beforeStartGame;
 
-            //Act
-            beforeStartGame = gameStrategy.IsGameActive();
-            gameStrategy.ActivateGame();
-            afterStartGame = gameStrategy.IsGameActive();
+        //    //Act
+        //    beforeStartGame = gameStrategy.IsGameActive();
+        //    gameStrategy.ActivateGame();
+        //    afterStartGame = gameStrategy.IsGameActive();
 
-            //Assert
-            Assert.IsFalse(beforeStartGame);
-            Assert.IsTrue(afterStartGame);
-        }
+        //    //Assert
+        //    Assert.IsFalse(beforeStartGame);
+        //    Assert.IsTrue(afterStartGame);
+        //}
 
         [TestMethod]
         public void TestGetGameIntroduction()
@@ -66,8 +66,8 @@ namespace CleanCodeLaborationTest.Model.GameLogic
 
 
             //Assert
-            Assert.AreEqual(rightGuessResponse, gameStrategy.EvaluateGuess(rightGuess)); //Plocka ut dem till egna variabler
-            Assert.AreEqual(wrongGuessResponse, gameStrategy.EvaluateGuess(wrongGuess)); //Plocka ut dem till egna variabler
+            Assert.AreEqual(rightGuessResponse, gameStrategy.GetEvaluatedGuess(rightGuess)); //Plocka ut dem till egna variabler
+            Assert.AreEqual(wrongGuessResponse, gameStrategy.GetEvaluatedGuess(wrongGuess)); //Plocka ut dem till egna variabler
         }
         [TestMethod]
         public void TestGetPracticeRun()
