@@ -60,7 +60,7 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.MooGameStrategy
         {
             return "For practice, number is: " + goal;
         }
-        public string EvaluateGuess(string guess) //Här skulle du kunna extrahera 2 metoder som tar ut cows och ut bulls. Kanske nån generisk metod? Eller delegat där du lägger in jämförelsen.
+        public string EvaluateGuess(string guess) 
         {
             string padding = new string(' ', lenghtOfGoal);
             guess += padding;
