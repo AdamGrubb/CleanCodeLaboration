@@ -39,7 +39,7 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.QuizGameStrategy
             return goal;
         }
 
-        private void SetQuizQuestion()
+        private void SetQuizQuestion() //Här borde du ha en try catch.
         {
             quizQuestion = questionDAO.GetRandomQuizQuestion();
         }
@@ -69,7 +69,7 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.QuizGameStrategy
 
         public string EvaluateGuess(string guess)
         {
-            string response = CompareGuessToGoal(guess) ? correctAnswerResponse : incorrectAnswerResponse;
+            string response = CompareGuessToGoal(guess) ? correctAnswerResponse : incorrectAnswerResponse; //Är responsedelen ett noiceword?
             return response;
         }
 

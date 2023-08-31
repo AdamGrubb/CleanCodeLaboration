@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CleanCodeLaboration.Model.GameLogic.Strategy
 {
-    public static class StrategyUtilitys
+    public static class StrategyUtilitys //Kolla upp hur man namngiver static methods så att de är förståelsebara.
     {
         public static string GetFormattedPlayerScores(List<Player> players) //GetFormattedPlayerScores? Kanske nått mer beskrivande namn.
         {
@@ -25,10 +25,10 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy
             players.Sort((p1, p2) => p1.GetAverageScore().CompareTo(p2.GetAverageScore()));
         }
 
-        public static List<Player> ConvertToPlayer(List<IPlayerScore> playersDTO)
+        public static List<Player> ConvertToPlayer(List<IPlayerScore> playersDTO)  //Ändra till till ToPLayer istället enligt sebbes slides.
         {
             List<Player> players = new List<Player>();
-            foreach (IPlayerScore playerDTO in playersDTO)
+            foreach (IPlayerScore playerDTO in playersDTO) //Går det att bryta ut till fler metoder kanske?
             {
                 Player pd = new Player(playerDTO.Name, playerDTO.Guesses); //Här har du player som Pd
                 int pos = players.IndexOf(pd); //Här har du en förkortning för pos, det är icke sa nicke.
