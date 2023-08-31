@@ -43,7 +43,7 @@ namespace CleanCodeLaboration.Model.GameLogic
         public string EvaluateGuess(string guess) //Är det tokigt att IncrementGuess ligger här? Bryta ut till fler metoder kanske?
         {
             gameStrategy.IncrementGuess();
-            string evaluatedGuess = gameStrategy.EvaluateGuess(guess);
+            string evaluatedGuess = gameStrategy.GetEvaluatedGuess(guess);
             bool correctGuess = gameStrategy.IsCorrectGuess(evaluatedGuess);
             if (correctGuess)
             {

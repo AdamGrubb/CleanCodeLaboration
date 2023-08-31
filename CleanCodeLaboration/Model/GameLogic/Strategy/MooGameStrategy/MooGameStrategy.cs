@@ -60,16 +60,26 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.MooGameStrategy
         {
             return "For practice, number is: " + goal;
         }
-        public string EvaluateGuess(string guess) 
+        public string GetEvaluatedGuess(string guess)
         {
-            string padding = new string(' ', lenghtOfGoal);
-            guess += padding;
-            int cows = calculateCows(guess); //Ska det kanske vara så att calculateCow ska heta typ GetContainingNumber?
-            int bulls = calculateBulls(guess); //Ska det kanske vara så att calculateCow ska heta typ GetMatchingNumber?
-            string bullsAndCows = new string(bull, bulls) + separator + new string(cow, cows); //Här får du fundera på vad variabeln för B ska vara? istället för bull, bulls.
+            string bullsAndCows = EvaluateGuess(guess);//Här får du fundera på vad variabeln för B ska vara? istället för bull, bulls.
             return bullsAndCows;
         }
-        private int calculateCows(string guess)
+
+        private string EvaluateGuess(string guess) //EvaluateGuess?
+        {
+            guess = AddPadding(guess); //Vad säger man om "Add" padding? Har jag något liknande koncept men med annat "prefix"
+            int cows = CalculateCows(guess); //Ska det kanske vara så att calculateCow ska heta typ GetContainingNumber?
+            int bulls = CalculateBulls(guess); //Ska det kanske vara så att calculateCow ska heta typ GetMatchingNumber?
+            string formatedAnswer = FormatGuess(cows, bulls); //Samma här, leta upp liknande koncept och välj ett ord. Har för mig att du haft Format sen tidigare.
+            return formatedAnswer;
+        }
+        private string AddPadding(string guess)
+        {
+            guess += new string(' ', lenghtOfGoal);
+            return guess;
+        }
+        private int CalculateCows(string guess)
         {
             int containingNumber = 0;
             for (int i = 0; i < lenghtOfGoal; i++)
@@ -81,7 +91,7 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.MooGameStrategy
             }
             return containingNumber;
         }
-        private int calculateBulls(string guess)
+        private int CalculateBulls(string guess)
         {
             int matchingNumber = 0;
             for (int i = 0; i < lenghtOfGoal; i++)
@@ -92,6 +102,11 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.MooGameStrategy
                 }
             }
             return matchingNumber;
+        }
+        private string FormatGuess(int cows, int bulls)
+        {
+            string formatedAnswer = new string(bull, bulls) + separator + new string(cow, cows);
+            return formatedAnswer;
         }
         public void IncrementGuess()
         {

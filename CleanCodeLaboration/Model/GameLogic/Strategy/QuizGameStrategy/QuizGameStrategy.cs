@@ -67,7 +67,7 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.QuizGameStrategy
             return quizQuestion.Question;
         }
 
-        public string EvaluateGuess(string guess)
+        public string GetEvaluatedGuess(string guess)
         {
             string response = CompareGuessToGoal(guess) ? correctAnswerResponse : incorrectAnswerResponse; //Är responsedelen ett noiceword?
             return response;
