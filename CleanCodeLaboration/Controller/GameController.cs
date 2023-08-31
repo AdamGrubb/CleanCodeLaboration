@@ -79,7 +79,7 @@ namespace CleanCodeLaboration.Controller
             }
         }
 
-        public void GetGameLoop() //Lista ut vad den här ska heta, 
+        public void GetGameLoop() //Lista ut vad den här ska heta, Här borde du kanske kalla på start new game?
         {
             string gameIntroduction = gameContext.GetGameIntroduction();
 
