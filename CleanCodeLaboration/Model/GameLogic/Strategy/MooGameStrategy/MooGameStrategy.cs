@@ -7,16 +7,17 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.MooGameStrategy
 {
     public class MooGameStrategy : IGameStrategy
     {
-        private string goal = "";
-        private int numberOfGuesses = 0;
-        private bool isGameActive;
         private const string gameName = "MooGame";
-        private IGameDAO gameDAO;
-        private string userName = "";
         private const int lenghtOfGoal = 4;
         private const char bull = 'B';
         private const char cow = 'C';
         private const char separator = ',';
+        private string userName = "";
+        private string goal = "";
+        private int numberOfGuesses = 0;
+        private bool isGameActive;
+        private IGameDAO gameDAO;
+ 
 
 
         public void SetGameDAO(IGameDAO gameDAO)
