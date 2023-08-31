@@ -21,8 +21,8 @@ namespace CleanCodeLaboration.Model.GameMenu
         private int commandIndex;
         ICommand[] commands = new ICommand[]
         {
-            new Game ("Moogame", new MooGameStrategy()),
-            new Game ("QuizGame", new QuizGameStrategy())
+            new MooGameCommand(),
+            new QuizCommand()
         };
 
         public List<string> GetMenu()
