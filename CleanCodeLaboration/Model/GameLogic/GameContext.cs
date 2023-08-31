@@ -5,7 +5,7 @@ using CleanCodeLaboration.Model.GameLogic.Strategy.Interface;
 
 namespace CleanCodeLaboration.Model.GameLogic
 {
-    public class GameContext : IGameContext
+    public class GameContext : IGameContext //Vad är GameContext? Du borde döpa om den här och fundera ut vad den har för ansvar. Läs på om strategy.
     {
         private IGameStrategy gameStrategy;
         private IGameDAO gameDAO;
@@ -23,13 +23,13 @@ namespace CleanCodeLaboration.Model.GameLogic
         {
             this.playerName = playerName;
         }
-        public void SetGameStrategy(IGameStrategy gameStrategy) //Frågan är ju här ifall det är för många metoder för en SetGameStrategy?
+        public void SetGameStrategy(IGameStrategy gameStrategy) //Frågan är ju här ifall det är för många metoder för en SetGameStrategy? Bryt ut en funktion som är StartGame?
         {
             gameStrategy.SetGameDAO(gameDAO);
             gameStrategy.SetPlayerName(playerName);
             String goal = gameStrategy.GenerateRandomGoal();
             gameStrategy.SetGoal(goal);
-            gameStrategy.ActivateGame();
+            gameStrategy.StartNewGame();
             this.gameStrategy = gameStrategy;
         }
         public string GetGameIntroduction()

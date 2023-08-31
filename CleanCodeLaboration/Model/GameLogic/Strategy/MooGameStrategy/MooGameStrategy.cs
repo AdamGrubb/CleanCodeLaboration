@@ -8,7 +8,7 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.MooGameStrategy
     public class MooGameStrategy : IGameStrategy
     {
         private string goal = "";
-        private int numberOfGuesses = 0;
+        private int numberOfGuesses;
         private bool isGameActive;
         private const string gameName = "MooGame";
         private IGameDAO gameDAO;
@@ -23,9 +23,20 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.MooGameStrategy
         {
             this.gameDAO = gameDAO;
         }
-        public void ActivateGame()
+        public void StartNewGame() //Borde denna kanske lyftas ut till GameContext och den har en metod som använder dessa? Tror det vore klokt
+        {
+            ActivateGame(); //Strategy nytt i interfacet
+            ResetGuesses(); //Strategy nytt i interfacet
+        }
+
+        private void ActivateGame()
         {
             isGameActive = true;
+        }
+
+        private void ResetGuesses()
+        {
+            numberOfGuesses = 0;
         }
         public void SetPlayerName(string userName)
         {
@@ -69,8 +80,8 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.MooGameStrategy
         private string EvaluateGuess(string guess) //EvaluateGuess?
         {
             guess = AddPadding(guess); //Vad säger man om "Add" padding? Har jag något liknande koncept men med annat "prefix"
-            int cows = CalculateCows(guess); //Ska det kanske vara så att calculateCow ska heta typ GetContainingNumber?
-            int bulls = CalculateBulls(guess); //Ska det kanske vara så att calculateCow ska heta typ GetMatchingNumber?
+            int cows = CountContainingNumbers(guess); //Ska det kanske vara så att calculateCow ska heta typ GetContainingNumber?
+            int bulls = CountMatchingNumbers(guess); //Ska det kanske vara så att calculateCow ska heta typ GetMatchingNumber?
             string formatedAnswer = FormatGuess(cows, bulls); //Samma här, leta upp liknande koncept och välj ett ord. Har för mig att du haft Format sen tidigare.
             return formatedAnswer;
         }
@@ -79,7 +90,7 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.MooGameStrategy
             guess += new string(' ', lenghtOfGoal);
             return guess;
         }
-        private int CalculateCows(string guess)
+        private int CountContainingNumbers(string guess)
         {
             int containingNumber = 0;
             for (int i = 0; i < lenghtOfGoal; i++)
@@ -91,7 +102,7 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.MooGameStrategy
             }
             return containingNumber;
         }
-        private int CalculateBulls(string guess)
+        private int CountMatchingNumbers(string guess)
         {
             int matchingNumber = 0;
             for (int i = 0; i < lenghtOfGoal; i++)

@@ -28,9 +28,20 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.QuizGameStrategy
         {
             this.playerName = playerName;
         }
-        public void ActivateGame()
+        public void StartNewGame()
+        {
+            ActivateGame();
+            ResetGuesses();
+        }
+
+        private void ActivateGame()
         {
             isGameActive = true;
+        }
+
+        private void ResetGuesses()
+        {
+            numberOfGuesses = 0;
         }
         public string GenerateRandomGoal()
         {
@@ -98,7 +109,7 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.QuizGameStrategy
 
         public string GetFinishedGameMessage()
         {
-            string winMessage = "You won!! You guessed : "+numberOfGuesses +"times!"; //winMessage är det rätt namn?
+            string winMessage = "You won!! You guessed : " + numberOfGuesses + "times!"; //winMessage är det rätt namn?
 
             return winMessage;
         }
