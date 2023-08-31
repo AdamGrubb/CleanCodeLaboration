@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace CleanCodeLaboration.Model.GameMenu
 {
-    public class GameMenu : IGameMenu
+    public class GameMenu : IGameMenu //Nu jobbar den ju med samma Games här i command-listan. 
     {
         private IGameStrategy strategy;
         private bool validSelection;
