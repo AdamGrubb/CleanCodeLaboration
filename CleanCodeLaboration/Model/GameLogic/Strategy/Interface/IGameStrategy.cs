@@ -5,7 +5,7 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.Interface
     public interface IGameStrategy
     {
         void SetGameDAO(IGameDAO gameDAO);
-        string GetEvaluatedGuess(string guess); //Fungerar Evaluate som namn?? Det kanske också är en metod som ska gömmas bakom en Get-metod? eller Kanske ha en privat EvaluateGuess-metod och sen döper du omd enna metod till GetEvaluatedGuess?
+        string GetEvaluatedGuess(string guess);
         string GenerateRandomGoal(); //Denna säger inget om att den också ska "ge tillbaka" ett RandomGoal. Kan du kanske gömma just den funktionen i Moogame osv. private void GenerateRandomGoal och denna heter GetRandomGoal()?
         string GetFinishedGameMessage();
         string GetGameIntroduction();
