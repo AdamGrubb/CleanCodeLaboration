@@ -31,17 +31,11 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.QuizGameStrategy
         public void StartNewGame()
         {
             ActivateGame();
-            ResetGuesses();
         }
 
         private void ActivateGame()
         {
             isGameActive = true;
-        }
-
-        private void ResetGuesses()
-        {
-            numberOfGuesses = 0;
         }
         public string GenerateRandomGoal()
         {

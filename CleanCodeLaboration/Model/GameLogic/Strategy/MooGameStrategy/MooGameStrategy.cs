@@ -8,7 +8,7 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.MooGameStrategy
     public class MooGameStrategy : IGameStrategy
     {
         private string goal = "";
-        private int numberOfGuesses;
+        private int numberOfGuesses = 0;
         private bool isGameActive;
         private const string gameName = "MooGame";
         private IGameDAO gameDAO;
@@ -26,17 +26,11 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.MooGameStrategy
         public void StartNewGame() //Borde denna kanske lyftas ut till GameContext och den har en metod som använder dessa? Tror det vore klokt
         {
             ActivateGame(); //Strategy nytt i interfacet
-            ResetGuesses(); //Strategy nytt i interfacet
         }
 
-        private void ActivateGame()
+        private void ActivateGame() //Ska jag ta bort denna och bara låta varje spel starta med en true?
         {
             isGameActive = true;
-        }
-
-        private void ResetGuesses()
-        {
-            numberOfGuesses = 0;
         }
         public void SetPlayerName(string userName)
         {
