@@ -98,7 +98,7 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.QuizGameStrategy
 
         public string GetFinishedGameMessage()
         {
-            string winMessage = "You won!! You guessed : " + numberOfGuesses + "times!"; //winMessage är det rätt namn?
+            string winMessage = "You won!! You guessed : " + numberOfGuesses + " times!";
 
             return winMessage;
         }
@@ -113,8 +113,8 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.QuizGameStrategy
             string spacing = "\n";
             string highScores = "Player   games average" + spacing;
             List<Player> players = GetSortedPlayers();
-            string formatedPlayers = GetFormatedPlayerScores(players);
-            highScores += formatedPlayers;
+            string formattedPlayersScores = GetFormattedPlayerScores(players);
+            highScores += formattedPlayersScores;
 
             return highScores;
         }
@@ -132,7 +132,7 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.QuizGameStrategy
 
             return playerScores;
         }
-        private string GetFormatedPlayerScores(List<Player> players)
+        private string GetFormattedPlayerScores(List<Player> players)
         {
             string formatedPLayerScores = StrategyUtilitys.GetFormattedPlayerScores(players);
             return formatedPLayerScores;
