@@ -19,21 +19,40 @@ namespace CleanCodeLaborationTest.Model.GameLogic
     {
         MooGameStrategy gameStrategy = new MooGameStrategy();
 
+        [TestMethod]
+        public void TestActivateGame()
+        {
+            //Arrange
+            bool beforeActivateGame;
+            bool afterActivateGame;
+           
+
+            //Act
+            beforeActivateGame = gameStrategy.IsGameActive();
+            gameStrategy.ActivateGame();
+            afterActivateGame = gameStrategy.IsGameActive();
+
+            //Assert
+            Assert.IsFalse(beforeActivateGame);
+            Assert.IsTrue(afterActivateGame);
+        }
+
         //[TestMethod]
-        //public void TestActivate()
+        //public void TestDeactivateGame()
         //{
         //    //Arrange
-        //    bool afterStartGame;
-        //    bool beforeStartGame;
+        //    bool beforeDeactivateGame;
+        //    bool afterDeactivateGame;
+            
 
         //    //Act
-        //    beforeStartGame = gameStrategy.IsGameActive();
+        //    beforeDeactivateGame = gameStrategy.IsGameActive();
         //    gameStrategy.ActivateGame();
-        //    afterStartGame = gameStrategy.IsGameActive();
+        //    afterDeactivateGame = gameStrategy.IsGameActive();
 
         //    //Assert
-        //    Assert.IsFalse(beforeStartGame);
-        //    Assert.IsTrue(afterStartGame);
+        //    Assert.IsFalse(beforeDeactivateGame);
+        //    Assert.IsTrue(afterDeactivateGame);
         //}
 
         [TestMethod]
@@ -70,7 +89,7 @@ namespace CleanCodeLaborationTest.Model.GameLogic
             Assert.AreEqual(wrongGuessResponse, gameStrategy.GetEvaluatedGuess(wrongGuess)); //Plocka ut dem till egna variabler
         }
         [TestMethod]
-        public void TestGetPracticeRun()
+        public void TestSetGoal()
         {
             //Arrange
             string goal = "3724";
@@ -169,14 +188,5 @@ namespace CleanCodeLaborationTest.Model.GameLogic
         {
             gameStrategy = new MooGameStrategy();
         }
-
-        /*Dessa är kvar att testa:
-         *EndGame
-         *
-         *Dessa två skulle jag kunna testa med en mock-dao. Göra SetPlayerName och sen incrementa 3 gånger, sen köra en Savegame typ?
-         *SaveGame()
-         *SetPlayerName
-         */
-
     }
 }
