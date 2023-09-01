@@ -9,8 +9,8 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.MooGameStrategy
     {
         private const string gameName = "MooGame";
         private const int lenghtOfGoal = 4;
-        private const char bull = 'B';
-        private const char cow = 'C';
+        private const char bullCharacter = 'B';
+        private const char cowCharacter = 'C';
         private const char separator = ',';
         private string userName = "";
         private string goal = "";
@@ -107,7 +107,7 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.MooGameStrategy
         }
         private string FormatGuess(int cows, int bulls)
         {
-            string formatedAnswer = new string(bull, bulls) + separator + new string(cow, cows);
+            string formatedAnswer = new string(bullCharacter, bulls) + separator + new string(cowCharacter, cows);
             return formatedAnswer;
         }
         public void IncrementGuess()
@@ -122,7 +122,7 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.MooGameStrategy
         }
         private string GetCorrectGuess()
         {
-            string correctBulls = new string(bull, lenghtOfGoal);
+            string correctBulls = new string(bullCharacter, lenghtOfGoal);
             correctBulls += separator;
             return correctBulls;
         }
