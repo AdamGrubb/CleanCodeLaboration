@@ -24,12 +24,8 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.MooGameStrategy
         {
             this.gameDAO = gameDAO;
         }
-        public void StartNewGame() //Borde denna kanske lyftas ut till GameContext och den har en metod som använder dessa? Tror det vore klokt
-        {
-            ActivateGame(); //Strategy nytt i interfacet
-        }
 
-        private void ActivateGame() //Ska jag ta bort denna och bara låta varje spel starta med en true?
+        public void ActivateGame() //Ska jag ta bort denna och bara låta varje spel starta med en true?
         {
             isGameActive = true;
         }

@@ -28,12 +28,7 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.QuizGameStrategy
         {
             this.playerName = playerName;
         }
-        public void StartNewGame()
-        {
-            ActivateGame();
-        }
-
-        private void ActivateGame()
+        public void ActivateGame()
         {
             isGameActive = true;
         }
