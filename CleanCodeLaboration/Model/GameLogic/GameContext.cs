@@ -50,15 +50,19 @@ namespace CleanCodeLaboration.Model.GameLogic
         }
         public string EvaluateGuess(string guess) //Är det tokigt att IncrementGuess ligger här? Bryta ut till fler metoder kanske?
         {
-            gameStrategy.IncrementGuess();
             string evaluatedGuess = gameStrategy.GetEvaluatedGuess(guess);
+            UpdateGame(evaluatedGuess);
+            return evaluatedGuess;
+        }
+        private void UpdateGame(string evaluatedGuess)
+        {
+            gameStrategy.IncrementGuess();
             bool correctGuess = gameStrategy.IsCorrectGuess(evaluatedGuess);
             if (correctGuess)
             {
                 gameStrategy.SaveGame();
                 gameStrategy.DeactivateGame();
             }
-            return evaluatedGuess;
         }
         public bool IsGameActive()
         {
