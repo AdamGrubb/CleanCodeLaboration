@@ -15,4 +15,4 @@ IGameMenu gameMenu = new GameMenu();
 GameController controller = new GameController(gameContext, iO);
 
 
-controller.StartCleanCodeGameLoop();
+controller.InitializeGame();
