@@ -31,8 +31,8 @@ namespace CleanCodeLaboration.Model.GameLogic
         }
         public void StartNewGame()
         {
-            SetGameDAO();
-            SetPlayerName();
+            SetGameDAO(); //AssignGameDao?
+            SetPlayerName();//AssignPlayerName?
             SetGameGoal();
             ActivateGame();
         }
@@ -61,29 +61,36 @@ namespace CleanCodeLaboration.Model.GameLogic
         {
             return gameStrategy.GetRightAnswer();
         }
-        public string CheckPlayerAnswer(string guess) //Är det tokigt att IncrementGuess ligger här? Bryta ut till fler metoder kanske?
-        {
-            string evaluatedGuess = gameStrategy.GetEvaluatedGuess(guess);
-            UpdateGame(evaluatedGuess);
-            return evaluatedGuess;
-        }
-        private void UpdateGame(string evaluatedGuess)
+        public string CheckPlayerAnswer(string guess) //Frågan är ifall man skulle bryta ut loopen ändå?
         {
             IncrementGuessCount();
-
+            string evaluatedGuess = EvaluateGuess(guess);
             if (IsCorrectGuess(evaluatedGuess))
             {
-                gameStrategy.SaveGame();
-                gameStrategy.DeactivateGame();
+                SaveGame();
+                EndGame();
             }
+            return evaluatedGuess;
+        }
+        private string EvaluateGuess(string guess)
+        {
+            return gameStrategy.GetEvaluatedGuess(guess); //Borde GameContext heta GetEvaluatedGuess och gameStrategy heta EvaluateGuess?
         }
         private void IncrementGuessCount()
         {
-            gameStrategy.IncrementGuess();
+            gameStrategy.IncrementGuess(); //IncrementGuessCount?
         }
         private bool IsCorrectGuess(string guess)
         {
             return gameStrategy.IsCorrectGuess(guess);
+        }
+        private void SaveGame()
+        {
+            gameStrategy.SaveGame();
+        }
+        private void EndGame()
+        {
+            gameStrategy.DeactivateGame();
         }
         public bool IsGameActive()
         {
