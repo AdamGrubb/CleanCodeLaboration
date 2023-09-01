@@ -78,7 +78,7 @@ namespace CleanCodeLaboration.Model.GameLogic
         }
         private void IncrementGuessCount()
         {
-            gameStrategy.IncrementGuess(); //IncrementGuessCount?
+            gameStrategy.IncrementGuessCount(); //IncrementGuessCount?
         }
         private bool IsCorrectGuess(string guess)
         {

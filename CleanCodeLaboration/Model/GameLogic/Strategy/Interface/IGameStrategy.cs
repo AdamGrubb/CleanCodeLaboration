@@ -15,7 +15,7 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.Interface
         void SetPlayerName(string userName);
         void ActivateGame(); //Fortfarande kanske otydligt vad den gör? För abstrakt? StartNewGame?
         void SaveGame();
-        void IncrementGuess(); //Denna kanske behöver bytas namn på, kanske borde heta något i stil med incrementNumberOfGuesses?
+        void IncrementGuessCount(); //Denna kanske behöver bytas namn på, kanske borde heta något i stil med incrementNumberOfGuesses?
         bool IsCorrectGuess(string guess);
         void DeactivateGame();
         string GetRightAnswer();

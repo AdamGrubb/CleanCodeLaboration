@@ -112,7 +112,7 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.MooGameStrategy
             string formatedAnswer = new string(bullCharacter, bulls) + separator + new string(cowCharacter, cows);
             return formatedAnswer;
         }
-        public void IncrementGuess()
+        public void IncrementGuessCount()
         {
             numberOfGuesses++;
         }

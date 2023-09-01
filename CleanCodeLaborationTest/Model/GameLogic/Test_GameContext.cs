@@ -87,7 +87,7 @@ namespace CleanCodeLaborationTest.Model.GameLogic
 
             //Assert
             mockGameStrategy.Verify(strategy => strategy.GetEvaluatedGuess(guess));
-            mockGameStrategy.Verify(strategy => strategy.IncrementGuess(),Times.Once);
+            mockGameStrategy.Verify(strategy => strategy.IncrementGuessCount(),Times.Once);
             if(IsCorrectGuess ==true)
             {
                 mockGameStrategy.Verify(strategy => strategy.SaveGame(), Times.Once);

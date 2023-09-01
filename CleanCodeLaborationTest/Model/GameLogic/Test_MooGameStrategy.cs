@@ -36,25 +36,6 @@ namespace CleanCodeLaborationTest.Model.GameLogic
             Assert.IsFalse(beforeActivateGame);
             Assert.IsTrue(afterActivateGame);
         }
-
-        //[TestMethod]
-        //public void TestDeactivateGame()
-        //{
-        //    //Arrange
-        //    bool beforeDeactivateGame;
-        //    bool afterDeactivateGame;
-            
-
-        //    //Act
-        //    beforeDeactivateGame = gameStrategy.IsGameActive();
-        //    gameStrategy.ActivateGame();
-        //    afterDeactivateGame = gameStrategy.IsGameActive();
-
-        //    //Assert
-        //    Assert.IsFalse(beforeDeactivateGame);
-        //    Assert.IsTrue(afterDeactivateGame);
-        //}
-
         [TestMethod]
         public void TestGetGameIntroduction()
         {
@@ -114,7 +95,7 @@ namespace CleanCodeLaborationTest.Model.GameLogic
             //Act
             for (int i = 0; i < guesses; i++)
             {
-                gameStrategy.IncrementGuess();
+                gameStrategy.IncrementGuessCount();
             }
             recivedResult = gameStrategy.GetFinishedGameMessage();
 
