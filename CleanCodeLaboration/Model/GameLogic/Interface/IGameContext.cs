@@ -11,6 +11,7 @@ namespace CleanCodeLaboration.Model.GameLogic.Interface
         string GetPlayerNameQuestion();
         bool IsGameActive();
         void SetGameStrategy(IGameStrategy gameStrategy);
+        void StartNewGame();
         void SetPlayerName(string playerName);
         bool KeepPlaying(string answer);
         string GetPlayAgainMessage();

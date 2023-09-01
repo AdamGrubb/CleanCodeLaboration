@@ -25,12 +25,20 @@ namespace CleanCodeLaboration.Model.GameLogic
         }
         public void SetGameStrategy(IGameStrategy gameStrategy) //Frågan är ju här ifall det är för många metoder för en SetGameStrategy? Bryt ut en funktion som är StartGame?
         {
+            this.gameStrategy = gameStrategy;
+        }
+        public void StartNewGame()
+        {
+            ConfigureGameComponents();
+            gameStrategy.ActivateGame();
+        }
+
+        private void ConfigureGameComponents()
+        {
             gameStrategy.SetGameDAO(gameDAO);
             gameStrategy.SetPlayerName(playerName);
-            String goal = gameStrategy.GenerateRandomGoal();
+            string goal = gameStrategy.GenerateRandomGoal();
             gameStrategy.SetGoal(goal);
-            gameStrategy.StartNewGame();
-            this.gameStrategy = gameStrategy;
         }
         public string GetGameIntroduction()
         {
