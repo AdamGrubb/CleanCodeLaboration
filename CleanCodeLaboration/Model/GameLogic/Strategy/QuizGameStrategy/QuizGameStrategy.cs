@@ -17,8 +17,8 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.QuizGameStrategy
         private IQuizQuestionDAO questionDAO = new StarWarsQuestionDAO();
         private IQuizQuestion quizQuestion;
         private string goal;
-        private const string correctAnswerResponse = "Correct Answer!"; //Är de för långa, är "response" redundant?
-        private const string incorrectAnswerResponse = "Incorrect Answer, try again";
+        private const string correctResponse = "Correct Answer!";
+        private const string incorrectResponse = "Incorrect Answer, try again";
         private int numberOfGuesses = 0;
         private bool isGameActive;
         private IGameDAO gameDAO;
@@ -69,7 +69,7 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.QuizGameStrategy
 
         public string GetEvaluatedGuess(string guess)
         {
-            string response = CompareGuessToGoal(guess) ? correctAnswerResponse : incorrectAnswerResponse; //Är responsedelen ett noiceword?
+            string response = CompareGuessToGoal(guess) ? correctResponse : incorrectResponse;
             return response;
         }
 
@@ -78,14 +78,14 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.QuizGameStrategy
             return goal.ToLower() == guess.ToLower();
         }
 
-        public void IncrementGuess()
+        public void IncrementGuessCount()
         {
             numberOfGuesses++;
         }
 
         public bool IsCorrectGuess(string evaluatedGuess)
         {
-            bool isCorrect = evaluatedGuess == correctAnswerResponse;
+            bool isCorrect = evaluatedGuess == correctResponse;
             return isCorrect;
         }
 
