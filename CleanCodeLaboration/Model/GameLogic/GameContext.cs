@@ -11,9 +11,10 @@ namespace CleanCodeLaboration.Model.GameLogic
         private IGameDAO gameDAO;
         private string playerName;
         
-        public GameContext(IGameDAO gameDAO)
+        public GameContext(IGameDAO gameDAO) //Om man inte gör SetPlayerName så kommer den göra null istället? 
         {
             this.gameDAO = gameDAO;
+            playerName = string.Empty; //Är detta en bättre lösning?
         }
         public string GetPlayerNameQuestion() //Ska man göra en const här?
         {
