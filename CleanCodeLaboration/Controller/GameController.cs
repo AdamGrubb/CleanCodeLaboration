@@ -6,19 +6,6 @@ using CleanCodeLaboration.View.Interface;
 
 namespace CleanCodeLaboration.Controller
 {
-
-    /*
-     * Kolla över om du använder denna standard:
-    Use Get prefix for methods that return a single value or object.
-    Use Set prefix for methods that assign a value or object to a property or field.
-    Use Add prefix for methods that add an item to a collection.
-    Use Remove prefix for methods that remove an item from a collection.
-    Use Create prefix for methods that create and return a new instance of a type.
-    Use Find prefix for methods that search for an item in a collection and return it or its index.
-    Use Is, Has, or Can prefixes for methods that return a boolean value indicating a condition or capability.
-
-    Sid. 80 Vertical Distance kolla på det.
-     */
     public class GameController
     {
         private readonly IGameContext gameContext;
@@ -82,7 +69,7 @@ namespace CleanCodeLaboration.Controller
             IGameStrategy selectedGame;
             do
             {
-                selectedGame = GetSelectedGame();
+                selectedGame = GetSelectedGame(); //Är det risky buisniess att ge tillbaka null från menyn?
 
 
             } while (selectedGame == null); 
@@ -99,7 +86,7 @@ namespace CleanCodeLaboration.Controller
         }
 
 
-        public void GetGameLoop() //Lista ut vad den här ska heta, Här borde du kanske kalla på start new game?
+        public void GetGameLoop()
         {
             StartNewGame();
 
@@ -114,7 +101,7 @@ namespace CleanCodeLaboration.Controller
             GetFinishedGameMessage();
             
         }
-        private void StartNewGame()
+        private void StartNewGame() //Start Game?
         {
             gameContext.StartNewGame();
         }
