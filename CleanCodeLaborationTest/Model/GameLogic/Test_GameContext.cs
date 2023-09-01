@@ -70,11 +70,50 @@ namespace CleanCodeLaborationTest.Model.GameLogic
             //Assert
             Assert.AreEqual(introduction, gameIntroduction);
         }
-        //public string GetGameIntroduction()
-        //{
-        //    return gameStrategy.GetGameIntroduction();
-        //}
+        [DataTestMethod]
+        [DataRow("234", "Rätt", true)]
+        [DataRow("234", "Fel", false)]
+        [DataRow("234", "Rätt", true)]
+        [DataRow("2354", "fel", false)]
+        public void TestEvaluateGuess(string guess, string evaluatedReturn, bool IsCorrectGuess)
+        {
+            //Arrange
+            gameContext.SetGameStrategy(mockGameStrategy.Object);
+            mockGameStrategy.Setup(strategy=>strategy.GetEvaluatedGuess(guess)).Returns(evaluatedReturn);
+            mockGameStrategy.Setup(strategy=>strategy.IsCorrectGuess(evaluatedReturn)).Returns(IsCorrectGuess);
 
+            //Act
+            string evaluatedGuess = gameContext.EvaluateGuess(guess);
+
+            //Assert
+            mockGameStrategy.Verify(strategy => strategy.GetEvaluatedGuess(guess));
+            mockGameStrategy.Verify(strategy => strategy.IncrementGuess(),Times.Once);
+            if(IsCorrectGuess ==true)
+            {
+                mockGameStrategy.Verify(strategy => strategy.SaveGame(), Times.Once);
+                mockGameStrategy.Verify(strategy => strategy.DeactivateGame(), Times.Once);
+            }
+            Assert.AreEqual(evaluatedGuess, evaluatedReturn);
+
+        }
+        [DataTestMethod]
+        [DataRow("n")]
+        [DataRow("")]
+        [DataRow(null)]
+        [DataRow("3333")]
+        public void TestKeepPlayng(string userInput)
+        {
+            //Arrange
+            const string correctInput = "n";
+            bool checkInput;
+
+            //Act
+            checkInput = gameContext.KeepPlaying(userInput);
+
+            //Assert
+            Assert.AreEqual(correctInput != userInput, checkInput);
+
+        }
     }
 
 }
