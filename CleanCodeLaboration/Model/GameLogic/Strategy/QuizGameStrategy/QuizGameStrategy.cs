@@ -13,7 +13,7 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.QuizGameStrategy
 {
     public class QuizGameStrategy : IGameStrategy
     {
-        private string playerName;
+        private string playerName = string.Empty;
         private IQuizQuestionDAO questionDAO = new StarWarsQuestionDAO();
         private IQuizQuestion quizQuestion;
         private string goal;

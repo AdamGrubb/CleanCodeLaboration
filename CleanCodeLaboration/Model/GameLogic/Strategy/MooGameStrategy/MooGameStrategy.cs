@@ -12,8 +12,8 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.MooGameStrategy
         private const char bullCharacter = 'B';
         private const char cowCharacter = 'C';
         private const char separator = ','; //Seperator? Lite oklart vad den ska användas för?
-        private string userName = "";
-        private string goal = "";
+        private string playerName = string.Empty;
+        private string goal;
         private int numberOfGuesses = 0;
         private bool isGameActive;
         private IGameDAO gameDAO;
@@ -29,9 +29,9 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.MooGameStrategy
         {
             isGameActive = true;
         }
-        public void SetPlayerName(string userName)
+        public void SetPlayerName(string playerName)
         {
-            this.userName = userName;
+            this.playerName = playerName;
         }
         public string GenerateRandomGoal()
         {
