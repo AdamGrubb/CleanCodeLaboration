@@ -30,16 +30,27 @@ namespace CleanCodeLaboration.Model.GameLogic
         }
         public void StartNewGame()
         {
-            ConfigureGameComponents();
-            gameStrategy.ActivateGame();
+            SetGameDAO();
+            SetPlayerName();
+            SetGameGoal();
+            ActivateGame();
         }
-
-        private void ConfigureGameComponents()
+        private void SetGameDAO()
         {
             gameStrategy.SetGameDAO(gameDAO);
+        }
+        private void SetPlayerName()
+        {
             gameStrategy.SetPlayerName(playerName);
+        }
+        private void SetGameGoal()
+        {
             string goal = gameStrategy.GenerateRandomGoal();
             gameStrategy.SetGoal(goal);
+        }
+        private void ActivateGame()
+        {
+            gameStrategy.ActivateGame();
         }
         public string GetGameIntroduction()
         {
