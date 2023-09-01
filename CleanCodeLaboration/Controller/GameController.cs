@@ -12,11 +12,11 @@ namespace CleanCodeLaboration.Controller
         private readonly IIO iO;
         private IGameMenu gameMenu;
 
-        public GameController(IGameContext gameContext, IIO iO)
+        public GameController(IGameContext gameContext, IIO iO, IGameMenu gameMenu)
         {
             this.gameContext = gameContext;
             this.iO = iO;
-            gameMenu = new GameMenu();
+            this.gameMenu = gameMenu;
         }
 
         public void InitializeGame() //Lite osäker på namnet?
@@ -57,12 +57,10 @@ namespace CleanCodeLaboration.Controller
         private void OutputMenu()
         {
             List<string> showGameMenu = gameMenu.GetMenu();
-            for (int i = 0; i < showGameMenu.Count; i++)
+            showGameMenu.ForEach(alternative =>
             {
-                int displayNumber = i + 1;
-                string menuNumber = $"{displayNumber}. ";
-                iO.GameOutput(menuNumber + showGameMenu[i]);
-            }
+                iO.GameOutput(alternative);
+            });
         }
         private void ChooseGame()
         {
@@ -86,7 +84,7 @@ namespace CleanCodeLaboration.Controller
         }
 
 
-        public void GetGameLoop()
+        private void GetGameLoop()
         {
             StartNewGame();
 

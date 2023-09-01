@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace CleanCodeLaboration.Model.GameMenu
 {
-    public class GameMenu : IGameMenu //Nu jobbar den ju med samma Games här i command-listan. 
+    public class GameStrategyMenu : IGameMenu //Nu jobbar den ju med samma Games här i command-listan. 
     {
         private int commandIndex;
         ICommand[] commands = new ICommand[]
@@ -22,10 +22,16 @@ namespace CleanCodeLaboration.Model.GameMenu
             new MooGameCommand(),
             new QuizCommand()
         };
+        public GameStrategyMenu(ICommand[] commands)
+        {
+                this.commands = commands;
+        }
 
         public List<string> GetMenu()
         {
-            var commandDescriptions = commands.Select(command => command.Description).ToList();
+            var commandDescriptions = commands
+                .Select((command, index) => $"{index + 1}. {command.Description}")
+                .ToList();
             return commandDescriptions;
         }
         public IGameStrategy? SelectGame(string userAnswer) //Ska jag göra denna till validSelectionOfGame? och sen bryta ut strategy = command-grejen till en privat metod?
