@@ -46,7 +46,7 @@ namespace CleanCodeLaboration.Model.GameLogic
         }
         private void SetGameGoal()
         {
-            string goal = gameStrategy.GenerateRandomGoal();
+            string goal = gameStrategy.GenerateGoal();
             gameStrategy.SetGoal(goal);
         }
         private void ActivateGame()

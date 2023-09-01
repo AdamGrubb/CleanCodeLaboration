@@ -145,7 +145,7 @@ namespace CleanCodeLaborationTest.Model.GameLogic
             int lengthOfGoal = 4;
 
             //Act
-            goal = gameStrategy.GenerateRandomGoal();
+            goal = gameStrategy.GenerateGoal();
 
             //Assert
             // The loop iterates over the goal to check if every element of the goal is unique, which is the premise of MooGame.

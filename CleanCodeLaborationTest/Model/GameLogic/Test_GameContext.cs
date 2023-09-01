@@ -37,7 +37,7 @@ namespace CleanCodeLaborationTest.Model.GameLogic
             //Arrange
             gameContext.SetPlayerName(name);
             gameContext.SetGameStrategy(mockGameStrategy.Object);
-            mockGameStrategy.Setup(dao => dao.GenerateRandomGoal()).Returns(mockGoal);
+            mockGameStrategy.Setup(dao => dao.GenerateGoal()).Returns(mockGoal);
 
 
             //Act
@@ -50,7 +50,7 @@ namespace CleanCodeLaborationTest.Model.GameLogic
             //Assert
             mockGameStrategy.Verify(method => method.SetGameDAO(It.Is<IGameDAO>(dao => dao == mockGameDAO.Object)), Times.Exactly(callsMade));
             mockGameStrategy.Verify(method => method.SetPlayerName(sameName),Times.Exactly(callsMade));
-            mockGameStrategy.Verify(method => method.GenerateRandomGoal(),Times.Exactly(callsMade));
+            mockGameStrategy.Verify(method => method.GenerateGoal(),Times.Exactly(callsMade));
             mockGameStrategy.Verify(method => method.SetGoal(mockGoal),Times.Exactly(callsMade));
             mockGameStrategy.Verify(method => method.ActivateGame(),Times.Exactly(callsMade));
         }

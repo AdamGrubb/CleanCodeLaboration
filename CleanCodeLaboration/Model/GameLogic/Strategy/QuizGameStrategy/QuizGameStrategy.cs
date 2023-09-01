@@ -32,7 +32,7 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.QuizGameStrategy
         {
             isGameActive = true;
         }
-        public string GenerateRandomGoal()
+        public string GenerateGoal()
         {
             SetQuizQuestion();
             string goal = GetQuizAnswer();

@@ -33,7 +33,7 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.MooGameStrategy
         {
             this.playerName = playerName;
         }
-        public string GenerateRandomGoal()
+        public string GenerateGoal()
         {
             string goal = "";
             Random random = new Random();
@@ -134,7 +134,7 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.MooGameStrategy
         }
         public void SaveGame()
         {
-            IPlayerScore playerScore = new PlayerScoreDTO(userName, numberOfGuesses);
+            IPlayerScore playerScore = new PlayerScoreDTO(playerName, numberOfGuesses);
             gameDAO.SavePlayerScore(gameName, playerScore);
         }
 
