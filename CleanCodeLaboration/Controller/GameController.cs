@@ -61,16 +61,10 @@ namespace CleanCodeLaboration.Controller
             } while (ContinuePlaying());
         }
 
-        private void InitializeGameMenu() //Start GameMenu or something? Det är ju Void?
+        private void InitializeGameMenu() //Denna behöver ett namnbyte.
         {
-            do
-            {
-                OutputMenu();
-                SelectGame(); //Här får den heta något som är i stil med att man väljer och 
-
-
-            } while (HasMadeValidSelection()); //Bryt ut till en egen metod. Är en do-while loop annan nivå av abstraction?
-            SetGameStrategy(); //Kanske något annat i stil med SetGame bara?
+            OutputMenu();
+            ChooseGame();
         }
         private void OutputMenu()
         {
@@ -82,19 +76,25 @@ namespace CleanCodeLaboration.Controller
                 iO.GameOutput(menuNumber + showGameMenu[i]);
             }
         }
-        private void SelectGame()
+        private void ChooseGame()
+        {
+            IGameStrategy selectedGame;
+            do
+            {
+                selectedGame = GetSelectedGame();
+
+
+            } while (selectedGame == null); 
+            SetGameStrategy(selectedGame);
+        }
+        private IGameStrategy? GetSelectedGame() //Hur är det att skicka null hit och dit?
         {
             string answer = iO.GetUserInput();
-            gameMenu.SelectGame(answer);
+            return gameMenu.SelectGame(answer);
         }
-        private bool HasMadeValidSelection()
+        private void SetGameStrategy(IGameStrategy gameStrategy)
         {
-            //Kollar om Strategy i Meny-klassen är null
-        }
-        private void SetGameStrategy()
-        {
-            IGameStrategy chosenStrategy = gameMenu.GetGameStrategy();
-            gameContext.SetGameStrategy(chosenStrategy);
+            gameContext.SetGameStrategy(gameStrategy);
         }
 
 

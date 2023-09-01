@@ -16,8 +16,6 @@ namespace CleanCodeLaboration.Model.GameMenu
 {
     public class GameMenu : IGameMenu //Nu jobbar den ju med samma Games här i command-listan. 
     {
-        private IGameStrategy strategy;
-        private bool validSelection;
         private int commandIndex;
         ICommand[] commands = new ICommand[]
         {
@@ -30,25 +28,25 @@ namespace CleanCodeLaboration.Model.GameMenu
             var commandDescriptions = commands.Select(command => command.Description).ToList();
             return commandDescriptions;
         }
-        public bool IsValidSelection() //Som skrivit i interfacet, här borde du ha ett namn som speglar att ett valid selection är gjort. Typ madeValidSelection eller userValidSelection. Och duplikation i isValidChoice-metoden.
+        public IGameStrategy? SelectGame(string userAnswer) //Ska jag göra denna till validSelectionOfGame? och sen bryta ut strategy = command-grejen till en privat metod?
         {
-            return validSelection;
-        }
-        public void SelectGame(string userAnswer) //Ska jag göra denna till validSelectionOfGame? och sen bryta ut strategy = command-grejen till en privat metod?
-        {
-            if (isValidChoice(userAnswer)) 
+            bool validChoice = isValidChoice(userAnswer);
+
+
+            if (validChoice)
             {
-                strategy = commands[commandIndex - 1].Execute();
+                return GetGameStrategy();
             }
+            return null;
         }
         private bool isValidChoice(string userAnswer)
         {
-            validSelection = !int.TryParse(userAnswer, out commandIndex) || commandIndex > commands.Length ? false : true;
-            return validSelection;
+            return int.TryParse(userAnswer, out commandIndex) && commandIndex <= commands.Length && commandIndex > 0;
+
         }
-        public IGameStrategy GetGameStrategy()
+        private IGameStrategy GetGameStrategy()
         {
-            return strategy;
+            return commands[commandIndex - 1].Execute();
         }
     }
 }
