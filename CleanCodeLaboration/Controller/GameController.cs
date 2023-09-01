@@ -119,7 +119,7 @@ namespace CleanCodeLaboration.Controller
             while (gameContext.IsGameActive())
             {
                 string userGuess = iO.GetUserInput();
-                string gameUpdateMessage = gameContext.EvaluateGuess(userGuess);
+                string gameUpdateMessage = gameContext.CheckPlayerAnswer(userGuess);
                 iO.GameOutput(gameUpdateMessage);
             }
         }

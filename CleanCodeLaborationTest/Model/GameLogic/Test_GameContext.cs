@@ -75,7 +75,7 @@ namespace CleanCodeLaborationTest.Model.GameLogic
         [DataRow("234", "Fel", false)]
         [DataRow("234", "Rätt", true)]
         [DataRow("2354", "fel", false)]
-        public void TestEvaluateGuess(string guess, string evaluatedReturn, bool IsCorrectGuess)
+        public void TestCheckPlayerAnswer(string guess, string evaluatedReturn, bool IsCorrectGuess)
         {
             //Arrange
             gameContext.SetGameStrategy(mockGameStrategy.Object);
@@ -83,7 +83,7 @@ namespace CleanCodeLaborationTest.Model.GameLogic
             mockGameStrategy.Setup(strategy=>strategy.IsCorrectGuess(evaluatedReturn)).Returns(IsCorrectGuess);
 
             //Act
-            string evaluatedGuess = gameContext.EvaluateGuess(guess);
+            string evaluatedGuess = gameContext.CheckPlayerAnswer(guess);
 
             //Assert
             mockGameStrategy.Verify(strategy => strategy.GetEvaluatedGuess(guess));

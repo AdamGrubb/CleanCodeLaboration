@@ -61,7 +61,7 @@ namespace CleanCodeLaboration.Model.GameLogic
         {
             return gameStrategy.GetRightAnswer();
         }
-        public string EvaluateGuess(string guess) //Är det tokigt att IncrementGuess ligger här? Bryta ut till fler metoder kanske?
+        public string CheckPlayerAnswer(string guess) //Är det tokigt att IncrementGuess ligger här? Bryta ut till fler metoder kanske?
         {
             string evaluatedGuess = gameStrategy.GetEvaluatedGuess(guess);
             UpdateGame(evaluatedGuess);
@@ -69,13 +69,21 @@ namespace CleanCodeLaboration.Model.GameLogic
         }
         private void UpdateGame(string evaluatedGuess)
         {
-            gameStrategy.IncrementGuess();
-            bool correctGuess = gameStrategy.IsCorrectGuess(evaluatedGuess);
-            if (correctGuess)
+            IncrementGuessCount();
+
+            if (IsCorrectGuess(evaluatedGuess))
             {
                 gameStrategy.SaveGame();
                 gameStrategy.DeactivateGame();
             }
+        }
+        private void IncrementGuessCount()
+        {
+            gameStrategy.IncrementGuess();
+        }
+        private bool IsCorrectGuess(string guess)
+        {
+            return gameStrategy.IsCorrectGuess(guess);
         }
         public bool IsGameActive()
         {

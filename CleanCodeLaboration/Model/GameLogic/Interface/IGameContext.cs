@@ -4,7 +4,7 @@ namespace CleanCodeLaboration.Model.GameLogic.Interface
 {
     public interface IGameContext
     {
-        string EvaluateGuess(string guess);
+        string CheckPlayerAnswer(string guess);
         string GetFinishedGameMessage();
         string GetGameIntroduction();
         string GetHighScore();
