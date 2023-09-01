@@ -11,7 +11,7 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.MooGameStrategy
         private const int lenghtOfGoal = 4;
         private const char bullCharacter = 'B';
         private const char cowCharacter = 'C';
-        private const char separator = ',';
+        private const char separator = ','; //Seperator? Lite oklart vad den ska användas för?
         private string userName = "";
         private string goal = "";
         private int numberOfGuesses = 0;
@@ -25,7 +25,7 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.MooGameStrategy
             this.gameDAO = gameDAO;
         }
 
-        public void ActivateGame() //Ska jag ta bort denna och bara låta varje spel starta med en true?
+        public void ActivateGame()
         {
             isGameActive = true;
         }
@@ -56,27 +56,29 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.MooGameStrategy
 
         public string GetGameIntroduction()
         {
-            return "New game:";
+            const string newGame = "New game:";
+            return newGame;
         }
-        public string GetRightAnswer() //Get correctAnswer?
+        public string GetRightAnswer() //Liite svajjig är detta metodnamn. GetCorrectAnswer kanske bättre?
         {
-            return "For practice, number is: " + goal;
+            string rightAnswer = "For practice, number is: " + goal;
+            return rightAnswer;
         }
         public string GetEvaluatedGuess(string guess)
         {
-            string bullsAndCows = EvaluateGuess(guess);//Här får du fundera på vad variabeln för B ska vara? istället för bull, bulls.
+            string bullsAndCows = EvaluateGuess(guess);
             return bullsAndCows;
         }
 
-        private string EvaluateGuess(string guess) //EvaluateGuess?
+        private string EvaluateGuess(string guess)
         {
-            guess = AddPadding(guess); //Vad säger man om "Add" padding? Har jag något liknande koncept men med annat "prefix"
-            int cows = CountContainingNumbers(guess); //Ska det kanske vara så att calculateCow ska heta typ GetContainingNumber?
-            int bulls = CountMatchingNumbers(guess); //Ska det kanske vara så att calculateCow ska heta typ GetMatchingNumber?
-            string formatedAnswer = FormatGuess(cows, bulls); //Samma här, leta upp liknande koncept och välj ett ord. Har för mig att du haft Format sen tidigare.
+            guess = EnsureGuessLenght(guess);
+            int cows = CountContainingNumbers(guess);
+            int bulls = CountMatchingNumbers(guess);
+            string formatedAnswer = FormatGuess(cows, bulls); //Lite osäker på denna
             return formatedAnswer;
         }
-        private string AddPadding(string guess)
+        private string EnsureGuessLenght(string guess)
         {
             guess += new string(' ', lenghtOfGoal);
             return guess;
@@ -146,8 +148,8 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.MooGameStrategy
             string spacing = "\n";
             string highScores = "Player   games average" + spacing;
             List<Player> players = GetSortedPlayers();
-            string formatedPlayers = GetFormatedPlayerScores(players);
-            highScores += formatedPlayers;
+            string formattedPlayersScores = GetFormattedPlayerScores(players);
+            highScores += formattedPlayersScores;
 
             return highScores;
         }
@@ -165,7 +167,7 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.MooGameStrategy
 
             return playerScores;
         }
-        private string GetFormatedPlayerScores(List<Player> players)
+        private string GetFormattedPlayerScores(List<Player> players)
         {
             string formatedPLayerScores = StrategyUtilitys.GetFormattedPlayerScores(players);
             return formatedPLayerScores;
