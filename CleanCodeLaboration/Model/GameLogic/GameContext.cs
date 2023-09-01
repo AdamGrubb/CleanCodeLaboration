@@ -10,14 +10,15 @@ namespace CleanCodeLaboration.Model.GameLogic
         private IGameStrategy gameStrategy;
         private IGameDAO gameDAO;
         private string playerName;
+        
         public GameContext(IGameDAO gameDAO)
         {
             this.gameDAO = gameDAO;
         }
         public string GetPlayerNameQuestion() //Ska man göra en const här?
         {
-            string askForPLayerName = "Enter your user name"; //Är detta ett bra namn? playerNameQuestion?
-            return askForPLayerName;
+            const string nameQuestion = "Enter your user name";
+            return nameQuestion;
         }
         public void SetPlayerName(string playerName)
         {
@@ -78,8 +79,8 @@ namespace CleanCodeLaboration.Model.GameLogic
         }
         public bool KeepPlaying(string answer)
         {
-            const string exitWord = "n"; //Här får du också välja ett nytt namn för variabeln som låter bra.
-            if (!string.IsNullOrWhiteSpace(answer) && answer.Substring(0, 1) == exitWord)
+            const string endGame = "n"; //Låter endGame Bra?
+            if (!string.IsNullOrWhiteSpace(answer) && answer.Substring(0, 1) == endGame)
             {
                 return false;
             }
@@ -87,8 +88,8 @@ namespace CleanCodeLaboration.Model.GameLogic
         }
         public string GetPlayAgainMessage()
         {
-            string askIfWantToPlayAgain = "Continue?"; //Denna får du byta namn på. Men till vad!?
-            return askIfWantToPlayAgain;
+            const string playAgainMessage = "Continue?"; //Är det redundant information med message?
+            return playAgainMessage;
         }
     }
 }
