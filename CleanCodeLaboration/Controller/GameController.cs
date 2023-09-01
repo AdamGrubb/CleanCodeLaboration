@@ -58,7 +58,8 @@ namespace CleanCodeLaboration.Controller
             {
                 InitializeGameMenu(); //Dnna borde ha ett namn som betyder att den både ger output och förväntar sig input. Namn som typ StartGameMenu?
                 GetGameLoop(); //Denna borde inte också heta gameLoop? Den här innehåller ju det spelet man valt.
-            } while (ContinuePlaying());
+                GetAskIfContinuePlaying();
+            } while (ShouldContinuePlaying());
         }
 
         private void InitializeGameMenu() //Denna behöver ett namnbyte.
@@ -100,33 +101,58 @@ namespace CleanCodeLaboration.Controller
 
         public void GetGameLoop() //Lista ut vad den här ska heta, Här borde du kanske kalla på start new game?
         {
+
+            GameIntroduction(); //OutputGameIntroduktion?
+
+            GetCorrectAnswer(); //ShowCorrectAnswer? OutPutCorrectAnswer?
+
+            GetUserGuesses(); //Här ska det framgå mer att det är nån slags guess-loop?
+
+            GetHighScore();
+
+            GetFinishedGameMessage();
+            
+        }
+        private void GameIntroduction()
+        {
             string gameIntroduction = gameContext.GetGameIntroduction();
 
             iO.GameOutput(gameIntroduction);
-
+        }
+        private void GetCorrectAnswer()
+        {
             string rightAnswer = gameContext.GetRightAnswer();
-
             iO.GameOutput(rightAnswer);
-
+        }
+        private void GetUserGuesses()
+        {
             while (gameContext.IsGameActive())
             {
                 string userGuess = iO.GetUserInput();
                 string gameUpdateMessage = gameContext.EvaluateGuess(userGuess);
                 iO.GameOutput(gameUpdateMessage);
             }
+        }
+        private void GetHighScore()
+        {
             string highScore = gameContext.GetHighScore();
             iO.GameOutput(highScore);
-
+        }
+        private void GetFinishedGameMessage()
+        {
             string finishedGameMessage = gameContext.GetFinishedGameMessage();
             iO.GameOutput(finishedGameMessage);
         }
 
-        private bool ContinuePlaying()
+        private bool ShouldContinuePlaying() //Hur blir det här, den borde ju lägga nära metoden som använder den, men om den har metoder som använder den hur gör man då?
+        {
+            string answer = iO.GetUserInput();
+            return gameContext.KeepPlaying(answer);
+        }
+        private void GetAskIfContinuePlaying()
         {
             string askIfKeepPlaying = gameContext.GetPlayAgainMessage();
             iO.GameOutput(askIfKeepPlaying);
-            string answer = iO.GetUserInput();
-            return gameContext.KeepPlaying(answer);
         }
     }
 }
