@@ -32,42 +32,46 @@ namespace CleanCodeLaboration.Controller
             gameMenu = new GameMenu();
         }
 
-        public void StartCleanCodeGameLoop()
+        public void InitializeGame() //Lite osäker på namnet?
         {
+            AskForPlayerName();
             SetUserName();
             StartGameLoop();
         }
 
-        public void SetUserName()
+
+        private void AskForPlayerName()
         {
             string playerNameQuestion = gameContext.GetPlayerNameQuestion();
             iO.GameOutput(playerNameQuestion);
+        }
+        private void SetUserName()
+        {
+
             string playerName = iO.GetUserInput();
             gameContext.SetPlayerName(playerName);
         }
 
-        public void StartGameLoop() //Egentligen borde GetGameLoop kanske heta StartGameLoop. Ska man kanske plocka in SetUserName här ínnan? Så döper jag den till StartGame()? Och tar bort StartCleanCodeGameLoop
+        private void StartGameLoop() //Egentligen borde GetGameLoop kanske heta StartGameLoop.
         {
             do 
             {
-                GetGameMenu();
-                GetGameLoop();
+                InitializeGameMenu(); //Dnna borde ha ett namn som betyder att den både ger output och förväntar sig input. Namn som typ StartGameMenu?
+                GetGameLoop(); //Denna borde inte också heta gameLoop? Den här innehåller ju det spelet man valt.
             } while (ContinuePlaying());
         }
 
-        public void GetGameMenu() //Start GameMenu or something? Det är ju Void?
+        private void InitializeGameMenu() //Start GameMenu or something? Det är ju Void?
         {
             do
             {
-                OutputMenu(); 
-                string answer = iO.GetUserInput();
-                gameMenu.SelectGame(answer);
+                OutputMenu();
+                SelectGame(); //Här får den heta något som är i stil med att man väljer och 
 
-            } while (!gameMenu.IsValidSelection()); //Ändra namn till MadeValidSelection?
-            IGameStrategy chosenStrategy = gameMenu.GetGameStrategy();
-            gameContext.SetGameStrategy(chosenStrategy);
+
+            } while (HasMadeValidSelection()); //Bryt ut till en egen metod. Är en do-while loop annan nivå av abstraction?
+            SetGameStrategy(); //Kanske något annat i stil med SetGame bara?
         }
-
         private void OutputMenu()
         {
             List<string> showGameMenu = gameMenu.GetMenu();
@@ -78,6 +82,21 @@ namespace CleanCodeLaboration.Controller
                 iO.GameOutput(menuNumber + showGameMenu[i]);
             }
         }
+        private void SelectGame()
+        {
+            string answer = iO.GetUserInput();
+            gameMenu.SelectGame(answer);
+        }
+        private bool HasMadeValidSelection()
+        {
+            //Kollar om Strategy i Meny-klassen är null
+        }
+        private void SetGameStrategy()
+        {
+            IGameStrategy chosenStrategy = gameMenu.GetGameStrategy();
+            gameContext.SetGameStrategy(chosenStrategy);
+        }
+
 
         public void GetGameLoop() //Lista ut vad den här ska heta, Här borde du kanske kalla på start new game?
         {
