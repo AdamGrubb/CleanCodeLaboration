@@ -1,26 +1,25 @@
 ﻿using CleanCodeLaboration.Model.GameDAO.Interface;
-using CleanCodeLaboration.Model.GameLogic.Interface;
-using CleanCodeLaboration.Model.GameLogic.Strategy;
+using CleanCodeLaboration.Model.GameHighScore.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CleanCodeLaboration.Model.GameLogic
+namespace CleanCodeLaboration.Model.GameHighScore
 {
-    public class HigScoreFormatter : IHigScoreFormatter
+    public class HighScoreFormatter : IHighScoreFormatter
     {
-        public string FormatHighScores(List<IPlayer> players)
+        public string FormatHighScores(List<IPlayerScore> playerScores)
         {
             string spacing = "\n";
             string highScores = "Player   games average" + spacing;
-            
+            List<IPlayer> players = ConvertToPlayer(playerScores);
             string formattedPlayersScores = GetFormattedPlayerScores(players);
             highScores += formattedPlayersScores;
             return highScores;
         }
-        private  string GetFormattedPlayerScores(List<IPlayer> players)
+        private string GetFormattedPlayerScores(List<IPlayer> players)
         {
             List<IPlayer> sortedPlayers = SortPlayerByScore(players);
             string playerScores = FormatResult(sortedPlayers);
@@ -42,12 +41,12 @@ namespace CleanCodeLaboration.Model.GameLogic
             }
             return formatedPlayerScores;
         }
-        public static List<Player> ConvertToPlayer(List<IPlayerScore> playersDTO)
+        public List<IPlayer> ConvertToPlayer(List<IPlayerScore> playerScores)
         {
-            List<Player> players = new List<Player>();
-            foreach (IPlayerScore playerDTO in playersDTO) //Går det att bryta ut till fler metoder kanske?
+            List<IPlayer> players = new List<IPlayer>();
+            foreach (IPlayerScore playerScore in playerScores) //Går det att bryta ut till fler metoder kanske?
             {
-                Player pd = new Player(playerDTO.Name, playerDTO.Guesses); //Här har du player som Pd
+                Player pd = new Player(playerScore.Name, playerScore.Guesses); //Här har du player som Pd
                 int pos = players.IndexOf(pd); //Här har du en förkortning för pos, det är icke sa nicke.
                 if (pos < 0)
                 {
@@ -55,7 +54,7 @@ namespace CleanCodeLaboration.Model.GameLogic
                 }
                 else
                 {
-                    players[pos].Update(playerDTO.Guesses);
+                    players[pos].Update(playerScore.Guesses);
                 }
             }
             return players;

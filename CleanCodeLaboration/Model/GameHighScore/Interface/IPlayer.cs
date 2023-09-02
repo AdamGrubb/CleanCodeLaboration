@@ -1,4 +1,4 @@
-﻿namespace CleanCodeLaboration.Model.GameLogic.Strategy
+﻿namespace CleanCodeLaboration.Model.GameHighScore.Interface
 {
     public interface IPlayer
     {
