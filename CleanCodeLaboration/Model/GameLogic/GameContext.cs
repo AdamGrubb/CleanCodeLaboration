@@ -12,7 +12,6 @@ namespace CleanCodeLaboration.Model.GameLogic
         private IGameStrategy gameStrategy;
         private readonly IGameDAO gameDAO;
         private readonly IHighScoreFormatter highScoreFormatter;
-        private string playerName = string.Empty;
         
         public GameContext(IGameDAO gameDAO, IHighScoreFormatter higScoreFormatter) 
         {
@@ -26,7 +25,7 @@ namespace CleanCodeLaboration.Model.GameLogic
         }
         public void SetPlayerName(string playerName)
         {
-            this.playerName = playerName;
+            gameStrategy.SetPlayerName(playerName);
         }
         public void SetGameStrategy(IGameStrategy gameStrategy) //Frågan är ju här ifall det är för många metoder för en SetGameStrategy? Bryt ut en funktion som är StartGame?
         {
@@ -35,7 +34,6 @@ namespace CleanCodeLaboration.Model.GameLogic
         public void StartNewGame()
         {
             SetGameDAO(); //AssignGameDao?
-            SetPlayerName();//AssignPlayerName?
             SetGameGoal();
             ActivateGame();
         }
@@ -43,10 +41,7 @@ namespace CleanCodeLaboration.Model.GameLogic
         {
             gameStrategy.SetGameDAO(gameDAO);
         }
-        private void SetPlayerName()
-        {
-            gameStrategy.SetPlayerName(playerName);
-        }
+ 
         private void SetGameGoal()
         {
             string goal = gameStrategy.GenerateGoal();
