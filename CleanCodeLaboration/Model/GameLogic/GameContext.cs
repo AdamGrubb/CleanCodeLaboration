@@ -98,7 +98,29 @@ namespace CleanCodeLaboration.Model.GameLogic
         }
         public string GetHighScore()
         {
-            return gameStrategy.GetHighScore();
+            string spacing = "\n";
+            string highScores = "Player   games average" + spacing;
+            List<Player> players = GetSortedPlayers();
+            string formattedPlayersScores = GetFormattedPlayerScores(players);
+            highScores += formattedPlayersScores;
+
+            return highScores;
+        }
+        private List<Player> GetSortedPlayers()
+        {
+            List<IPlayerScore> playerScores = GetPlayerScores();
+            List<Player> players = StrategyUtilitys.ConvertToPlayer(playerScores);
+            StrategyUtilitys.SortPlayersByScore(players);
+            return players;
+        }
+        public List<IPlayerScore> GetPlayerScores()
+        {
+            return gameStrategy.GetPlayerScores();
+        }
+        private string GetFormattedPlayerScores(List<Player> players)
+        {
+            string formatedPLayerScores = StrategyUtilitys.GetFormattedPlayerScores(players);
+            return formatedPLayerScores;
         }
         public string GetFinishedGameMessage()
         {

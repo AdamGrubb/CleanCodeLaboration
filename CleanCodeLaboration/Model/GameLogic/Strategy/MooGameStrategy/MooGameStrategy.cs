@@ -17,7 +17,7 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.MooGameStrategy
         private int numberOfGuesses = 0;
         private bool isGameActive;
         private IGameDAO gameDAO;
- 
+
 
 
         public void SetGameDAO(IGameDAO gameDAO)
@@ -119,7 +119,7 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.MooGameStrategy
         public bool IsCorrectGuess(string evaluatedGuess)
         {
             string correctEvaluatedAnswer = GetCorrectGuess();
-            
+
             return evaluatedGuess == correctEvaluatedAnswer;
         }
         private string GetCorrectGuess()
@@ -143,34 +143,12 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.MooGameStrategy
             return isGameActive;
         }
 
-        public string GetHighScore()
-        {
-            string spacing = "\n";
-            string highScores = "Player   games average" + spacing;
-            List<Player> players = GetSortedPlayers();
-            string formattedPlayersScores = GetFormattedPlayerScores(players);
-            highScores += formattedPlayersScores;
-
-            return highScores;
-        }
-        private List<Player> GetSortedPlayers()
-        {
-            List<IPlayerScore> playerScores = GetPlayerScores();
-            List<Player> players = StrategyUtilitys.ConvertToPlayer(playerScores);
-            StrategyUtilitys.SortPlayersByScore(players);
-            return players;
-        }
-        private List<IPlayerScore> GetPlayerScores()
+        public List<IPlayerScore> GetPlayerScores()
         {
 
             List<IPlayerScore> playerScores = gameDAO.GetAllPlayerScores(gameName);
 
             return playerScores;
-        }
-        private string GetFormattedPlayerScores(List<Player> players)
-        {
-            string formatedPLayerScores = StrategyUtilitys.GetFormattedPlayerScores(players);
-            return formatedPLayerScores;
         }
 
         public string GetFinishedGameMessage()

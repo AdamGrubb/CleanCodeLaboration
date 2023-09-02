@@ -11,7 +11,7 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.Interface
         string GetGameIntroduction();
         bool IsGameActive();
         void SetGoal(string goal);
-        string GetHighScore();
+        List<IPlayerScore> GetPlayerScores();
         void SetPlayerName(string userName);
         void ActivateGame(); //Fortfarande kanske otydligt vad den gör? För abstrakt? StartNewGame?
         void SaveGame();
