@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CleanCodeLaboration.Model.GameLogic.Strategy;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,6 @@ namespace CleanCodeLaboration.Model.GameLogic.Interface
 {
     public interface IHigScoreFormatter
     {
-        string FormatHighScores();
+        string FormatHighScores(List<IPlayer> players);
     }
 }
