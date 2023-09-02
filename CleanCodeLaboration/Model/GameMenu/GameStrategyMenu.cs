@@ -17,15 +17,15 @@ namespace CleanCodeLaboration.Model.GameMenu
 {
     public class GameStrategyMenu : IGameMenu //Nu jobbar den ju med samma Games här i command-listan. 
     {
-        private readonly IIO io;
+        private readonly IIO iO;
         private int commandIndex;
         private ICommand[] commands;
 
 
-        public GameStrategyMenu(ICommand[] commands, IIO io)
+        public GameStrategyMenu(ICommand[] commands, IIO iO)
         {
             this.commands = commands;
-            this.io = io;
+            this.iO = iO;
         }
         public void DisplayMenu() //PrintMenu?
         {
@@ -41,7 +41,7 @@ namespace CleanCodeLaboration.Model.GameMenu
         }
         private void OutputGameInfo(string output) //Bättre namn på det här helt klart. OUTPUT!!?!?!
         {
-            io.GameOutput(output);
+            iO.GameOutput(output);
         }
         public IGameStrategy SelectGame()
         {
@@ -64,12 +64,32 @@ namespace CleanCodeLaboration.Model.GameMenu
         }
         private string GetUserInput()
         {
-            return io.GetUserInput();
+            return iO.GetUserInput();
         }
 
         private IGameStrategy GetGameStrategy(int choice) //Choice!?
         {
             return commands[choice - 1].Execute();
+        }
+        public bool ContinuePlaying()
+        {
+            GetPlayAgainMessage();
+            return KeepPlaying();
+        }
+        private bool KeepPlaying()
+        {
+            string answer = GetUserInput();
+            const string endGame = "n"; //Låter endGame Bra?
+            if (!string.IsNullOrWhiteSpace(answer) && answer.Substring(0, 1) == endGame)
+            {
+                return false;
+            }
+            return true;
+        }
+        private void GetPlayAgainMessage()
+        {
+            const string playAgainMessage = "Continue?"; //Är det redundant information med message?
+            iO.GameOutput(playAgainMessage);
         }
     }
 }

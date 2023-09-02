@@ -10,6 +10,8 @@ using CleanCodeLaboration.Model.GameMenu.Interface;
 using CleanCodeLaboration.Model.GameMenu.Commands;
 using CleanCodeLaboration.Model.GameHighScore.Interface;
 using CleanCodeLaboration.Model.GameHighScore;
+using CleanCodeLaboration.Model.GameLoop.Interface;
+using CleanCodeLaboration.Model.GameLoop;
 
 IIO iO = new ConsoleView();
 
@@ -26,8 +28,7 @@ ICommand[] commands = new ICommand[]
 };
 
 IGameMenu gameMenu = new GameStrategyMenu(commands, iO);
+IGameLoop gameLoop = new GameLoop(iO, gameContext);
 
-GameController controller = new GameController(gameContext, iO, gameMenu);
-
-
-controller.InitializeGame();
+GameController controller = new GameController(gameLoop, gameMenu);
+controller.StartGame();

@@ -114,19 +114,5 @@ namespace CleanCodeLaboration.Model.GameLogic
         {
             return gameStrategy.GetFinishedGameMessage();
         }
-        public bool KeepPlaying(string answer)
-        {
-            const string endGame = "n"; //Låter endGame Bra?
-            if (!string.IsNullOrWhiteSpace(answer) && answer.Substring(0, 1) == endGame)
-            {
-                return false;
-            }
-            return true;
-        }
-        public string GetPlayAgainMessage()
-        {
-            const string playAgainMessage = "Continue?"; //Är det redundant information med message?
-            return playAgainMessage;
-        }
     }
 }

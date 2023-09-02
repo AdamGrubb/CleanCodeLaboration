@@ -13,8 +13,6 @@ namespace CleanCodeLaboration.Model.GameLogic.Interface
         void SetGameStrategy(IGameStrategy gameStrategy);
         void StartNewGame();
         void SetPlayerName(string playerName);
-        bool KeepPlaying(string answer);
-        string GetPlayAgainMessage();
         string GetRightAnswer();
     }
 }
