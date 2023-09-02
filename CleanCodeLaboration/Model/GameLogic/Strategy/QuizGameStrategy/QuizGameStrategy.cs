@@ -108,34 +108,12 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.QuizGameStrategy
             return isGameActive;
         }
 
-        public string GetHighScore()
-        {
-            string spacing = "\n";
-            string highScores = "Player   games average" + spacing;
-            List<Player> players = GetSortedPlayers();
-            string formattedPlayersScores = GetFormattedPlayerScores(players);
-            highScores += formattedPlayersScores;
-
-            return highScores;
-        }
-        private List<Player> GetSortedPlayers()
-        {
-            List<IPlayerScore> playerScores = GetPlayerScores();
-            List<Player> players = StrategyUtilitys.ConvertToPlayer(playerScores);
-            StrategyUtilitys.SortPlayersByScore(players);
-            return players;
-        }
-        private List<IPlayerScore> GetPlayerScores()
+        public List<IPlayerScore> GetPlayerScores()
         {
 
             List<IPlayerScore> playerScores = gameDAO.GetAllPlayerScores(gameName);
 
             return playerScores;
-        }
-        private string GetFormattedPlayerScores(List<Player> players)
-        {
-            string formatedPLayerScores = StrategyUtilitys.GetFormattedPlayerScores(players);
-            return formatedPLayerScores;
         }
 
         public string GetRightAnswer()

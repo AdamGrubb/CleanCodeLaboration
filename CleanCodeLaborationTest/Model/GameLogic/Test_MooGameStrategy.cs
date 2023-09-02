@@ -139,30 +139,24 @@ namespace CleanCodeLaborationTest.Model.GameLogic
             }
             Assert.AreEqual(lengthOfGoal, goal.Length);
         }
-        [TestMethod]
+        [DataTestMethod]
         public void TestHighScore() //Denna skulle du kunna strukturera mer ordentligt, speciellt mock-delen.
         {
             //Arrange 
             var mockDAO = new Mock<IGameDAO>();
-            string expectedHighScores = "Player   games average\n";
-            string recivedHighScores;
+            List<IPlayerScore> testPlayersScores =  new List<IPlayerScore> { new PlayerScoreDTO("Bananaman", 15), new PlayerScoreDTO("Korven Senap", 15) };
+            List<IPlayerScore> expectedPlayerScores;
 
-            List<IPlayerScore> testPlayersScores = new List<IPlayerScore> { new PlayerScoreDTO("Bananaman", 15), new PlayerScoreDTO("Korven Senap", 15) };
-
-            List<Player> players = StrategyUtilitys.ConvertToPlayer(testPlayersScores);
-
-            StrategyUtilitys.SortPlayersByScore(players);
-            expectedHighScores += StrategyUtilitys.GetFormattedPlayerScores(players);
 
             mockDAO.Setup(dao => dao.GetAllPlayerScores(It.IsAny<string>())).Returns(testPlayersScores);
 
 
             //Act
             gameStrategy.SetGameDAO(mockDAO.Object);
-            recivedHighScores = gameStrategy.GetHighScore();
+            expectedPlayerScores = gameStrategy.GetPlayerScores();
 
             //Assert
-            Assert.AreEqual(expectedHighScores, recivedHighScores);
+            Assert.AreEqual(expectedPlayerScores, testPlayersScores);
         }
         [TestCleanup]
         public void TestCleanup() //Kanske jätteonödigt att göra, tar massa kraft??
