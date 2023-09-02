@@ -56,27 +56,12 @@ namespace CleanCodeLaboration.Controller
         }
         private void OutputMenu()
         {
-            List<string> showGameMenu = gameMenu.GetMenu();
-            showGameMenu.ForEach(alternative =>
-            {
-                iO.GameOutput(alternative);
-            });
+            gameMenu.DisplayMenu();
         }
         private void ChooseGame()
         {
-            IGameStrategy selectedGame;
-            do
-            {
-                selectedGame = GetSelectedGame(); //Är det risky buisniess att ge tillbaka null från menyn?
-
-
-            } while (selectedGame == null); 
-            SetGameStrategy(selectedGame);
-        }
-        private IGameStrategy? GetSelectedGame() //Hur är det att skicka null hit och dit?
-        {
-            string answer = iO.GetUserInput();
-            return gameMenu.SelectGame(answer);
+            IGameStrategy gameStrategy = gameMenu.SelectGame();
+            SetGameStrategy(gameStrategy);
         }
         private void SetGameStrategy(IGameStrategy gameStrategy)
         {

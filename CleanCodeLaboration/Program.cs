@@ -25,7 +25,7 @@ ICommand[] commands = new ICommand[]
             new QuizCommand()
 };
 
-IGameMenu gameMenu = new GameStrategyMenu(commands);
+IGameMenu gameMenu = new GameStrategyMenu(commands, iO);
 
 GameController controller = new GameController(gameContext, iO, gameMenu);
 
