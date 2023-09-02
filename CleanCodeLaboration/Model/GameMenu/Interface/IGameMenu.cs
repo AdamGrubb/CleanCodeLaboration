@@ -6,5 +6,6 @@ namespace CleanCodeLaboration.Model.GameMenu.Interface
     {
         void DisplayMenu();
         IGameStrategy SelectGame();
+        bool ContinuePlaying();
     }
 }
