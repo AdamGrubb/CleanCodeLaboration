@@ -7,12 +7,23 @@ using CleanCodeLaboration.View.Interface;
 using CleanCodeLaboration.View;
 using CleanCodeLaboration.Model.GameMenu;
 using CleanCodeLaboration.Model.GameMenu.Interface;
+using CleanCodeLaboration.Model.GameMenu.Commands;
 
 IIO iO = new ConsoleView();
+
 IGameDAO gameDAO = new LocalFileDAO();
+
 IGameContext gameContext = new GameContext(gameDAO);
-IGameMenu gameMenu = new GameMenu();
-GameController controller = new GameController(gameContext, iO);
+
+ICommand[] commands = new ICommand[]
+{
+            new MooGameCommand(),
+            new QuizCommand()
+};
+
+IGameMenu gameMenu = new GameStrategyMenu(commands);
+
+GameController controller = new GameController(gameContext, iO, gameMenu);
 
 
-controller.StartCleanCodeGameLoop();
+controller.InitializeGame();

@@ -10,14 +10,16 @@ namespace CleanCodeLaboration.Model.GameLogic
         private IGameStrategy gameStrategy;
         private IGameDAO gameDAO;
         private string playerName;
-        public GameContext(IGameDAO gameDAO)
+        
+        public GameContext(IGameDAO gameDAO) //Om man inte gör SetPlayerName så kommer den göra null istället? 
         {
             this.gameDAO = gameDAO;
+            playerName = string.Empty; //Är detta en bättre lösning?
         }
         public string GetPlayerNameQuestion() //Ska man göra en const här?
         {
-            string askForPLayerName = "Enter your user name"; //Är detta ett bra namn? playerNameQuestion?
-            return askForPLayerName;
+            const string nameQuestion = "Enter your user name";
+            return nameQuestion;
         }
         public void SetPlayerName(string playerName)
         {
@@ -25,12 +27,31 @@ namespace CleanCodeLaboration.Model.GameLogic
         }
         public void SetGameStrategy(IGameStrategy gameStrategy) //Frågan är ju här ifall det är för många metoder för en SetGameStrategy? Bryt ut en funktion som är StartGame?
         {
-            gameStrategy.SetGameDAO(gameDAO);
-            gameStrategy.SetPlayerName(playerName);
-            String goal = gameStrategy.GenerateRandomGoal();
-            gameStrategy.SetGoal(goal);
-            gameStrategy.StartNewGame();
             this.gameStrategy = gameStrategy;
+        }
+        public void StartNewGame()
+        {
+            SetGameDAO(); //AssignGameDao?
+            SetPlayerName();//AssignPlayerName?
+            SetGameGoal();
+            ActivateGame();
+        }
+        private void SetGameDAO()
+        {
+            gameStrategy.SetGameDAO(gameDAO);
+        }
+        private void SetPlayerName()
+        {
+            gameStrategy.SetPlayerName(playerName);
+        }
+        private void SetGameGoal()
+        {
+            string goal = gameStrategy.GenerateGoal();
+            gameStrategy.SetGoal(goal);
+        }
+        private void ActivateGame()
+        {
+            gameStrategy.ActivateGame();
         }
         public string GetGameIntroduction()
         {
@@ -40,17 +61,36 @@ namespace CleanCodeLaboration.Model.GameLogic
         {
             return gameStrategy.GetRightAnswer();
         }
-        public string EvaluateGuess(string guess) //Är det tokigt att IncrementGuess ligger här? Bryta ut till fler metoder kanske?
+        public string CheckPlayerAnswer(string guess) //Frågan är ifall man skulle bryta ut loopen ändå?
         {
-            gameStrategy.IncrementGuess();
-            string evaluatedGuess = gameStrategy.GetEvaluatedGuess(guess);
-            bool correctGuess = gameStrategy.IsCorrectGuess(evaluatedGuess);
-            if (correctGuess)
+            IncrementGuessCount();
+            string evaluatedGuess = EvaluateGuess(guess);
+            if (IsCorrectGuess(evaluatedGuess))
             {
-                gameStrategy.SaveGame();
-                gameStrategy.DeactivateGame();
+                SaveGame();
+                EndGame();
             }
             return evaluatedGuess;
+        }
+        private string EvaluateGuess(string guess)
+        {
+            return gameStrategy.GetEvaluatedGuess(guess); //Borde GameContext heta GetEvaluatedGuess och gameStrategy heta EvaluateGuess?
+        }
+        private void IncrementGuessCount()
+        {
+            gameStrategy.IncrementGuessCount(); //IncrementGuessCount?
+        }
+        private bool IsCorrectGuess(string guess)
+        {
+            return gameStrategy.IsCorrectGuess(guess);
+        }
+        private void SaveGame()
+        {
+            gameStrategy.SaveGame();
+        }
+        private void EndGame()
+        {
+            gameStrategy.DeactivateGame();
         }
         public bool IsGameActive()
         {
@@ -66,8 +106,8 @@ namespace CleanCodeLaboration.Model.GameLogic
         }
         public bool KeepPlaying(string answer)
         {
-            const string exitWord = "n"; //Här får du också välja ett nytt namn för variabeln som låter bra.
-            if (!string.IsNullOrWhiteSpace(answer) && answer.Substring(0, 1) == exitWord)
+            const string endGame = "n"; //Låter endGame Bra?
+            if (!string.IsNullOrWhiteSpace(answer) && answer.Substring(0, 1) == endGame)
             {
                 return false;
             }
@@ -75,8 +115,8 @@ namespace CleanCodeLaboration.Model.GameLogic
         }
         public string GetPlayAgainMessage()
         {
-            string askIfWantToPlayAgain = "Continue?"; //Denna får du byta namn på. Men till vad!?
-            return askIfWantToPlayAgain;
+            const string playAgainMessage = "Continue?"; //Är det redundant information med message?
+            return playAgainMessage;
         }
     }
 }

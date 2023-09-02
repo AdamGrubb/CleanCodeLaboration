@@ -19,23 +19,23 @@ namespace CleanCodeLaborationTest.Model.GameLogic
     {
         MooGameStrategy gameStrategy = new MooGameStrategy();
 
-        //[TestMethod]
-        //public void TestActivate()
-        //{
-        //    //Arrange
-        //    bool afterStartGame;
-        //    bool beforeStartGame;
+        [TestMethod]
+        public void TestActivateGame()
+        {
+            //Arrange
+            bool beforeActivateGame;
+            bool afterActivateGame;
+           
 
-        //    //Act
-        //    beforeStartGame = gameStrategy.IsGameActive();
-        //    gameStrategy.ActivateGame();
-        //    afterStartGame = gameStrategy.IsGameActive();
+            //Act
+            beforeActivateGame = gameStrategy.IsGameActive();
+            gameStrategy.ActivateGame();
+            afterActivateGame = gameStrategy.IsGameActive();
 
-        //    //Assert
-        //    Assert.IsFalse(beforeStartGame);
-        //    Assert.IsTrue(afterStartGame);
-        //}
-
+            //Assert
+            Assert.IsFalse(beforeActivateGame);
+            Assert.IsTrue(afterActivateGame);
+        }
         [TestMethod]
         public void TestGetGameIntroduction()
         {
@@ -70,7 +70,7 @@ namespace CleanCodeLaborationTest.Model.GameLogic
             Assert.AreEqual(wrongGuessResponse, gameStrategy.GetEvaluatedGuess(wrongGuess)); //Plocka ut dem till egna variabler
         }
         [TestMethod]
-        public void TestGetPracticeRun()
+        public void TestSetGoal()
         {
             //Arrange
             string goal = "3724";
@@ -95,7 +95,7 @@ namespace CleanCodeLaborationTest.Model.GameLogic
             //Act
             for (int i = 0; i < guesses; i++)
             {
-                gameStrategy.IncrementGuess();
+                gameStrategy.IncrementGuessCount();
             }
             recivedResult = gameStrategy.GetFinishedGameMessage();
 
@@ -126,7 +126,7 @@ namespace CleanCodeLaborationTest.Model.GameLogic
             int lengthOfGoal = 4;
 
             //Act
-            goal = gameStrategy.GenerateRandomGoal();
+            goal = gameStrategy.GenerateGoal();
 
             //Assert
             // The loop iterates over the goal to check if every element of the goal is unique, which is the premise of MooGame.
@@ -169,14 +169,5 @@ namespace CleanCodeLaborationTest.Model.GameLogic
         {
             gameStrategy = new MooGameStrategy();
         }
-
-        /*Dessa är kvar att testa:
-         *EndGame
-         *
-         *Dessa två skulle jag kunna testa med en mock-dao. Göra SetPlayerName och sen incrementa 3 gånger, sen köra en Savegame typ?
-         *SaveGame()
-         *SetPlayerName
-         */
-
     }
 }

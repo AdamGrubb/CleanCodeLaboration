@@ -13,12 +13,12 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.QuizGameStrategy
 {
     public class QuizGameStrategy : IGameStrategy
     {
-        private string playerName;
+        private string playerName = string.Empty;
         private IQuizQuestionDAO questionDAO = new StarWarsQuestionDAO();
         private IQuizQuestion quizQuestion;
         private string goal;
-        private const string correctAnswerResponse = "Correct Answer!"; //Är de för långa, är "response" redundant?
-        private const string incorrectAnswerResponse = "Incorrect Answer, try again";
+        private const string correctResponse = "Correct Answer!";
+        private const string incorrectResponse = "Incorrect Answer, try again";
         private int numberOfGuesses = 0;
         private bool isGameActive;
         private IGameDAO gameDAO;
@@ -28,16 +28,11 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.QuizGameStrategy
         {
             this.playerName = playerName;
         }
-        public void StartNewGame()
-        {
-            ActivateGame();
-        }
-
-        private void ActivateGame()
+        public void ActivateGame()
         {
             isGameActive = true;
         }
-        public string GenerateRandomGoal()
+        public string GenerateGoal()
         {
             SetQuizQuestion();
             string goal = GetQuizAnswer();
@@ -74,7 +69,7 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.QuizGameStrategy
 
         public string GetEvaluatedGuess(string guess)
         {
-            string response = CompareGuessToGoal(guess) ? correctAnswerResponse : incorrectAnswerResponse; //Är responsedelen ett noiceword?
+            string response = CompareGuessToGoal(guess) ? correctResponse : incorrectResponse;
             return response;
         }
 
@@ -83,14 +78,14 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.QuizGameStrategy
             return goal.ToLower() == guess.ToLower();
         }
 
-        public void IncrementGuess()
+        public void IncrementGuessCount()
         {
             numberOfGuesses++;
         }
 
         public bool IsCorrectGuess(string evaluatedGuess)
         {
-            bool isCorrect = evaluatedGuess == correctAnswerResponse;
+            bool isCorrect = evaluatedGuess == correctResponse;
             return isCorrect;
         }
 
@@ -103,7 +98,7 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.QuizGameStrategy
 
         public string GetFinishedGameMessage()
         {
-            string winMessage = "You won!! You guessed : " + numberOfGuesses + "times!"; //winMessage är det rätt namn?
+            string winMessage = "You won!! You guessed : " + numberOfGuesses + " times!";
 
             return winMessage;
         }
@@ -118,8 +113,8 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.QuizGameStrategy
             string spacing = "\n";
             string highScores = "Player   games average" + spacing;
             List<Player> players = GetSortedPlayers();
-            string formatedPlayers = GetFormatedPlayerScores(players);
-            highScores += formatedPlayers;
+            string formattedPlayersScores = GetFormattedPlayerScores(players);
+            highScores += formattedPlayersScores;
 
             return highScores;
         }
@@ -137,7 +132,7 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.QuizGameStrategy
 
             return playerScores;
         }
-        private string GetFormatedPlayerScores(List<Player> players)
+        private string GetFormattedPlayerScores(List<Player> players)
         {
             string formatedPLayerScores = StrategyUtilitys.GetFormattedPlayerScores(players);
             return formatedPLayerScores;
