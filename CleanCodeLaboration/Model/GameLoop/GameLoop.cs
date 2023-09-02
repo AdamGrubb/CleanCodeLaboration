@@ -29,10 +29,14 @@ namespace CleanCodeLaboration.Model.GameLoop
             string playerName = iO.GetUserInput();
             gameContext.SetPlayerName(playerName);
         }
-        private void GetGameLoop() //Denna borde vara den publika öppningen och då sätter du AskForPLayer och SetUserName inne där. Och de får vara innan loopen eller ska de vara i kanske?
+        public void GetGameLoop()
         {
             do
             {
+                AskForPlayerName();
+
+                SetUserName();
+
                 StartNewGame();
 
                 GameIntroduction(); //OutputGameIntroduktion?
@@ -49,7 +53,7 @@ namespace CleanCodeLaboration.Model.GameLoop
 
 
         }
-        private void StartNewGame() //Start Game?
+        private void StartNewGame() //Start Game? Eventuellt ta bort
         {
             gameContext.StartNewGame();
         }
@@ -64,7 +68,7 @@ namespace CleanCodeLaboration.Model.GameLoop
             string rightAnswer = gameContext.GetRightAnswer();
             iO.GameOutput(rightAnswer);
         }
-        private void GetUserGuesses()
+        private void GetUserGuesses() //Här skulle jag ju kunna lägga till en int som aggregeras och skickas in i save?
         {
             while (gameContext.IsGameActive())
             {
