@@ -8,12 +8,16 @@ using CleanCodeLaboration.View;
 using CleanCodeLaboration.Model.GameMenu;
 using CleanCodeLaboration.Model.GameMenu.Interface;
 using CleanCodeLaboration.Model.GameMenu.Commands;
+using CleanCodeLaboration.Model.GameHighScore.Interface;
+using CleanCodeLaboration.Model.GameHighScore;
 
 IIO iO = new ConsoleView();
 
 IGameDAO gameDAO = new LocalFileDAO();
 
-IGameContext gameContext = new GameContext(gameDAO);
+IHighScoreFormatter highScoreFormatter = new HighScoreFormatter();
+
+IGameContext gameContext = new GameContext(gameDAO, highScoreFormatter);
 
 ICommand[] commands = new ICommand[]
 {

@@ -1,5 +1,6 @@
 ﻿using CleanCodeLaboration.Model.GameDAO;
 using CleanCodeLaboration.Model.GameDAO.Interface;
+using CleanCodeLaboration.Model.GameHighScore.Interface;
 using CleanCodeLaboration.Model.GameLogic;
 using CleanCodeLaboration.Model.GameLogic.Interface;
 using CleanCodeLaboration.Model.GameLogic.Strategy;
@@ -18,6 +19,7 @@ namespace CleanCodeLaborationTest.Model.GameLogic
     {
         private Mock<IGameStrategy> mockGameStrategy;
         private Mock<IGameDAO> mockGameDAO;
+        private Mock<IHighScoreFormatter> mockHighScoreFormatter;
         private IGameContext gameContext;
 
         [TestInitialize]
@@ -25,8 +27,9 @@ namespace CleanCodeLaborationTest.Model.GameLogic
         {
             mockGameStrategy = new Mock<IGameStrategy>();
             mockGameDAO = new Mock<IGameDAO>();
-            gameContext = new GameContext(mockGameDAO.Object);
-        }
+            mockHighScoreFormatter = new Mock<IHighScoreFormatter>();
+            gameContext = new GameContext(mockGameDAO.Object, mockHighScoreFormatter.Object);
+        } 
 
         [DataTestMethod]
         [DataRow("adam", "adam", "Han Solo", 1)]

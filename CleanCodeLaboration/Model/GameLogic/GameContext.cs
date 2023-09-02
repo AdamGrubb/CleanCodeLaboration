@@ -1,4 +1,6 @@
 ﻿using CleanCodeLaboration.Model.GameDAO.Interface;
+using CleanCodeLaboration.Model.GameHighScore;
+using CleanCodeLaboration.Model.GameHighScore.Interface;
 using CleanCodeLaboration.Model.GameLogic.Interface;
 using CleanCodeLaboration.Model.GameLogic.Strategy;
 using CleanCodeLaboration.Model.GameLogic.Strategy.Interface;
@@ -8,13 +10,14 @@ namespace CleanCodeLaboration.Model.GameLogic
     public class GameContext : IGameContext //Vad är GameContext? Du borde döpa om den här och fundera ut vad den har för ansvar. Läs på om strategy.
     {
         private IGameStrategy gameStrategy;
-        private IGameDAO gameDAO;
-        private string playerName;
+        private readonly IGameDAO gameDAO;
+        private readonly IHighScoreFormatter highScoreFormatter;
+        private string playerName = string.Empty;
         
-        public GameContext(IGameDAO gameDAO) //Om man inte gör SetPlayerName så kommer den göra null istället? 
+        public GameContext(IGameDAO gameDAO, IHighScoreFormatter higScoreFormatter) 
         {
             this.gameDAO = gameDAO;
-            playerName = string.Empty; //Är detta en bättre lösning?
+            this.highScoreFormatter = higScoreFormatter;
         }
         public string GetPlayerNameQuestion() //Ska man göra en const här?
         {
@@ -98,29 +101,14 @@ namespace CleanCodeLaboration.Model.GameLogic
         }
         public string GetHighScore()
         {
-            string spacing = "\n";
-            string highScores = "Player   games average" + spacing;
-            List<Player> players = GetSortedPlayers();
-            string formattedPlayersScores = GetFormattedPlayerScores(players);
-            highScores += formattedPlayersScores;
+            List<IPlayerScore> playerScores = gameStrategy.GetPlayerScores();
+            string highScore = highScoreFormatter.FormatHighScores(playerScores);
+            return highScore;
+        }
 
-            return highScores;
-        }
-        private List<Player> GetSortedPlayers()
-        {
-            List<IPlayerScore> playerScores = GetPlayerScores();
-            List<Player> players = StrategyUtilitys.ConvertToPlayer(playerScores);
-            StrategyUtilitys.SortPlayersByScore(players);
-            return players;
-        }
         public List<IPlayerScore> GetPlayerScores()
         {
             return gameStrategy.GetPlayerScores();
-        }
-        private string GetFormattedPlayerScores(List<Player> players)
-        {
-            string formatedPLayerScores = StrategyUtilitys.GetFormattedPlayerScores(players);
-            return formatedPLayerScores;
         }
         public string GetFinishedGameMessage()
         {

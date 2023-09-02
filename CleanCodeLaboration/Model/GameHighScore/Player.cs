@@ -1,6 +1,8 @@
-﻿namespace CleanCodeLaboration.Model.GameLogic.Strategy
+﻿using CleanCodeLaboration.Model.GameHighScore.Interface;
+
+namespace CleanCodeLaboration.Model.GameHighScore
 {
-    public class Player
+    public class Player : IPlayer
     {
 
         public string Name { get; private set; }
