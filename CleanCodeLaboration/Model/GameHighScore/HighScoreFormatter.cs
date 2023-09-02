@@ -36,7 +36,7 @@ namespace CleanCodeLaboration.Model.GameHighScore
         {
             string spacing = "\n";
             string formatedPlayerScores = "";
-            foreach (Player player in players)
+            foreach (IPlayer player in players)
             {
                 formatedPlayerScores += string.Format("{0,-9}{1,5:D}{2,9:F2}" + spacing, player.Name, player.NumberOfGames, player.GetAverageScore()); //Ska du bryta ut formaten till ints eller nått? typ "int LeftOrientation = -9, osv"
             }
