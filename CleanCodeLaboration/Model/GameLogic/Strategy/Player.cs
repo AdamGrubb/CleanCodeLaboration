@@ -1,6 +1,6 @@
 ﻿namespace CleanCodeLaboration.Model.GameLogic.Strategy
 {
-    public class Player
+    public class Player : IPlayer
     {
 
         public string Name { get; private set; }
