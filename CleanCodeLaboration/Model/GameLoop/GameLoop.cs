@@ -1,4 +1,5 @@
 ﻿using CleanCodeLaboration.Model.GameLogic.Interface;
+using CleanCodeLaboration.Model.GameLoop.Interface;
 using CleanCodeLaboration.View.Interface;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CleanCodeLaboration.Model.GameLoop
 {
-    public class GameLoop
+    public class GameLoop : IGameLoop
     {
         private readonly IIO iO;
         private readonly IGameContext gameContext;
