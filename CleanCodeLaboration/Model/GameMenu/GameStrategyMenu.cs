@@ -4,6 +4,7 @@ using CleanCodeLaboration.Model.GameLogic.Strategy.MooGameStrategy;
 using CleanCodeLaboration.Model.GameLogic.Strategy.QuizGameStrategy;
 using CleanCodeLaboration.Model.GameMenu.Commands;
 using CleanCodeLaboration.Model.GameMenu.Interface;
+using CleanCodeLaboration.View.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,43 +17,59 @@ namespace CleanCodeLaboration.Model.GameMenu
 {
     public class GameStrategyMenu : IGameMenu //Nu jobbar den ju med samma Games här i command-listan. 
     {
+        private readonly IIO io;
         private int commandIndex;
-        ICommand[] commands = new ICommand[]
-        {
-            new MooGameCommand(),
-            new QuizCommand()
-        };
-        public GameStrategyMenu(ICommand[] commands)
-        {
-                this.commands = commands;
-        }
+        private ICommand[] commands;
 
-        public List<string> GetMenu()
+
+        public GameStrategyMenu(ICommand[] commands, IIO io)
+        {
+            this.commands = commands;
+            this.io = io;
+        }
+        public void DisplayMenu() //PrintMenu?
+        {
+            List<string> commands = GetMenu(); //MenuItems?
+            commands.ForEach(command => OutputGameInfo(command));
+        }
+        private List<string> GetMenu()
         {
             var commandDescriptions = commands
                 .Select((command, index) => $"{index + 1}. {command.Description}")
                 .ToList();
             return commandDescriptions;
         }
-        public IGameStrategy? SelectGame(string userAnswer) //Ska jag göra denna till validSelectionOfGame? och sen bryta ut strategy = command-grejen till en privat metod?
+        private void OutputGameInfo(string output) //Bättre namn på det här helt klart. OUTPUT!!?!?!
         {
-            bool validChoice = isValidChoice(userAnswer);
-
-
-            if (validChoice)
+            io.GameOutput(output);
+        }
+        public IGameStrategy SelectGame()
+        {
+            int choice = GetValidChoice();
+            IGameStrategy gameStrategy = GetGameStrategy(choice);
+            return gameStrategy;
+        }
+        private int GetValidChoice() //Är det bättre att ha alla på utsidan av loopen? Kolla av med clean code boken.
+        {
+            bool validInput;
+            int choice; //Choice?
+            string userSelection; //User Selection?
+            do
             {
-                return GetGameStrategy();
-            }
-            return null;
-        }
-        private bool isValidChoice(string userAnswer)
-        {
-            return int.TryParse(userAnswer, out commandIndex) && commandIndex <= commands.Length && commandIndex > 0;
+                userSelection = GetUserInput();
+                validInput =int.TryParse(userSelection, out choice) && choice <= commands.Length && choice > 0;
+            } while (!validInput);
 
+            return choice;
         }
-        private IGameStrategy GetGameStrategy()
+        private string GetUserInput()
         {
-            return commands[commandIndex - 1].Execute();
+            return io.GetUserInput();
+        }
+
+        private IGameStrategy GetGameStrategy(int choice) //Choice!?
+        {
+            return commands[choice - 1].Execute();
         }
     }
 }
