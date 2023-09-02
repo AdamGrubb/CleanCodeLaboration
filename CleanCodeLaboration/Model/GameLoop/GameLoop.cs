@@ -1,4 +1,5 @@
 ﻿using CleanCodeLaboration.Model.GameLogic.Interface;
+using CleanCodeLaboration.Model.GameLogic.Strategy.Interface;
 using CleanCodeLaboration.Model.GameLoop.Interface;
 using CleanCodeLaboration.View.Interface;
 using System;
@@ -19,21 +20,12 @@ namespace CleanCodeLaboration.Model.GameLoop
             this.iO = iO;
             this.gameContext = gameContext;
         }
-        private void AskForPlayerName()
+        public void SetGameStrategy(IGameStrategy gameStrategy)
         {
-            string playerNameQuestion = gameContext.GetPlayerNameQuestion();
-            iO.GameOutput(playerNameQuestion);
-        }
-        private void SetUserName()
-        {
-
-            string playerName = iO.GetUserInput();
-            gameContext.SetPlayerName(playerName);
+            gameContext.SetGameStrategy(gameStrategy);
         }
         public void GetGameLoop()
         {
-            do
-            {
                 AskForPlayerName();
 
                 SetUserName();
@@ -49,10 +41,17 @@ namespace CleanCodeLaboration.Model.GameLoop
                 GetHighScore();
 
                 GetFinishedGameMessage();
+        }
+        private void AskForPlayerName()
+        {
+            string playerNameQuestion = gameContext.GetPlayerNameQuestion();
+            iO.GameOutput(playerNameQuestion);
+        }
+        private void SetUserName()
+        {
 
-            } while (ShouldContinuePlaying());
-
-
+            string playerName = iO.GetUserInput();
+            gameContext.SetPlayerName(playerName);
         }
         private void StartNewGame() //Start Game? Eventuellt ta bort
         {
@@ -87,11 +86,6 @@ namespace CleanCodeLaboration.Model.GameLoop
         {
             string finishedGameMessage = gameContext.GetFinishedGameMessage();
             iO.GameOutput(finishedGameMessage);
-        }
-        private bool ShouldContinuePlaying() //Hur blir det här, den borde ju lägga nära metoden som använder den, men om den har metoder som använder den hur gör man då?
-        {
-            string answer = iO.GetUserInput();
-            return gameContext.KeepPlaying(answer);
         }
     }
 }
