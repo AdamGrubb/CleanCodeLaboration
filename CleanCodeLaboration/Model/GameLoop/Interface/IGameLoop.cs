@@ -5,6 +5,6 @@ namespace CleanCodeLaboration.Model.GameLoop.Interface
     public interface IGameLoop
     {
         void SetGameStrategy(IGameStrategy gameStrategy);
-        void GetGameLoop();
+        void GetGameLoop(); //Sätt ett bättre namn på den! StartGameLoop?
     }
 }
