@@ -30,13 +30,13 @@ namespace CleanCodeLaboration.Controller.GameLoop
 
             SetUserName();
 
-            StartNewGame();
+            StartNewGame(); //Lite fortfarande för StartNewGame, det är svårt att veta vad den gör.
 
             OutputGameIntroduction();
 
             OutputCorrectAnswer();
 
-            PromtUserGuesses();  //PromtUserGuesses? Fundera lite mer på den.
+            PromtUserGuesses();  //PromtUserGuesses? Fundera lite mer på den. också svårt att veta vad den gör.
 
             OutputHighScore();
 
@@ -92,14 +92,12 @@ namespace CleanCodeLaboration.Controller.GameLoop
         }
         private bool ActiveGame()
         {
-           return gameContext.IsGameActive();
+            return gameContext.IsGameActive();
         }
         private string CheckPlayerAnswer(string userGuess)
         {
             return gameContext.CheckPlayerAnswer(userGuess);
         }
-
-
 
         private void OutputHighScore()
         {
