@@ -18,7 +18,7 @@ namespace CleanCodeLaboration.Model.GameLogic
             this.gameDAO = gameDAO;
             this.highScoreFormatter = higScoreFormatter;
         }
-        public string GetPlayerNameQuestion() //Ska man göra en const här?
+        public string GetPlayerNameQuestion()
         {
             const string nameQuestion = "Enter your user name";
             return nameQuestion;
@@ -27,27 +27,27 @@ namespace CleanCodeLaboration.Model.GameLogic
         {
             gameStrategy.SetPlayerName(playerName);
         }
-        public void SetGameStrategy(IGameStrategy gameStrategy) //Frågan är ju här ifall det är för många metoder för en SetGameStrategy? Bryt ut en funktion som är StartGame?
+        public void SetGameStrategy(IGameStrategy gameStrategy)
         {
             this.gameStrategy = gameStrategy;
         }
         public void StartNewGame()
         {
-            SetGameDAO(); //AssignGameDao?
-            SetGameGoal();
-            ActivateGame();
+            SetGameStrategyDAO();
+            SetGoalForGame();
+            StartGame();
         }
-        private void SetGameDAO()
+        private void SetGameStrategyDAO()
         {
             gameStrategy.SetGameDAO(gameDAO);
         }
  
-        private void SetGameGoal()
+        private void SetGoalForGame()
         {
             string goal = gameStrategy.GenerateGoal();
             gameStrategy.SetGoal(goal);
         }
-        private void ActivateGame()
+        private void StartGame()
         {
             gameStrategy.ActivateGame();
         }
@@ -59,24 +59,24 @@ namespace CleanCodeLaboration.Model.GameLogic
         {
             return gameStrategy.GetRightAnswer();
         }
-        public string CheckPlayerAnswer(string guess) //Frågan är ifall man skulle bryta ut loopen ändå?
+        public string CheckPlayerAnswer(string guess)
         {
             IncrementGuessCount();
-            string evaluatedGuess = EvaluateGuess(guess);
+            string evaluatedGuess = GetEvaluateGuess(guess);
             if (IsCorrectGuess(evaluatedGuess))
             {
                 SaveGame();
-                EndGame();
+                StopGame();
             }
             return evaluatedGuess;
         }
-        private string EvaluateGuess(string guess)
+        private string GetEvaluateGuess(string guess)
         {
-            return gameStrategy.GetEvaluatedGuess(guess); //Borde GameContext heta GetEvaluatedGuess och gameStrategy heta EvaluateGuess?
+            return gameStrategy.GetEvaluatedGuess(guess);
         }
         private void IncrementGuessCount()
         {
-            gameStrategy.IncrementGuessCount(); //IncrementGuessCount?
+            gameStrategy.IncrementGuessCount();
         }
         private bool IsCorrectGuess(string guess)
         {
@@ -86,7 +86,7 @@ namespace CleanCodeLaboration.Model.GameLogic
         {
             gameStrategy.SaveGame();
         }
-        private void EndGame()
+        private void StopGame()
         {
             gameStrategy.DeactivateGame();
         }
@@ -96,14 +96,18 @@ namespace CleanCodeLaboration.Model.GameLogic
         }
         public string GetHighScore()
         {
-            List<IPlayerScore> playerScores = gameStrategy.GetPlayerScores();
-            string highScore = highScoreFormatter.FormatHighScores(playerScores);
+            List<IPlayerScore> playerScores = GetPlayerScores();
+            string highScore = GetFormattedHighScore(playerScores);
             return highScore;
         }
 
-        public List<IPlayerScore> GetPlayerScores()
+        private List<IPlayerScore> GetPlayerScores()
         {
             return gameStrategy.GetPlayerScores();
+        }
+        private string GetFormattedHighScore(List<IPlayerScore> playerScores)
+        {
+            return highScoreFormatter.FormatHighScores(playerScores);
         }
         public string GetFinishedGameMessage()
         {
