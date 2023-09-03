@@ -15,9 +15,9 @@ namespace CleanCodeLaboration.Controller.GameMenu
             this.commands = commands;
             this.iO = iO;
         }
-        public void DisplayMenu() //PrintMenu?
+        public void OutputMenu()
         {
-            List<string> commands = GetMenu(); //MenuItems?
+            List<string> commands = GetMenu();
             commands.ForEach(command => OutputGameInfo(command));
         }
         private List<string> GetMenu()
