@@ -59,7 +59,7 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.MooGameStrategy
             const string newGame = "New game:";
             return newGame;
         }
-        public string GetRightAnswer() //Liite svajjig är detta metodnamn. GetCorrectAnswer kanske bättre?
+        public string GetRightAnswer() 
         {
             string rightAnswer = "For practice, number is: " + goal;
             return rightAnswer;
