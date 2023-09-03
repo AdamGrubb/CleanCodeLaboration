@@ -1,6 +1,6 @@
-﻿using CleanCodeLaboration.Model.GameLogic.Interface;
+﻿using CleanCodeLaboration.Controller.GameLoop.Interface;
+using CleanCodeLaboration.Model.GameLogic.Interface;
 using CleanCodeLaboration.Model.GameLogic.Strategy.Interface;
-using CleanCodeLaboration.Model.GameLoop.Interface;
 using CleanCodeLaboration.Model.GameMenu;
 using CleanCodeLaboration.Model.GameMenu.Interface;
 using CleanCodeLaboration.View.Interface;
@@ -49,7 +49,7 @@ namespace CleanCodeLaboration.Controller
         }
         private void StartGameLoop()
         {
-            gameLoop.GetGameLoop();
+            gameLoop.RunGameLoop();
         }
         private bool KeepPlaying()
         {

@@ -1,6 +1,6 @@
-﻿using CleanCodeLaboration.Model.GameLogic.Interface;
+﻿using CleanCodeLaboration.Controller.GameLoop.Interface;
+using CleanCodeLaboration.Model.GameLogic.Interface;
 using CleanCodeLaboration.Model.GameLogic.Strategy.Interface;
-using CleanCodeLaboration.Model.GameLoop.Interface;
 using CleanCodeLaboration.View.Interface;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CleanCodeLaboration.Model.GameLoop
+namespace CleanCodeLaboration.Controller.GameLoop
 {
     public class GameLoop : IGameLoop
     {
@@ -24,23 +24,23 @@ namespace CleanCodeLaboration.Model.GameLoop
         {
             gameContext.SetGameStrategy(gameStrategy);
         }
-        public void GetGameLoop()
+        public void RunGameLoop()
         {
-                AskForPlayerName();
+            AskForPlayerName();
 
-                SetUserName();
+            SetUserName();
 
-                StartNewGame();
+            StartNewGame();
 
-                GameIntroduction(); //OutputGameIntroduktion?
+            GameIntroduction();
 
-                GetCorrectAnswer(); //ShowCorrectAnswer? OutPutCorrectAnswer?
+            GetCorrectAnswer(); //ShowCorrectAnswer? OutPutCorrectAnswer?
 
-                GetUserGuesses(); //Här ska det framgå mer att det är nån slags guess-loop?
+            GetUserGuesses(); //Här ska det framgå mer att det är nån slags guess-loop?
 
-                GetHighScore();
+            GetHighScore();
 
-                GetFinishedGameMessage();
+            GetFinishedGameMessage();
         }
         private void AskForPlayerName()
         {
