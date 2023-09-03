@@ -18,7 +18,7 @@ namespace CleanCodeLaboration.Controller.GameMenu
         public void OutputMenu()
         {
             List<string> commands = GetMenu();
-            commands.ForEach(command => OutputGameInfo(command));
+            commands.ForEach(command => OutputMessage(command));
         }
         private List<string> GetMenu()
         {
@@ -27,7 +27,7 @@ namespace CleanCodeLaboration.Controller.GameMenu
                 .ToList();
             return commandDescriptions;
         }
-        private void OutputGameInfo(string output) //Bättre namn på det här helt klart. OUTPUT!!?!?!
+        private void OutputMessage(string output)
         {
             iO.GameOutput(output);
         }

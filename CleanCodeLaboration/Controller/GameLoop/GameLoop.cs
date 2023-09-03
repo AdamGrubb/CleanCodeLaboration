@@ -72,8 +72,6 @@ namespace CleanCodeLaboration.Controller.GameLoop
             OutputMessage(gameIntroduction);
 
         }
-
-
         private void OutputCorrectAnswer()
         {
             string rightAnswer = gameContext.GetRightAnswer();
