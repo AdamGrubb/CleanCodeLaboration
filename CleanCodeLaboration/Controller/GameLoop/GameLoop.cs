@@ -15,7 +15,7 @@ namespace CleanCodeLaboration.Controller.GameLoop
         private readonly IIO iO;
         private readonly IGameContext gameContext;
 
-        public GameLoop(IIO iO, IGameContext gameContext) //Det är ju lite tokigt att den kommer krascha ifall man inte har skickat in ett IGameStrategy? Du kan ju ha det som output att man måste använda SetGameStrategy.
+        public GameLoop(IIO iO, IGameContext gameContext)
         {
             this.iO = iO;
             this.gameContext = gameContext;
@@ -26,23 +26,23 @@ namespace CleanCodeLaboration.Controller.GameLoop
         }
         public void RunGameLoop()
         {
-            AskForPlayerName();
+            OutputPlayerNamePromt();
 
             SetUserName();
 
             StartNewGame();
 
-            GameIntroduction();
+            OutputGameIntroduction();
 
-            GetCorrectAnswer(); //ShowCorrectAnswer? OutPutCorrectAnswer?
+            OutputCorrectAnswer();
 
-            GetUserGuesses(); //Här ska det framgå mer att det är nån slags guess-loop?
+            PromtUserGuesses();  //PromtUserGuesses? Fundera lite mer på den.
 
-            GetHighScore();
+            OutputHighScore();
 
-            GetFinishedGameMessage();
+            OutputFinishedGameMessage();
         }
-        private void AskForPlayerName()
+        private void OutputPlayerNamePromt()
         {
             string playerNameQuestion = gameContext.GetPlayerNameQuestion();
             iO.GameOutput(playerNameQuestion);
@@ -53,22 +53,22 @@ namespace CleanCodeLaboration.Controller.GameLoop
             string playerName = iO.GetUserInput();
             gameContext.SetPlayerName(playerName);
         }
-        private void StartNewGame() //Start Game? Eventuellt ta bort
+        private void StartNewGame()
         {
             gameContext.StartNewGame();
         }
-        private void GameIntroduction()
+        private void OutputGameIntroduction()
         {
             string gameIntroduction = gameContext.GetGameIntroduction();
 
             iO.GameOutput(gameIntroduction);
         }
-        private void GetCorrectAnswer()
+        private void OutputCorrectAnswer()
         {
             string rightAnswer = gameContext.GetRightAnswer();
             iO.GameOutput(rightAnswer);
         }
-        private void GetUserGuesses() //Här skulle jag ju kunna lägga till en int som aggregeras och skickas in i save?
+        private void PromtUserGuesses()
         {
             while (gameContext.IsGameActive())
             {
@@ -77,12 +77,12 @@ namespace CleanCodeLaboration.Controller.GameLoop
                 iO.GameOutput(gameUpdateMessage);
             }
         }
-        private void GetHighScore()
+        private void OutputHighScore()
         {
             string highScore = gameContext.GetHighScore();
             iO.GameOutput(highScore);
         }
-        private void GetFinishedGameMessage()
+        private void OutputFinishedGameMessage()
         {
             string finishedGameMessage = gameContext.GetFinishedGameMessage();
             iO.GameOutput(finishedGameMessage);
