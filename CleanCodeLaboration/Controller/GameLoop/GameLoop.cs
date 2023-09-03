@@ -45,13 +45,21 @@ namespace CleanCodeLaboration.Controller.GameLoop
         private void OutputPlayerNamePromt()
         {
             string playerNameQuestion = gameContext.GetPlayerNameQuestion();
-            iO.GameOutput(playerNameQuestion);
+            OutputMessage(playerNameQuestion);
+        }
+        private void OutputMessage(string output) //Denna får du också kolla över namnet på.
+        {
+            iO.GameOutput(output);
         }
         private void SetUserName()
         {
 
-            string playerName = iO.GetUserInput();
+            string playerName = GetUserInput();
             gameContext.SetPlayerName(playerName);
+        }
+        private string GetUserInput()
+        {
+            return iO.GetUserInput();
         }
         private void StartNewGame()
         {
@@ -61,22 +69,38 @@ namespace CleanCodeLaboration.Controller.GameLoop
         {
             string gameIntroduction = gameContext.GetGameIntroduction();
 
-            iO.GameOutput(gameIntroduction);
+            OutputMessage(gameIntroduction);
+
         }
+
+
         private void OutputCorrectAnswer()
         {
             string rightAnswer = gameContext.GetRightAnswer();
-            iO.GameOutput(rightAnswer);
+
+            OutputMessage(rightAnswer);
         }
         private void PromtUserGuesses()
         {
-            while (gameContext.IsGameActive())
+            while (ActiveGame())
             {
-                string userGuess = iO.GetUserInput();
-                string gameUpdateMessage = gameContext.CheckPlayerAnswer(userGuess);
-                iO.GameOutput(gameUpdateMessage);
+                string userGuess = GetUserInput();
+                string gameUpdateMessage = CheckPlayerAnswer(userGuess);
+
+                OutputMessage(gameUpdateMessage);
             }
         }
+        private bool ActiveGame()
+        {
+           return gameContext.IsGameActive();
+        }
+        private string CheckPlayerAnswer(string userGuess)
+        {
+            return gameContext.CheckPlayerAnswer(userGuess);
+        }
+
+
+
         private void OutputHighScore()
         {
             string highScore = gameContext.GetHighScore();
