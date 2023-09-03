@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CleanCodeLaboration.Model.GameMenu.Interface
+namespace CleanCodeLaboration.Controller.GameMenu.Interface
 {
     public interface ICommand
     {

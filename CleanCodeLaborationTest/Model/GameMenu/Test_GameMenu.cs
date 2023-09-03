@@ -1,8 +1,8 @@
-﻿using CleanCodeLaboration.Model.GameLogic.Strategy.Interface;
+﻿using CleanCodeLaboration.Controller.GameMenu.Interface;
+using CleanCodeLaboration.Model.GameLogic.Strategy.Interface;
 using CleanCodeLaboration.Model.GameLogic.Strategy.MooGameStrategy;
 using CleanCodeLaboration.Model.GameMenu;
 using CleanCodeLaboration.Model.GameMenu.Commands;
-using CleanCodeLaboration.Model.GameMenu.Interface;
 using Moq;
 using System.Security.Cryptography.X509Certificates;
 

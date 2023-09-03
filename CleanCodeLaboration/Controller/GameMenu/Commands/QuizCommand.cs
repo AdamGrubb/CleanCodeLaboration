@@ -1,9 +1,9 @@
-﻿using CleanCodeLaboration.Model.GameLogic.Strategy.Interface;
+﻿using CleanCodeLaboration.Controller.GameMenu.Interface;
+using CleanCodeLaboration.Model.GameLogic.Strategy.Interface;
 using CleanCodeLaboration.Model.GameLogic.Strategy.MooGameStrategy;
 using CleanCodeLaboration.Model.GameLogic.Strategy.QuizGameStrategy;
-using CleanCodeLaboration.Model.GameMenu.Interface;
 
-namespace CleanCodeLaboration.Model.GameMenu.Commands
+namespace CleanCodeLaboration.Controller.GameMenu.Commands
 {
     public class QuizCommand : ICommand
     {

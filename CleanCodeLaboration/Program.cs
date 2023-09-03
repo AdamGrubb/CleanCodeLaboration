@@ -6,12 +6,12 @@ using CleanCodeLaboration.Model.GameLogic;
 using CleanCodeLaboration.View.Interface;
 using CleanCodeLaboration.View;
 using CleanCodeLaboration.Model.GameMenu;
-using CleanCodeLaboration.Model.GameMenu.Interface;
 using CleanCodeLaboration.Model.GameMenu.Commands;
 using CleanCodeLaboration.Model.GameHighScore.Interface;
 using CleanCodeLaboration.Model.GameHighScore;
 using CleanCodeLaboration.Model.GameLoop;
 using CleanCodeLaboration.Controller.GameLoop.Interface;
+using CleanCodeLaboration.Controller.GameMenu.Interface;
 
 IIO iO = new ConsoleView();
 

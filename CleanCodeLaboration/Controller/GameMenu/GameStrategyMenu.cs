@@ -1,24 +1,12 @@
-﻿using CleanCodeLaboration.Model.GameLogic.Strategy;
+﻿using CleanCodeLaboration.Controller.GameMenu.Interface;
 using CleanCodeLaboration.Model.GameLogic.Strategy.Interface;
-using CleanCodeLaboration.Model.GameLogic.Strategy.MooGameStrategy;
-using CleanCodeLaboration.Model.GameLogic.Strategy.QuizGameStrategy;
-using CleanCodeLaboration.Model.GameMenu.Commands;
-using CleanCodeLaboration.Model.GameMenu.Interface;
 using CleanCodeLaboration.View.Interface;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http.Headers;
-using System.Security.AccessControl;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace CleanCodeLaboration.Model.GameMenu
+namespace CleanCodeLaboration.Controller.GameMenu
 {
-    public class GameStrategyMenu : IGameMenu //Nu jobbar den ju med samma Games här i command-listan. 
+    public class GameStrategyMenu : IGameMenu
     {
         private readonly IIO iO;
-        private int commandIndex;
         private ICommand[] commands;
 
 
@@ -57,7 +45,7 @@ namespace CleanCodeLaboration.Model.GameMenu
             do
             {
                 userSelection = GetUserInput();
-                validInput =int.TryParse(userSelection, out choice) && choice <= commands.Length && choice > 0;
+                validInput = int.TryParse(userSelection, out choice) && choice <= commands.Length && choice > 0;
             } while (!validInput);
 
             return choice;
