@@ -3,6 +3,7 @@ using CleanCodeLaboration.Model.GameDAO.Interface;
 using CleanCodeLaboration.Model.GameLogic.Strategy.Interface;
 using CleanCodeLaboration.Model.GameLogic.Strategy.MooGameStrategy;
 using CleanCodeLaboration.Model.GameLogic.Strategy.QuizGameStrategy;
+using CleanCodeLaboration.Model.GameLogic.Strategy.QuizGameStrategy.QuizQuestionDAO.Interface;
 
 namespace CleanCodeLaboration.Controller.GameMenu.Commands
 {
@@ -10,10 +11,12 @@ namespace CleanCodeLaboration.Controller.GameMenu.Commands
     {
         private const string description = "Quiz Game";
         private readonly IGameDAO gameDAO;
+        private readonly IQuizQuestionDAO quizQuestionDAO;
 
-        public QuizCommand(IGameDAO gameDAO)
+        public QuizCommand(IGameDAO gameDAO, IQuizQuestionDAO quizQuestionDAO)
         {
             this.gameDAO = gameDAO;
+            this.quizQuestionDAO = quizQuestionDAO;
         }
         public string Description
         {
@@ -22,7 +25,7 @@ namespace CleanCodeLaboration.Controller.GameMenu.Commands
 
         public IGameStrategy Execute()
         {
-            return new QuizGameStrategy(gameDAO);
+            return new QuizGameStrategy(gameDAO, quizQuestionDAO);
         }
     }
 }

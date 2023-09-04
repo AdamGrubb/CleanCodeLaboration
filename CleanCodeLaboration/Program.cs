@@ -12,19 +12,22 @@ using CleanCodeLaboration.Controller.GameMenu.Interface;
 using CleanCodeLaboration.Controller.GameMenu;
 using CleanCodeLaboration.Controller.GameMenu.Commands;
 using CleanCodeLaboration.Controller.GameLoop;
+using CleanCodeLaboration.Model.GameLogic.Strategy.QuizGameStrategy.QuizQuestionDAO.Interface;
+using CleanCodeLaboration.Model.GameLogic.Strategy.QuizGameStrategy.QuizQuestionDAO;
 
+IQuizQuestionDAO quizQuestionDAO = new StarWarsQuestionDAO();
 IIO iO = new ConsoleView();
 
 IGameDAO gameDAO = new LocalFileDAO();
 
 IHighScoreFormatter highScoreFormatter = new HighScoreFormatter();
 
-IGameContext gameContext = new GameContext(gameDAO, highScoreFormatter);
+IGameContext gameContext = new GameContext(highScoreFormatter);
 
-ICommand[] commands = new ICommand[] //Factory här då? Så kan du ha olik
+ICommand[] commands = new ICommand[]
 {
-            new MooGameCommand(),
-            new QuizCommand()
+            new MooGameCommand(gameDAO),
+            new QuizCommand(gameDAO, quizQuestionDAO)
 };
 
 IGameMenu gameMenu = new GameStrategyMenu(commands, iO);
