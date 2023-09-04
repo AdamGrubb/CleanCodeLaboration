@@ -14,7 +14,7 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.Interface
         List<IPlayerScore> GetPlayerScores();
         void SetPlayerName(string userName);
         void ActivateGame(); //Fortfarande kanske otydligt vad den gör? För abstrakt? StartNewGame?
-        void SaveGame();
+        void SaveGame(); //Skulle jag kunna stoppa in name här istället då?
         void IncrementGuessCount(); //Denna kanske behöver bytas namn på, kanske borde heta något i stil med incrementNumberOfGuesses?
         bool IsCorrectGuess(string guess);
         void DeactivateGame();
