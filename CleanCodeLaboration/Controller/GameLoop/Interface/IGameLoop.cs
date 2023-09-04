@@ -6,5 +6,6 @@ namespace CleanCodeLaboration.Controller.GameLoop.Interface
     {
         void SetGameStrategy(IGameStrategy gameStrategy);
         void RunGameLoop(); //Sätt ett bättre namn på den! StartGameLoop?
+        void InputPlayerName();
     }
 }

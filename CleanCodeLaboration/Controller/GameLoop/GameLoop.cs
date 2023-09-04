@@ -24,11 +24,15 @@ namespace CleanCodeLaboration.Controller.GameLoop
         {
             gameContext.SetGameStrategy(gameStrategy);
         }
-        public void RunGameLoop()
+        public void InputPlayerName()
         {
             OutputPlayerNamePromt();
 
             SetUserName();
+        }
+        public void RunGameLoop()
+        {
+
 
             StartNewGame(); //Lite fortfarande för StartNewGame, det är svårt att veta vad den gör.
 
