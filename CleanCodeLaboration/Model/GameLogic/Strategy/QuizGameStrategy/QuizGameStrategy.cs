@@ -13,7 +13,6 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.QuizGameStrategy
 {
     public class QuizGameStrategy : IGameStrategy
     {
-        private string playerName = string.Empty;
         private IQuizQuestionDAO questionDAO = new StarWarsQuestionDAO();
         private IQuizQuestion quizQuestion;
         private string goal;
@@ -24,10 +23,6 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.QuizGameStrategy
         private IGameDAO gameDAO;
         private const string gameName = "QuizGame";
 
-        public void SetPlayerName(string playerName)
-        {
-            this.playerName = playerName;
-        }
         public void ActivateGame()
         {
             isGameActive = true;
@@ -121,7 +116,7 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.QuizGameStrategy
             string rightAnswer = "The right answer is: " + goal;
             return rightAnswer;
         }
-        public void SaveGame()
+        public void SaveGame(string playerName)
         {
             gameDAO.SavePlayerScore(gameName, new PlayerScoreDTO(playerName, numberOfGuesses));
         }
