@@ -9,25 +9,28 @@ using System.Threading.Tasks;
 
 namespace CleanCodeLaboration.Model.Utilities
 {
-    public static class PlayerConverter
+    public static class PlayerConverter //Se över denna en gång till.
     {
-        public static List<IPlayer> ToPlayer(List<IPlayerScore> playerScores) //Ska jag göra en utility-klass med den här metoden? Frågar sig jag!
+        public static List<IPlayer> ToPlayer(List<IPlayerScore> playerScores)
         {
             List<IPlayer> players = new List<IPlayer>();
-            foreach (IPlayerScore playerScore in playerScores) //Går det att bryta ut till fler metoder kanske?
+            foreach (IPlayerScore playerScore in playerScores)
             {
-                Player pd = new Player(playerScore.Name, playerScore.Guesses); //Här har du player som Pd
-                int pos = players.IndexOf(pd); //Här har du en förkortning för pos, det är icke sa nicke.
-                if (pos < 0)
+                IPlayer player = new Player(playerScore.Name, playerScore.Guesses);
+
+                int playerIndex = players.IndexOf(player);
+                
+                if (playerIndex < 0)
                 {
-                    players.Add(pd);
+                    players.Add(player);
                 }
                 else
                 {
-                    players[pos].Update(playerScore.Guesses);
+                    players[playerIndex].Update(playerScore.Guesses);
                 }
             }
             return players;
         }
     }
+
 }
