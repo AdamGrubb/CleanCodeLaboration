@@ -23,6 +23,11 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.QuizGameStrategy
         private IGameDAO gameDAO;
         private const string gameName = "QuizGame";
 
+        public QuizGameStrategy(IGameDAO gameDAO)
+        {
+            this.gameDAO = gameDAO;
+        }
+
         public void ActivateGame()
         {
             isGameActive = true;

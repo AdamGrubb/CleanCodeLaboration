@@ -17,7 +17,10 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.MooGameStrategy
         private bool isGameActive;
         private IGameDAO gameDAO;
 
-
+        public MooGameStrategy(IGameDAO gameDAO)
+        {
+            this.gameDAO = gameDAO;
+        }
 
         public void SetGameDAO(IGameDAO gameDAO)
         {
