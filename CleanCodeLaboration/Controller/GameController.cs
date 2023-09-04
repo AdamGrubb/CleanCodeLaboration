@@ -29,8 +29,6 @@ namespace CleanCodeLaboration.Controller
                 ChooseGame();
                 StartGameLoop();
             } while (KeepPlaying());
-
-
         }
         private void InputPlayerName()
         {

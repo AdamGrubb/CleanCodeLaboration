@@ -24,7 +24,7 @@ namespace CleanCodeLaboration.Controller.GameLoop
         {
             gameContext.SetGameStrategy(gameStrategy);
         }
-        public void InputPlayerName()
+        public void InputPlayerName() //Lite oklart att den sätter namnet samt frågar om det.
         {
             OutputPlayerNamePromt();
 
