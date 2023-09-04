@@ -67,17 +67,19 @@ namespace CleanCodeLaboration.Controller.GameMenu
         public bool ContinuePlaying()
         {
             OutputPlayAgainPrompt();
+
             return KeepPlaying();
         }
         private bool KeepPlaying()
         {
             string answer = GetUserInput();
-            return ShouldContinuePlaying(answer);
+            bool keepPlaying = !ShouldStopPlaying(answer);
+            return keepPlaying;
         }
-        private bool ShouldContinuePlaying(string answer) //Här har du en bugg, kolla hur de gjorde i originalkoden. något här är galet du avslutar spelet då. Det blir tvärt om ifall du skriver "n"
+        private bool ShouldStopPlaying(string answer)
         {
             const string endGame = "n";
-            return !string.IsNullOrWhiteSpace(answer) && answer.Substring(0, 1) == endGame;
+            return !string.IsNullOrWhiteSpace(answer) && answer.StartsWith(endGame);
         }
         private void OutputPlayAgainPrompt()
         {
