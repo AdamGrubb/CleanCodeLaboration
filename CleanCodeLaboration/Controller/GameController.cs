@@ -22,6 +22,7 @@ namespace CleanCodeLaboration.Controller
 
         private void InitializeGameMenu() //Denna behöver ett namnbyte.
         {
+            InputPlayerName();
             do
             {
                 OutputMenu();
@@ -30,6 +31,10 @@ namespace CleanCodeLaboration.Controller
             } while (KeepPlaying());
 
 
+        }
+        private void InputPlayerName()
+        {
+            gameLoop.InputPlayerName();
         }
         private void OutputMenu()
         {
