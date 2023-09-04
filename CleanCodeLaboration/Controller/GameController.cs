@@ -33,7 +33,7 @@ namespace CleanCodeLaboration.Controller
         }
         private void OutputMenu()
         {
-            gameMenu.DisplayMenu();
+            gameMenu.OutputMenu();
         }
         private void ChooseGame()
         {
