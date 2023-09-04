@@ -36,7 +36,7 @@ namespace CleanCodeLaboration.Controller.GameLoop
 
             OutputCorrectAnswer();
 
-            PromtUserGuesses();  //PromtUserGuesses? Fundera lite mer på den. också svårt att veta vad den gör.
+            PromtUserGuesses();  //PromtUserGuesses? Fundera lite mer på den. också svårt att veta vad den gör. Har sammai GameStrategyMenu nu också.
 
             OutputHighScore();
 
