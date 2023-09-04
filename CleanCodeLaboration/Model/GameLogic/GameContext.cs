@@ -12,6 +12,7 @@ namespace CleanCodeLaboration.Model.GameLogic
         private IGameStrategy gameStrategy;
         private readonly IGameDAO gameDAO;
         private readonly IHighScoreFormatter highScoreFormatter;
+        private string playerName;
         
         public GameContext(IGameDAO gameDAO, IHighScoreFormatter higScoreFormatter) 
         {
@@ -25,7 +26,7 @@ namespace CleanCodeLaboration.Model.GameLogic
         }
         public void SetPlayerName(string playerName)
         {
-            gameStrategy.SetPlayerName(playerName);
+            this.playerName = playerName;
         }
         public void SetGameStrategy(IGameStrategy gameStrategy)
         {
@@ -84,7 +85,7 @@ namespace CleanCodeLaboration.Model.GameLogic
         }
         private void SaveGame()
         {
-            gameStrategy.SaveGame();
+            gameStrategy.SaveGame(playerName);
         }
         private void StopGame()
         {
