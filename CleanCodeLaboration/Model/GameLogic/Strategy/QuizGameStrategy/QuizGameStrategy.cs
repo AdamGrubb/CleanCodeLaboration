@@ -13,7 +13,6 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.QuizGameStrategy
 {
     public class QuizGameStrategy : IGameStrategy
     {
-        private IQuizQuestionDAO questionDAO = new StarWarsQuestionDAO();
         private IQuizQuestion quizQuestion;
         private string goal;
         private const string correctResponse = "Correct Answer!";
@@ -21,11 +20,13 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.QuizGameStrategy
         private int numberOfGuesses = 0;
         private bool isGameActive;
         private IGameDAO gameDAO;
+        private readonly IQuizQuestionDAO questionDAO;
         private const string gameName = "QuizGame";
 
-        public QuizGameStrategy(IGameDAO gameDAO)
+        public QuizGameStrategy(IGameDAO gameDAO, IQuizQuestionDAO questionDAO)
         {
             this.gameDAO = gameDAO;
+            this.questionDAO = questionDAO;
         }
 
         public void ActivateGame()
@@ -39,12 +40,12 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.QuizGameStrategy
             return goal;
         }
 
-        private void SetQuizQuestion() //Här borde du ha en try catch.
+        private void SetQuizQuestion()
         {
             quizQuestion = questionDAO.GetRandomQuizQuestion();
         }
 
-        private string GetQuizAnswer()
+        private string GetQuizAnswer() //Här borde du ha en try catch.
         {
             string quizAnswer = quizQuestion.Answer;
             return quizAnswer;

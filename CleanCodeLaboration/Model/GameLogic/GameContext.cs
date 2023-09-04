@@ -10,13 +10,11 @@ namespace CleanCodeLaboration.Model.GameLogic
     public class GameContext : IGameContext //Vad är GameContext? Du borde döpa om den här och fundera ut vad den har för ansvar. Läs på om strategy.
     {
         private IGameStrategy gameStrategy;
-        private readonly IGameDAO gameDAO;
         private readonly IHighScoreFormatter highScoreFormatter;
         private string playerName;
         
-        public GameContext(IGameDAO gameDAO, IHighScoreFormatter higScoreFormatter) 
+        public GameContext(IHighScoreFormatter higScoreFormatter) 
         {
-            this.gameDAO = gameDAO;
             this.highScoreFormatter = higScoreFormatter;
         }
         public string GetPlayerNameQuestion()
@@ -34,13 +32,8 @@ namespace CleanCodeLaboration.Model.GameLogic
         }
         public void StartNewGame()
         {
-            SetGameStrategyDAO();
             SetGoalForGame();
             StartGame();
-        }
-        private void SetGameStrategyDAO()
-        {
-            gameStrategy.SetGameDAO(gameDAO);
         }
  
         private void SetGoalForGame()
