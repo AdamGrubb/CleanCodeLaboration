@@ -17,31 +17,35 @@ namespace CleanCodeLaboration.Controller.GameMenu
         }
         public void OutputMenu()
         {
-            List<string> commands = GetMenu();
-            commands.ForEach(command => OutputMessage(command));
+            List<string> names = GetGameNames();
+            OutputGameNames(names);
         }
-        private List<string> GetMenu()
+        private List<string> GetGameNames()
         {
-            var commandDescriptions = commands
+            var gameNames = commands
                 .Select((command, index) => $"{index + 1}. {command.Description}")
                 .ToList();
-            return commandDescriptions;
+            return gameNames;
         }
         private void OutputMessage(string output)
         {
             iO.GameOutput(output);
         }
+        private void OutputGameNames(List<string> names)
+        {
+            names.ForEach(name => OutputMessage(name));
+        }
         public IGameStrategy SelectGame()
         {
-            int choice = GetValidChoice();
+            int choice = PromtUserChoice();
             IGameStrategy gameStrategy = GetGameStrategy(choice);
             return gameStrategy;
         }
-        private int GetValidChoice() //Är det bättre att ha alla på utsidan av loopen? Kolla av med clean code boken.
+        private int PromtUserChoice()
         {
             bool validInput;
-            int choice; //Choice?
-            string userSelection; //User Selection?
+            int choice;
+            string userSelection; //User selection och userCHoice vaddåå!???!?!?
             do
             {
                 userSelection = GetUserInput();
@@ -55,29 +59,31 @@ namespace CleanCodeLaboration.Controller.GameMenu
             return iO.GetUserInput();
         }
 
-        private IGameStrategy GetGameStrategy(int choice) //Choice!?
+        private IGameStrategy GetGameStrategy(int userChoice)
         {
-            return commands[choice - 1].Execute();
+            int indexCorrection = 1;
+            return commands[userChoice - indexCorrection].Execute();
         }
         public bool ContinuePlaying()
         {
-            GetPlayAgainMessage();
+            OutputPlayAgainPrompt();
             return KeepPlaying();
         }
         private bool KeepPlaying()
         {
             string answer = GetUserInput();
-            const string endGame = "n"; //Låter endGame Bra?
-            if (!string.IsNullOrWhiteSpace(answer) && answer.Substring(0, 1) == endGame)
-            {
-                return false;
-            }
-            return true;
+            return ShouldContinuePlaying(answer);
         }
-        private void GetPlayAgainMessage()
+        private bool ShouldContinuePlaying(string answer) //Här har du en bugg, kolla hur de gjorde i originalkoden. något här är galet du avslutar spelet då. Det blir tvärt om ifall du skriver "n"
         {
-            const string playAgainMessage = "Continue?"; //Är det redundant information med message?
-            iO.GameOutput(playAgainMessage);
+            const string endGame = "n";
+            return !string.IsNullOrWhiteSpace(answer) && answer.Substring(0, 1) == endGame;
+        }
+        private void OutputPlayAgainPrompt()
+        {
+            const string promptContinue = "Continue?";
+
+            OutputMessage(promptContinue);
         }
     }
 }
