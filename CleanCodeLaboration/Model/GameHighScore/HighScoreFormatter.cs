@@ -1,5 +1,6 @@
 ﻿using CleanCodeLaboration.Model.GameDAO.Interface;
 using CleanCodeLaboration.Model.GameHighScore.Interface;
+using CleanCodeLaboration.Model.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,7 @@ namespace CleanCodeLaboration.Model.GameHighScore
         {
             string spacing = "\n";
             string highScores = "Player   games average" + spacing;
-            List<IPlayer> players = ConvertToPlayer(playerScores);
+            List<IPlayer> players = PlayerConverter.ToPlayer(playerScores);
             string formattedPlayersScores = GetFormattedPlayerScores(players);
             highScores += formattedPlayersScores;
             return highScores;
@@ -35,30 +36,11 @@ namespace CleanCodeLaboration.Model.GameHighScore
         {
             string spacing = "\n";
             string formatedPlayerScores = "";
-            foreach (Player player in players)
+            foreach (IPlayer player in players)
             {
                 formatedPlayerScores += string.Format("{0,-9}{1,5:D}{2,9:F2}" + spacing, player.Name, player.NumberOfGames, player.GetAverageScore()); //Ska du bryta ut formaten till ints eller nått? typ "int LeftOrientation = -9, osv"
             }
             return formatedPlayerScores;
         }
-        public List<IPlayer> ConvertToPlayer(List<IPlayerScore> playerScores)
-        {
-            List<IPlayer> players = new List<IPlayer>();
-            foreach (IPlayerScore playerScore in playerScores) //Går det att bryta ut till fler metoder kanske?
-            {
-                Player pd = new Player(playerScore.Name, playerScore.Guesses); //Här har du player som Pd
-                int pos = players.IndexOf(pd); //Här har du en förkortning för pos, det är icke sa nicke.
-                if (pos < 0)
-                {
-                    players.Add(pd);
-                }
-                else
-                {
-                    players[pos].Update(playerScore.Guesses);
-                }
-            }
-            return players;
-        }
-
     }
 }

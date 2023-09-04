@@ -10,16 +10,14 @@ namespace CleanCodeLaboration.Model.GameLogic
     public class GameContext : IGameContext //Vad är GameContext? Du borde döpa om den här och fundera ut vad den har för ansvar. Läs på om strategy.
     {
         private IGameStrategy gameStrategy;
-        private readonly IGameDAO gameDAO;
         private readonly IHighScoreFormatter highScoreFormatter;
-        private string playerName = string.Empty;
+        private string playerName;
         
-        public GameContext(IGameDAO gameDAO, IHighScoreFormatter higScoreFormatter) 
+        public GameContext(IHighScoreFormatter higScoreFormatter) 
         {
-            this.gameDAO = gameDAO;
             this.highScoreFormatter = higScoreFormatter;
         }
-        public string GetPlayerNameQuestion() //Ska man göra en const här?
+        public string GetPlayerNameQuestion()
         {
             const string nameQuestion = "Enter your user name";
             return nameQuestion;
@@ -28,31 +26,22 @@ namespace CleanCodeLaboration.Model.GameLogic
         {
             this.playerName = playerName;
         }
-        public void SetGameStrategy(IGameStrategy gameStrategy) //Frågan är ju här ifall det är för många metoder för en SetGameStrategy? Bryt ut en funktion som är StartGame?
+        public void SetGameStrategy(IGameStrategy gameStrategy)
         {
             this.gameStrategy = gameStrategy;
         }
         public void StartNewGame()
         {
-            SetGameDAO(); //AssignGameDao?
-            SetPlayerName();//AssignPlayerName?
-            SetGameGoal();
-            ActivateGame();
+            SetGoalForGame();
+            StartGame();
         }
-        private void SetGameDAO()
-        {
-            gameStrategy.SetGameDAO(gameDAO);
-        }
-        private void SetPlayerName()
-        {
-            gameStrategy.SetPlayerName(playerName);
-        }
-        private void SetGameGoal()
+ 
+        private void SetGoalForGame()
         {
             string goal = gameStrategy.GenerateGoal();
             gameStrategy.SetGoal(goal);
         }
-        private void ActivateGame()
+        private void StartGame()
         {
             gameStrategy.ActivateGame();
         }
@@ -64,24 +53,24 @@ namespace CleanCodeLaboration.Model.GameLogic
         {
             return gameStrategy.GetRightAnswer();
         }
-        public string CheckPlayerAnswer(string guess) //Frågan är ifall man skulle bryta ut loopen ändå?
+        public string CheckPlayerAnswer(string guess)
         {
             IncrementGuessCount();
-            string evaluatedGuess = EvaluateGuess(guess);
+            string evaluatedGuess = GetEvaluateGuess(guess);
             if (IsCorrectGuess(evaluatedGuess))
             {
                 SaveGame();
-                EndGame();
+                StopGame();
             }
             return evaluatedGuess;
         }
-        private string EvaluateGuess(string guess)
+        private string GetEvaluateGuess(string guess)
         {
-            return gameStrategy.GetEvaluatedGuess(guess); //Borde GameContext heta GetEvaluatedGuess och gameStrategy heta EvaluateGuess?
+            return gameStrategy.GetEvaluatedGuess(guess);
         }
         private void IncrementGuessCount()
         {
-            gameStrategy.IncrementGuessCount(); //IncrementGuessCount?
+            gameStrategy.IncrementGuessCount();
         }
         private bool IsCorrectGuess(string guess)
         {
@@ -89,9 +78,9 @@ namespace CleanCodeLaboration.Model.GameLogic
         }
         private void SaveGame()
         {
-            gameStrategy.SaveGame();
+            gameStrategy.SaveGame(playerName);
         }
-        private void EndGame()
+        private void StopGame()
         {
             gameStrategy.DeactivateGame();
         }
@@ -101,32 +90,22 @@ namespace CleanCodeLaboration.Model.GameLogic
         }
         public string GetHighScore()
         {
-            List<IPlayerScore> playerScores = gameStrategy.GetPlayerScores();
-            string highScore = highScoreFormatter.FormatHighScores(playerScores);
+            List<IPlayerScore> playerScores = GetPlayerScores();
+            string highScore = GetFormattedHighScore(playerScores);
             return highScore;
         }
 
-        public List<IPlayerScore> GetPlayerScores()
+        private List<IPlayerScore> GetPlayerScores()
         {
             return gameStrategy.GetPlayerScores();
+        }
+        private string GetFormattedHighScore(List<IPlayerScore> playerScores)
+        {
+            return highScoreFormatter.FormatHighScores(playerScores);
         }
         public string GetFinishedGameMessage()
         {
             return gameStrategy.GetFinishedGameMessage();
-        }
-        public bool KeepPlaying(string answer)
-        {
-            const string endGame = "n"; //Låter endGame Bra?
-            if (!string.IsNullOrWhiteSpace(answer) && answer.Substring(0, 1) == endGame)
-            {
-                return false;
-            }
-            return true;
-        }
-        public string GetPlayAgainMessage()
-        {
-            const string playAgainMessage = "Continue?"; //Är det redundant information med message?
-            return playAgainMessage;
         }
     }
 }

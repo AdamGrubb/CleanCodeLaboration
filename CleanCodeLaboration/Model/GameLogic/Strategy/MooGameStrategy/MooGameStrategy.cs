@@ -12,26 +12,18 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.MooGameStrategy
         private const char bullCharacter = 'B';
         private const char cowCharacter = 'C';
         private const char separator = ','; //Seperator? Lite oklart vad den ska användas för?
-        private string playerName = string.Empty;
         private string goal;
         private int numberOfGuesses = 0;
         private bool isGameActive;
         private IGameDAO gameDAO;
 
-
-
-        public void SetGameDAO(IGameDAO gameDAO)
+        public MooGameStrategy(IGameDAO gameDAO)
         {
             this.gameDAO = gameDAO;
         }
-
         public void ActivateGame()
         {
             isGameActive = true;
-        }
-        public void SetPlayerName(string playerName)
-        {
-            this.playerName = playerName;
         }
         public string GenerateGoal()
         {
@@ -59,7 +51,7 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.MooGameStrategy
             const string newGame = "New game:";
             return newGame;
         }
-        public string GetRightAnswer() //Liite svajjig är detta metodnamn. GetCorrectAnswer kanske bättre?
+        public string GetRightAnswer() 
         {
             string rightAnswer = "For practice, number is: " + goal;
             return rightAnswer;
@@ -132,7 +124,7 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.MooGameStrategy
         {
             isGameActive = false;
         }
-        public void SaveGame()
+        public void SaveGame(string playerName)
         {
             IPlayerScore playerScore = new PlayerScoreDTO(playerName, numberOfGuesses);
             gameDAO.SavePlayerScore(gameName, playerScore);

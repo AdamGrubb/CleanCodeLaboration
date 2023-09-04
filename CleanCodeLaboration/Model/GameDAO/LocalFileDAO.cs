@@ -18,7 +18,7 @@ namespace CleanCodeLaboration.Model.GameDAO
         {
             StreamReader streamReader = new StreamReader(gameName + fileFormat);
             List<IPlayerScore> playerScores = new List<IPlayerScore>();
-            string line; //Line?
+            string line; //Line? Row kanske? eller något
             while ((line = streamReader.ReadLine()) != null)
             {
                 string[] nameAndScore = line.Split(new string[] { nameAndScoreSeperator }, StringSplitOptions.None);
