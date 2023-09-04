@@ -1,4 +1,5 @@
 ﻿using CleanCodeLaboration.Controller.GameMenu.Interface;
+using CleanCodeLaboration.Model.GameDAO.Interface;
 using CleanCodeLaboration.Model.GameLogic.Strategy.Interface;
 using CleanCodeLaboration.Model.GameLogic.Strategy.MooGameStrategy;
 using System;
@@ -12,6 +13,12 @@ namespace CleanCodeLaboration.Controller.GameMenu.Commands
     public class MooGameCommand : ICommand
     {
         private const string description = "MooGame";
+        private readonly IGameDAO gameDAO;
+        public MooGameCommand(IGameDAO gameDAO)
+        {
+            this.gameDAO = gameDAO;
+        }
+
         public string Description
         {
             get { return description; }
@@ -19,7 +26,7 @@ namespace CleanCodeLaboration.Controller.GameMenu.Commands
 
         public IGameStrategy Execute()
         {
-            return new MooGameStrategy();
+            return new MooGameStrategy(gameDAO);
         }
     }
 }
