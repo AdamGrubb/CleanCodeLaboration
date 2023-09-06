@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace CleanCodeLaboration.Controller.GameMenu.Commands
 {
-    public class MooGameCommand : ICommand
+    public class MooGameCommand : IGameCommand
     {
         private const string description = "MooGame";
         private readonly IGameDAO gameDAO;

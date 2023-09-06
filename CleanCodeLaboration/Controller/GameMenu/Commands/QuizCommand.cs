@@ -7,7 +7,7 @@ using CleanCodeLaboration.Model.GameLogic.Strategy.QuizGameStrategy.QuizQuestion
 
 namespace CleanCodeLaboration.Controller.GameMenu.Commands
 {
-    public class QuizCommand : ICommand
+    public class QuizCommand : IGameCommand
     {
         private const string description = "Quiz Game";
         private readonly IGameDAO gameDAO;

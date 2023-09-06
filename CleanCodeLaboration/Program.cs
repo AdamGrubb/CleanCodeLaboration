@@ -24,7 +24,7 @@ IHighScoreFormatter highScoreFormatter = new HighScoreFormatter();
 
 IGameContext gameContext = new GameLogicContext(highScoreFormatter);
 
-ICommand[] commands = new ICommand[]
+IGameCommand[] commands = new IGameCommand[]
 {
             new MooGameCommand(gameDAO),
             new QuizCommand(gameDAO, quizQuestionDAO)

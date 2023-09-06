@@ -7,10 +7,10 @@ namespace CleanCodeLaboration.Controller.GameMenu
     public class GameStrategyMenu : IGameMenu
     {
         private readonly IIO iO;
-        private ICommand[] commands;
+        private IGameCommand[] commands;
 
 
-        public GameStrategyMenu(ICommand[] commands, IIO iO)
+        public GameStrategyMenu(IGameCommand[] commands, IIO iO)
         {
             this.commands = commands;
             this.iO = iO;

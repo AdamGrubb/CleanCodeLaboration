@@ -11,15 +11,15 @@ namespace CleanCodeLaborationTest.Model.GameMenu
     [TestClass]
     public class Test_GameMenu
     {
-        Mock<ICommand> mockCommand;
+        Mock<IGameCommand> mockCommand;
         Mock<IGameStrategy> mockStrategy;
         IGameMenu gameMenu;
         [TestInitialize]
         public void Initialize()
         {
-            mockCommand = new Mock<ICommand>();
+            mockCommand = new Mock<IGameCommand>();
             mockStrategy = new Mock<IGameStrategy>();
-            ICommand[] commands = new ICommand[] { mockCommand.Object, mockCommand.Object, mockCommand.Object };
+            IGameCommand[] commands = new IGameCommand[] { mockCommand.Object, mockCommand.Object, mockCommand.Object };
             gameMenu = new GameStrategyMenu(commands);
 
 
