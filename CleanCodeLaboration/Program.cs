@@ -30,7 +30,7 @@ IGameCommand[] commands = new IGameCommand[]
             new QuizCommand(gameDAO, quizQuestionDAO)
 };
 
-IGameMenu gameMenu = new GameStrategyMenu(commands, iO);
+IGameMenu gameMenu = new GameMenu(commands, iO);
 IGameLoop gameLoop = new GameLoop(iO, gameContext);
 
 GameController controller = new GameController(gameLoop, gameMenu);

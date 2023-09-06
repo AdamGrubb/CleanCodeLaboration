@@ -4,13 +4,13 @@ using CleanCodeLaboration.View.Interface;
 
 namespace CleanCodeLaboration.Controller.GameMenu
 {
-    public class GameStrategyMenu : IGameMenu
+    public class GameMenu : IGameMenu
     {
         private readonly IIO iO;
         private IGameCommand[] commands;
 
 
-        public GameStrategyMenu(IGameCommand[] commands, IIO iO)
+        public GameMenu(IGameCommand[] commands, IIO iO)
         {
             this.commands = commands;
             this.iO = iO;
