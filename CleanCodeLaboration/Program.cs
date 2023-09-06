@@ -22,7 +22,7 @@ IGameDAO gameDAO = new LocalFileDAO();
 
 IHighScoreFormatter highScoreFormatter = new HighScoreFormatter();
 
-IGameContext gameContext = new GameContext(highScoreFormatter);
+IGameContext gameContext = new GameLogicContext(highScoreFormatter);
 
 ICommand[] commands = new ICommand[]
 {
