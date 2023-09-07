@@ -32,8 +32,6 @@ namespace CleanCodeLaboration.Controller.GameLoop
         }
         public void RunGameLoop()
         {
-
-
             StartNewGame(); //Lite fortfarande för StartNewGame, det är svårt att veta vad den gör.
 
             OutputGameIntroduction();
