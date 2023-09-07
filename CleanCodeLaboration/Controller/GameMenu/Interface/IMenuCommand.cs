@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 
 namespace CleanCodeLaboration.Controller.GameMenu.Interface
 {
-    public interface IGameCommand
+    public interface IMenuCommand
     {
-        string Description { get; }
         void Execute();
     }
 }

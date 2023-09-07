@@ -6,13 +6,13 @@ namespace CleanCodeLaboration.Controller.GameMenu
 {
     public class GameMenu : IGameMenu
     {
+        private readonly IGameMenuSelection[] menuSelections;
         private readonly IIO iO;
-        private IGameCommand[] commands;
 
 
-        public GameMenu(IGameCommand[] commands, IIO iO)
+        public GameMenu(IGameMenuSelection[] menuSelections, IIO iO)
         {
-            this.commands = commands;
+            this.menuSelections = menuSelections;
             this.iO = iO;
         }
         public void OutputMenu()
@@ -22,8 +22,8 @@ namespace CleanCodeLaboration.Controller.GameMenu
         }
         private List<string> GetGameNames()
         {
-            var gameNames = commands
-                .Select((command, index) => $"{index + 1}. {command.Description}")
+            var gameNames = menuSelections
+                .Select((command, index) => $"{index + 1}. {command.Description}") //Fixa commandgrejen, det ska väl vara selection 
                 .ToList();
             return gameNames;
         }
@@ -48,7 +48,7 @@ namespace CleanCodeLaboration.Controller.GameMenu
             do
             {
                 userSelection = GetUserInput();
-                validInput = int.TryParse(userSelection, out choice) && choice <= commands.Length && choice > 0;
+                validInput = int.TryParse(userSelection, out choice) && choice <= menuSelections.Length && choice > 0;
             } while (!validInput);
 
             return choice;
@@ -61,7 +61,7 @@ namespace CleanCodeLaboration.Controller.GameMenu
         private void GetGameStrategy(int userChoice) //Denna gör valet i listan. Här ska man låta command köra sin  metod.
         {
             int indexCorrection = 1;
-            commands[userChoice - indexCorrection].Execute();
+            menuSelections[userChoice - indexCorrection].MenuCommand.Execute();
         }
         public bool ContinuePlaying()
         {

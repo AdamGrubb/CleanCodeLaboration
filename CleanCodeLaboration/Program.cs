@@ -27,17 +27,21 @@ IHighScoreFormatter highScoreFormatter = new HighScoreFormatter();
 IGameContext gameContext = new GameLogicContext(highScoreFormatter);
 QuizGameStrategyFactory quizGameStrategyFactory = new QuizGameStrategyFactory(gameDAO, quizQuestionDAO);
 MooGameStrategyFactory mooGameStrategyFactory = new MooGameStrategyFactory(gameDAO);
-
 IGameLoop gameLoop = new GameLoop(iO, gameContext);
+IMenuCommand quizGameSelection = new GameSelectionCommand(quizGameStrategyFactory, gameLoop);
+IMenuCommand mooGameSelection = new GameSelectionCommand(mooGameStrategyFactory, gameLoop);
 
 
-IGameCommand[] commands = new IGameCommand[]
+
+
+IGameMenuSelection[] gameMenuSelections = new IGameMenuSelection[]
 {
-            new MooGameCommand(quizGameStrategyFactory, gameLoop),
-            new MooGameCommand(mooGameStrategyFactory, gameLoop)
+    new GameMenuSelection("Moo Game", mooGameSelection),
+    new GameMenuSelection("Quiz Game", quizGameSelection)
+
 };
 
-IGameMenu gameMenu = new GameMenu(commands, iO);
+IGameMenu gameMenu = new GameMenu(gameMenuSelections, iO);
 
 
 GameController controller = new GameController(gameLoop, gameMenu);
