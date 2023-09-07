@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CleanCodeLaboration.Model.GameStrategyFactory
 {
-    public abstract class GameStrategyFactory
+    public abstract class AbstractGameStrategyFactory
     {
 
         protected abstract IGameStrategy GetStrategy();
