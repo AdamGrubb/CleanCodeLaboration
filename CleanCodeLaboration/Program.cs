@@ -28,15 +28,17 @@ IGameContext gameContext = new GameLogicContext(highScoreFormatter);
 QuizGameStrategyFactory quizGameStrategyFactory = new QuizGameStrategyFactory(gameDAO, quizQuestionDAO);
 MooGameStrategyFactory mooGameStrategyFactory = new MooGameStrategyFactory(gameDAO);
 
+IGameLoop gameLoop = new GameLoop(iO, gameContext);
+
 
 IGameCommand[] commands = new IGameCommand[]
 {
-            new GameChoiceCommand(quizGameStrategyFactory, "Quiz Game"),
-            new GameChoiceCommand(mooGameStrategyFactory, "Moo Game")
+            new MooGameCommand(quizGameStrategyFactory, gameLoop),
+            new MooGameCommand(mooGameStrategyFactory, gameLoop)
 };
 
 IGameMenu gameMenu = new GameMenu(commands, iO);
-IGameLoop gameLoop = new GameLoop(iO, gameContext);
+
 
 GameController controller = new GameController(gameLoop, gameMenu);
 controller.StartGame();

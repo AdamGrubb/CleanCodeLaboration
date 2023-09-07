@@ -27,7 +27,6 @@ namespace CleanCodeLaboration.Controller
             {
                 OutputMenu();
                 ChooseGame();
-                StartGameLoop();
             } while (KeepPlaying());
         }
         private void InputPlayerName()
@@ -40,8 +39,7 @@ namespace CleanCodeLaboration.Controller
         }
         private void ChooseGame()
         {
-            IGameStrategy gameStrategy = gameMenu.SelectGame();
-            SetGameStrategy(gameStrategy);
+            gameMenu.SelectMenu();
         }
         private void SetGameStrategy(IGameStrategy gameStrategy)
         {
