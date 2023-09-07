@@ -10,6 +10,6 @@ namespace CleanCodeLaboration.Controller.GameMenu.Interface
     public interface IGameCommand
     {
         string Description { get; }
-        IGameStrategy Execute();
+        void Execute();
     }
 }

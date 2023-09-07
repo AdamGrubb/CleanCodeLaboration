@@ -5,7 +5,7 @@ namespace CleanCodeLaboration.Controller.GameMenu.Interface
     public interface IGameMenu
     {
         void OutputMenu();
-        IGameStrategy SelectGame();
+        void SelectMenu();
         bool ContinuePlaying();
     }
 }

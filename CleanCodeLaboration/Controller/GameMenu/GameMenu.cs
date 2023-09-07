@@ -35,11 +35,10 @@ namespace CleanCodeLaboration.Controller.GameMenu
         {
             names.ForEach(name => OutputMessage(name));
         }
-        public IGameStrategy SelectGame()
+        public void SelectMenu() //Här så väljer man vilket val i listan.
         {
             int choice = PromtUserChoice();
-            IGameStrategy gameStrategy = GetGameStrategy(choice);
-            return gameStrategy;
+            GetGameStrategy(choice);
         }
         private int PromtUserChoice()
         {
@@ -59,10 +58,10 @@ namespace CleanCodeLaboration.Controller.GameMenu
             return iO.GetUserInput();
         }
 
-        private IGameStrategy GetGameStrategy(int userChoice)
+        private void GetGameStrategy(int userChoice) //Denna gör valet i listan. Här ska man låta command köra sin  metod.
         {
             int indexCorrection = 1;
-            return commands[userChoice - indexCorrection].Execute();
+            commands[userChoice - indexCorrection].Execute();
         }
         public bool ContinuePlaying()
         {
