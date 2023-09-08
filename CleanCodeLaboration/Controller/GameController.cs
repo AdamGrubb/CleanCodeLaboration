@@ -41,14 +41,6 @@ namespace CleanCodeLaboration.Controller
         {
             gameMenu.SelectMenu();
         }
-        private void SetGameStrategy(IGameStrategy gameStrategy)
-        {
-            gameLoop.SetGameStrategy(gameStrategy);
-        }
-        private void StartGameLoop()
-        {
-            gameLoop.RunGameLoop();
-        }
         private bool KeepPlaying()
         {
            return gameMenu.ContinuePlaying();
