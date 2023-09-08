@@ -21,10 +21,12 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.MooGameStrategy
         {
             this.gameDAO = gameDAO;
         }
+
         public void ActivateGame()
         {
             isGameActive = true;
         }
+
         public string GenerateGoal()
         {
             string goal = "";
@@ -41,6 +43,7 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.MooGameStrategy
             }
             return goal;
         }
+
         public void SetGoal(string goal)
         {
             this.goal = goal;
@@ -51,17 +54,18 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.MooGameStrategy
             const string newGame = "New game:";
             return newGame;
         }
+
         public string GetRightAnswer()
         {
             string rightAnswer = "For practice, number is: " + goal;
             return rightAnswer;
         }
+
         public string GetEvaluatedGuess(string guess)
         {
             string bullsAndCows = EvaluateGuess(guess);
             return bullsAndCows;
         }
-
         private string EvaluateGuess(string guess)
         {
             guess = EnsureGuessLenght(guess);
@@ -104,10 +108,12 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.MooGameStrategy
             string formatedAnswer = new string(bullCharacter, bulls) + separator + new string(cowCharacter, cows);
             return formatedAnswer;
         }
+
         public void IncrementGuessCount()
         {
             numberOfGuesses++;
         }
+
         public bool IsCorrectGuess(string evaluatedGuess)
         {
             string correctEvaluatedAnswer = GetCorrectGuess();
@@ -120,10 +126,12 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.MooGameStrategy
             correctBulls += separator;
             return correctBulls;
         }
+
         public void DeactivateGame()
         {
             isGameActive = false;
         }
+
         public void SaveGame(string playerName)
         {
             IPlayerScore playerScore = new PlayerScoreDTO(playerName, numberOfGuesses);
@@ -148,6 +156,5 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.MooGameStrategy
             string gameOverMessages = "Correct, it took " + numberOfGuesses + " guesses";
             return gameOverMessages;
         }
-
     }
 }

@@ -32,18 +32,17 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.QuizGameStrategy
         {
             isGameActive = true;
         }
+
         public string GenerateGoal()
         {
             SetQuizQuestion();
             string goal = GetQuizAnswer();
             return goal;
         }
-
         private void SetQuizQuestion()
         {
             quizQuestion = questionDAO.GetRandomQuizQuestion();
         }
-
         private string GetQuizAnswer()
         {
             string quizAnswer = quizQuestion.Answer;
@@ -61,7 +60,6 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.QuizGameStrategy
             string introduction = "Welcome to QuizGame, the question is: " + question;
             return introduction;
         }
-
         private string GetQuestion()
         {
             return quizQuestion.Question;
@@ -73,7 +71,6 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.QuizGameStrategy
             string response = CompareGuessToGoal(guess) ? correctResponse : incorrectResponse;
             return response;
         }
-
         private bool CompareGuessToGoal(string guess)
         {
             return goal.ToLower() == guess.ToLower();
@@ -90,12 +87,10 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.QuizGameStrategy
             return isCorrect;
         }
 
-
         public void DeactivateGame()
         {
             isGameActive = false;
         }
-
 
         public string GetFinishedGameMessage()
         {
@@ -122,6 +117,7 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.QuizGameStrategy
             string rightAnswer = "The right answer is: " + goal;
             return rightAnswer;
         }
+
         public void SaveGame(string playerName)
         {
             gameDAO.SavePlayerScore(gameName, new PlayerScoreDTO(playerName, numberOfGuesses));

@@ -20,7 +20,6 @@ namespace CleanCodeLaboration.Controller.GameMenu.Commands
             this.gameFactory = gameFactory;
             this.gameLoop = gameLoop;
         }
-
         public void Execute()
         {
             SetStrategy();

@@ -9,13 +9,9 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.QuizGameStrategy.QuizQues
 {
     public class StarWarsQuestionDAO : IQuizQuestionDAO
     {
-        private Random randomIndex; //Hur namnsätter man random, är detta bra?
-        public StarWarsQuestionDAO()
-        {
-            randomIndex = new Random();
-        }
+        private Random randomIndex;
         private IQuizQuestion[] quizQuestions = new IQuizQuestion[]
-        {
+{
             new QuizQuestionDTO("What is the real name of the actor who played Han Solo?", "Harrison Ford" ),
             new QuizQuestionDTO("Which famous director directed 'Star Wars: A New Hope'?", "George Lucas"),
             new QuizQuestionDTO("What planet is the home of Chewbacca and the Wookiees?", "Kashyyyk"),
@@ -35,7 +31,12 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.QuizGameStrategy.QuizQues
             new QuizQuestionDTO("What is the subtitle of Episode VI in the Star Wars saga?", "Return of the Jedi"),
             new QuizQuestionDTO("What is the main weapon used by Jedi and Sith?", "Lightsaber"),
             new QuizQuestionDTO("Who trained Obi-Wan Kenobi as a Jedi?", "Qui-Gon Jinn"),
-        };
+};
+        public StarWarsQuestionDAO()
+        {
+            randomIndex = new Random();
+        }
+
         public IQuizQuestion GetRandomQuizQuestion()
         {
             int indexOfQuestion = randomIndex.Next(0, quizQuestions.Length);

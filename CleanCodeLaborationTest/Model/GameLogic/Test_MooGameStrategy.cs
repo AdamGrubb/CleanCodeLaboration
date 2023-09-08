@@ -31,30 +31,23 @@ namespace CleanCodeLaborationTest.Model.GameLogic
         [TestMethod]
         public void TestActivateGame()
         {
-            //Arrange
             bool isGameActive = false;
 
-
-            //Act
             mooGameStrategy.ActivateGame();
             isGameActive = mooGameStrategy.IsGameActive();
 
-            //Assert
             Assert.IsTrue(isGameActive);
         }
         [DataTestMethod]
         [DataRow("3224", "BBB,C")]
         [DataRow("3724", "BBBB,")]
-        public void TestEvaluateGuess(string guess, string evaluatedAnswer) //testa DataTestMethod för att snygga till det.
+        public void TestEvaluateGuess(string guess, string evaluatedAnswer)
         {
-            //Arrange
             string goal = "3724";
 
-            //Act
             mooGameStrategy.SetGoal(goal);
 
-            //Assert
-            Assert.AreEqual(evaluatedAnswer, mooGameStrategy.GetEvaluatedGuess(guess)); //Plocka ut dem till egna variabler
+            Assert.AreEqual(evaluatedAnswer, mooGameStrategy.GetEvaluatedGuess(guess));
         }
         [DataTestMethod]
         [DataRow("3724")]
@@ -63,16 +56,12 @@ namespace CleanCodeLaborationTest.Model.GameLogic
         [DataRow("7234")]
         public void TestSetGoal(string goal)
         {
-            //Arrange
-
             string expectedResult = "For practice, number is: " + goal;
             string recivedResult;
 
-            //Act
             mooGameStrategy.SetGoal(goal);
             recivedResult = mooGameStrategy.GetRightAnswer();
 
-            //Assert
             Assert.AreEqual(@expectedResult, recivedResult);
         }
         [DataTestMethod]
@@ -81,42 +70,33 @@ namespace CleanCodeLaborationTest.Model.GameLogic
         [DataRow(12)]
         public void TestIncrementGuess(int guesses)
         {
-            //Arrange
             string expectedResult = "Correct, it took " + guesses + " guesses";
             string recivedResult;
 
-            //Act
             for (int i = 0; i < guesses; i++)
             {
                 mooGameStrategy.IncrementGuessCount();
             }
             recivedResult = mooGameStrategy.GetFinishedGameMessage();
 
-            //Assert
             Assert.AreEqual(expectedResult, recivedResult);
         }
         [TestMethod]
         public void TestWrongGuess()
         {
-            //Arrange
             string wrongEvaluatedGuess = "BB,CCCCCCC";
 
-            //Act
             bool wrongGuess = mooGameStrategy.IsCorrectGuess(wrongEvaluatedGuess);
 
-            //Assert
             Assert.IsFalse(wrongGuess);
         }
         [TestMethod]
         public void TestCorrectGuess()
         {
-            //Arrange
             string rightEvaluatedGuess = "BBBB,";
 
-            //Act
             bool correctGuess = mooGameStrategy.IsCorrectGuess(rightEvaluatedGuess);
 
-            //Assert
             Assert.IsTrue(correctGuess);
         }
 
@@ -124,14 +104,11 @@ namespace CleanCodeLaborationTest.Model.GameLogic
         public void TestGenerateRandomGoal()
 
         {
-            //Arrange
             string goal;
             const int lengthOfGoal = 4;
 
-            //Act
             goal = mooGameStrategy.GenerateGoal();
 
-            //Assert
             for (int i = 0; i < lengthOfGoal; i++)
             {
                 for (int j = i + 1; j < lengthOfGoal; j++)

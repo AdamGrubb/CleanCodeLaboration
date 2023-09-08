@@ -14,7 +14,7 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.QuizGameStrategy.QuizQues
         public QuizQuestionDTO(string question, string answer)
         {
             Question = question;
-            Answer = answer;  
+            Answer = answer;
         }
     }
 }

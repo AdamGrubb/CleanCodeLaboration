@@ -38,7 +38,7 @@ namespace CleanCodeLaboration.Controller
         }
         private bool KeepPlaying()
         {
-           return gameMenu.ContinuePlaying();
+            return gameMenu.ContinuePlaying();
         }
     }
 }

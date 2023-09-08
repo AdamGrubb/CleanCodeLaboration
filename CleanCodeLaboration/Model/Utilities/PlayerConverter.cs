@@ -19,7 +19,7 @@ namespace CleanCodeLaboration.Model.Utilities
                 IPlayer player = new Player(playerScore.Name, playerScore.Guesses);
 
                 int playerIndex = players.IndexOf(player);
-                
+
                 if (playerIndex < 0)
                 {
                     players.Add(player);
