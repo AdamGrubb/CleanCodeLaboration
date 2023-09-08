@@ -17,16 +17,16 @@ namespace CleanCodeLaboration.Controller
 
         public void StartGame()
         {
-            InputPlayerName();
+            PromptUserForName();
             do
             {
                 OutputMenu();
                 ChooseGame();
             } while (KeepPlaying());
         }
-        private void InputPlayerName()
+        private void PromptUserForName()
         {
-            gameLoop.InputPlayerName();
+            gameLoop.PromptUserForName();
         }
         private void OutputMenu()
         {

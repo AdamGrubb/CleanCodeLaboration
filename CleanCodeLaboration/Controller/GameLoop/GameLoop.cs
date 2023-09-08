@@ -24,7 +24,7 @@ namespace CleanCodeLaboration.Controller.GameLoop
         {
             gameContext.SetGameStrategy(gameStrategy);
         }
-        public void InputPlayerName()
+        public void PromptUserForName()
         {
             OutputPlayerNamePrompt();
 
