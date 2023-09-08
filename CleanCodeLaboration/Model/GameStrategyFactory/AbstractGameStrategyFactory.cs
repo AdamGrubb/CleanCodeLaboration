@@ -9,7 +9,6 @@ namespace CleanCodeLaboration.Model.GameStrategyFactory
 {
     public abstract class AbstractGameStrategyFactory
     {
-
         protected abstract IGameStrategy GetStrategy();
         public IGameStrategy CreateStrategy()
         {

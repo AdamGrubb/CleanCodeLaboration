@@ -12,7 +12,6 @@ namespace CleanCodeLaboration.Model.GameStrategyFactory
     public class MooGameStrategyFactory : AbstractGameStrategyFactory
     {
         private readonly IGameDAO gameDAO;
-
         public MooGameStrategyFactory(IGameDAO gameDAO)
         {
             this.gameDAO = gameDAO;

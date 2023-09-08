@@ -15,7 +15,6 @@ namespace CleanCodeLaboration.Model.GameStrategyFactory
     {
         private readonly IGameDAO gameDAO;
         private readonly IQuizQuestionDAO quizQuestionDAO;
-
         public QuizGameStrategyFactory(IGameDAO gameDAO, IQuizQuestionDAO quizQuestionDAO)
         {
             this.gameDAO = gameDAO;
