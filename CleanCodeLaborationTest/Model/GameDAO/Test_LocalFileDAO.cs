@@ -11,7 +11,7 @@ namespace CleanCodeLaborationTest.Model.GameDAO
     [TestClass]
     public class Test_LocalFileDAO
     {
-        const string localFileDAOFormat = ".txt";
+        const string fileFormat = ".txt";
         const string nameAndScoreSeperator = "#&#";
         const string TestGameName = "Test";
         [TestMethod]
@@ -27,7 +27,7 @@ namespace CleanCodeLaborationTest.Model.GameDAO
             gameDAO.SavePlayerScore(TestGameName, testPlayerScore);
 
             //Assert
-            string[] lines = File.ReadAllLines(TestGameName + ".txt");
+            string[] lines = File.ReadAllLines(TestGameName + fileFormat);
             Assert.IsTrue(lines.Length > 0);
             Assert.AreEqual($"{testPlayerScore.Name}{nameAndScoreSeperator}{testPlayerScore.Guesses}", lines[0]);
 
@@ -50,7 +50,7 @@ namespace CleanCodeLaborationTest.Model.GameDAO
         [TestCleanup]
         public void TestCleanup()
         {
-            if (File.Exists(TestGameName + localFileDAOFormat)) File.Delete(TestGameName + localFileDAOFormat);
+            if (File.Exists(TestGameName + fileFormat)) File.Delete(TestGameName + fileFormat);
         }
 
     }

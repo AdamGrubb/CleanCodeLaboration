@@ -2,7 +2,7 @@
 
 namespace CleanCodeLaboration.Model.GameLogic.Interface
 {
-    public interface IGameContext
+    public interface IGameLogicContext
     {
         string CheckPlayerAnswer(string guess);
         string GetFinishedGameMessage();

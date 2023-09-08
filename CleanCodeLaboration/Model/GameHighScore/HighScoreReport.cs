@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CleanCodeLaboration.Model.GameHighScore
 {
-    public class HighScoreFormatter : IHighScoreFormatter
+    public class HighScoreReport : IHighScoreReport
     {
         public string FormatHighScores(List<IPlayerScore> playerScores)
         {
@@ -38,7 +38,7 @@ namespace CleanCodeLaboration.Model.GameHighScore
             string formatedPlayerScores = "";
             foreach (IPlayer player in players)
             {
-                formatedPlayerScores += string.Format("{0,-9}{1,5:D}{2,9:F2}" + spacing, player.Name, player.NumberOfGames, player.GetAverageScore()); //Ska du bryta ut formaten till ints eller nått? typ "int LeftOrientation = -9, osv"
+                formatedPlayerScores += string.Format("{0,-9}{1,5:D}{2,9:F2}" + spacing, player.Name, player.NumberOfGames, player.GetAverageScore());
             }
             return formatedPlayerScores;
         }

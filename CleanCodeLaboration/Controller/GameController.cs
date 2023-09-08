@@ -15,24 +15,18 @@ namespace CleanCodeLaboration.Controller
             this.gameMenu = gameMenu;
         }
 
-        public void StartGame() //Lite osäker på namnet?
+        public void StartGame()
         {
-            InitializeGameMenu();
-        }
-
-        private void InitializeGameMenu() //Denna behöver ett namnbyte.
-        {
-            InputPlayerName();
+            PromptUserForName();
             do
             {
                 OutputMenu();
                 ChooseGame();
-                StartGameLoop();
             } while (KeepPlaying());
         }
-        private void InputPlayerName()
+        private void PromptUserForName()
         {
-            gameLoop.InputPlayerName();
+            gameLoop.PromptUserForName();
         }
         private void OutputMenu()
         {
@@ -40,16 +34,7 @@ namespace CleanCodeLaboration.Controller
         }
         private void ChooseGame()
         {
-            IGameStrategy gameStrategy = gameMenu.SelectGame();
-            SetGameStrategy(gameStrategy);
-        }
-        private void SetGameStrategy(IGameStrategy gameStrategy)
-        {
-            gameLoop.SetGameStrategy(gameStrategy);
-        }
-        private void StartGameLoop()
-        {
-            gameLoop.RunGameLoop();
+            gameMenu.MakeMenuSelection();
         }
         private bool KeepPlaying()
         {

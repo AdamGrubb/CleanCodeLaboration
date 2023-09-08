@@ -14,24 +14,31 @@ using CleanCodeLaboration.Controller.GameMenu.Commands;
 using CleanCodeLaboration.Controller.GameLoop;
 using CleanCodeLaboration.Model.GameLogic.Strategy.QuizGameStrategy.QuizQuestionDAO.Interface;
 using CleanCodeLaboration.Model.GameLogic.Strategy.QuizGameStrategy.QuizQuestionDAO;
+using CleanCodeLaboration.Model.GameLogic.Strategy.QuizGameStrategy;
+using CleanCodeLaboration.Model.GameStrategyFactory;
 
 IQuizQuestionDAO quizQuestionDAO = new StarWarsQuestionDAO();
-IIO iO = new ConsoleView();
-
+IIO iO = new ConsoleIO();
 IGameDAO gameDAO = new LocalFileDAO();
+IHighScoreReport highScoreFormatter = new HighScoreReport();
+IGameLogicContext gameContext = new GameLogicContext(highScoreFormatter);
 
-IHighScoreFormatter highScoreFormatter = new HighScoreFormatter();
+QuizGameStrategyFactory quizGameStrategyFactory = new QuizGameStrategyFactory(gameDAO, quizQuestionDAO);
+MooGameStrategyFactory mooGameStrategyFactory = new MooGameStrategyFactory(gameDAO);
 
-IGameContext gameContext = new GameContext(highScoreFormatter);
+IGameLoop gameLoop = new GameLoop(iO, gameContext);
 
-ICommand[] commands = new ICommand[]
+IMenuCommand quizGameSelection = new GameSelectionCommand(quizGameStrategyFactory, gameLoop);
+IMenuCommand mooGameSelection = new GameSelectionCommand(mooGameStrategyFactory, gameLoop);
+
+IGameMenuSelection[] gameMenuSelections = new IGameMenuSelection[]
 {
-            new MooGameCommand(gameDAO),
-            new QuizCommand(gameDAO, quizQuestionDAO)
+    new GameMenuSelection("Moo Game", mooGameSelection),
+    new GameMenuSelection("Quiz Game", quizGameSelection)
+
 };
 
-IGameMenu gameMenu = new GameStrategyMenu(commands, iO);
-IGameLoop gameLoop = new GameLoop(iO, gameContext);
+IGameMenu gameMenu = new GameMenu(gameMenuSelections, iO);
 
 GameController controller = new GameController(gameLoop, gameMenu);
 controller.StartGame();

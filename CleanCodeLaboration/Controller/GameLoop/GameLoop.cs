@@ -13,9 +13,9 @@ namespace CleanCodeLaboration.Controller.GameLoop
     public class GameLoop : IGameLoop
     {
         private readonly IIO iO;
-        private readonly IGameContext gameContext;
+        private readonly IGameLogicContext gameContext;
 
-        public GameLoop(IIO iO, IGameContext gameContext)
+        public GameLoop(IIO iO, IGameLogicContext gameContext)
         {
             this.iO = iO;
             this.gameContext = gameContext;
@@ -24,36 +24,34 @@ namespace CleanCodeLaboration.Controller.GameLoop
         {
             gameContext.SetGameStrategy(gameStrategy);
         }
-        public void InputPlayerName() //Lite oklart att den sätter namnet samt frågar om det.
+        public void PromptUserForName()
         {
-            OutputPlayerNamePromt();
+            OutputPlayerNamePrompt();
 
             SetUserName();
         }
         public void RunGameLoop()
         {
-
-
-            StartNewGame(); //Lite fortfarande för StartNewGame, det är svårt att veta vad den gör.
+            StartNewGame();
 
             OutputGameIntroduction();
 
             OutputCorrectAnswer();
 
-            PromtUserGuesses();  //PromtUserGuesses? Fundera lite mer på den. också svårt att veta vad den gör. Har sammai GameStrategyMenu nu också.
+            PromptUserGuesses();
 
             OutputHighScore();
 
             OutputFinishedGameMessage();
         }
-        private void OutputPlayerNamePromt()
+        private void OutputPlayerNamePrompt()
         {
             string playerNameQuestion = gameContext.GetPlayerNameQuestion();
             OutputMessage(playerNameQuestion);
         }
-        private void OutputMessage(string output) //Denna får du också kolla över namnet på.
+        private void OutputMessage(string messageToOutput)
         {
-            iO.GameOutput(output);
+            iO.GameOutput(messageToOutput);
         }
         private void SetUserName()
         {
@@ -82,7 +80,7 @@ namespace CleanCodeLaboration.Controller.GameLoop
 
             OutputMessage(rightAnswer);
         }
-        private void PromtUserGuesses()
+        private void PromptUserGuesses()
         {
             while (ActiveGame())
             {

@@ -14,17 +14,17 @@ namespace CleanCodeLaboration.Model.GameDAO
             streamWriter.Close();
         }
 
-        public List<IPlayerScore> GetAllPlayerScores(string gameName) //I denna metod så saknas det felhantering för om filen inte skulle existera samt ingen tryparse på convertToInt32 ifall det skulle vara text i filen som inte går att convertera.
+        public List<IPlayerScore> GetAllPlayerScores(string gameName)
         {
             StreamReader streamReader = new StreamReader(gameName + fileFormat);
             List<IPlayerScore> playerScores = new List<IPlayerScore>();
-            string line; //Line? Row kanske? eller något
+            string line;
             while ((line = streamReader.ReadLine()) != null)
             {
-                string[] nameAndScore = line.Split(new string[] { nameAndScoreSeperator }, StringSplitOptions.None);
-                string name = nameAndScore[0];
-                int score = Convert.ToInt32(nameAndScore[1]);
-                playerScores.Add(new PlayerScoreDTO(name, score));
+                string[] nameAndGuesses = line.Split(new string[] { nameAndScoreSeperator }, StringSplitOptions.None);
+                string name = nameAndGuesses[0];
+                int guesses = Convert.ToInt32(nameAndGuesses[1]);
+                playerScores.Add(new PlayerScoreDTO(name, guesses));
             }
             streamReader.Close();
 

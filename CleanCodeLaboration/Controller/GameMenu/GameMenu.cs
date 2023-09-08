@@ -4,15 +4,15 @@ using CleanCodeLaboration.View.Interface;
 
 namespace CleanCodeLaboration.Controller.GameMenu
 {
-    public class GameStrategyMenu : IGameMenu
+    public class GameMenu : IGameMenu
     {
+        private readonly IGameMenuSelection[] menuSelections;
         private readonly IIO iO;
-        private ICommand[] commands;
 
 
-        public GameStrategyMenu(ICommand[] commands, IIO iO)
+        public GameMenu(IGameMenuSelection[] menuSelections, IIO iO)
         {
-            this.commands = commands;
+            this.menuSelections = menuSelections;
             this.iO = iO;
         }
         public void OutputMenu()
@@ -22,8 +22,8 @@ namespace CleanCodeLaboration.Controller.GameMenu
         }
         private List<string> GetGameNames()
         {
-            var gameNames = commands
-                .Select((command, index) => $"{index + 1}. {command.Description}")
+            var gameNames = menuSelections
+                .Select((selection, index) => $"{index + 1}. {selection.Description}")
                 .ToList();
             return gameNames;
         }
@@ -35,34 +35,33 @@ namespace CleanCodeLaboration.Controller.GameMenu
         {
             names.ForEach(name => OutputMessage(name));
         }
-        public IGameStrategy SelectGame()
+        public void MakeMenuSelection()
         {
-            int choice = PromtUserChoice();
-            IGameStrategy gameStrategy = GetGameStrategy(choice);
-            return gameStrategy;
+            int userChoice = PromtUserChoice();
+            ExecuteSelectedMenuCommand(userChoice);
         }
         private int PromtUserChoice()
         {
             bool validInput;
-            int choice;
-            string userSelection; //User selection och userCHoice vaddåå!???!?!?
+            int userChoice;
+            string userSelection;
             do
             {
                 userSelection = GetUserInput();
-                validInput = int.TryParse(userSelection, out choice) && choice <= commands.Length && choice > 0;
+                validInput = int.TryParse(userSelection, out userChoice) && userChoice <= menuSelections.Length && userChoice > 0;
             } while (!validInput);
 
-            return choice;
+            return userChoice;
         }
         private string GetUserInput()
         {
             return iO.GetUserInput();
         }
 
-        private IGameStrategy GetGameStrategy(int userChoice)
+        private void ExecuteSelectedMenuCommand(int userChoice)
         {
             int indexCorrection = 1;
-            return commands[userChoice - indexCorrection].Execute();
+            menuSelections[userChoice - indexCorrection].MenuCommand.Execute();
         }
         public bool ContinuePlaying()
         {
@@ -70,22 +69,18 @@ namespace CleanCodeLaboration.Controller.GameMenu
 
             return KeepPlaying();
         }
-        private bool KeepPlaying()
-        {
-            string answer = GetUserInput();
-            bool keepPlaying = !ShouldStopPlaying(answer);
-            return keepPlaying;
-        }
-        private bool ShouldStopPlaying(string answer)
-        {
-            const string endGame = "n";
-            return !string.IsNullOrWhiteSpace(answer) && answer.StartsWith(endGame);
-        }
         private void OutputPlayAgainPrompt()
         {
             const string promptContinue = "Continue?";
 
             OutputMessage(promptContinue);
         }
+        private bool KeepPlaying()
+        {
+            string answer = GetUserInput();
+            bool keepPlaying = answer.ToLower() != "n";
+            return keepPlaying;
+        }
+
     }
 }
