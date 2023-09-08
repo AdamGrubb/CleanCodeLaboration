@@ -26,7 +26,7 @@ namespace CleanCodeLaboration.Controller.GameLoop
         }
         public void InputPlayerName()
         {
-            OutputPlayerNamePromt();
+            OutputPlayerNamePrompt();
 
             SetUserName();
         }
@@ -38,20 +38,20 @@ namespace CleanCodeLaboration.Controller.GameLoop
 
             OutputCorrectAnswer();
 
-            PromtUserGuesses();
+            PromptUserGuesses();
 
             OutputHighScore();
 
             OutputFinishedGameMessage();
         }
-        private void OutputPlayerNamePromt()
+        private void OutputPlayerNamePrompt()
         {
             string playerNameQuestion = gameContext.GetPlayerNameQuestion();
             OutputMessage(playerNameQuestion);
         }
-        private void OutputMessage(string output)
+        private void OutputMessage(string messageToOutput)
         {
-            iO.GameOutput(output);
+            iO.GameOutput(messageToOutput);
         }
         private void SetUserName()
         {
@@ -80,7 +80,7 @@ namespace CleanCodeLaboration.Controller.GameLoop
 
             OutputMessage(rightAnswer);
         }
-        private void PromtUserGuesses()
+        private void PromptUserGuesses()
         {
             while (ActiveGame())
             {
