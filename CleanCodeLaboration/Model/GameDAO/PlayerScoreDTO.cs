@@ -18,7 +18,7 @@ namespace CleanCodeLaboration.Model.GameDAO
             Name = name;
             Guesses = guesses;
         }
-        public override bool Equals(object obj) //Kolla upp om den här behöver ändras på nått sätt?
+        public override bool Equals(object obj)
         {
             if (obj == null || GetType() != obj.GetType())
             {
