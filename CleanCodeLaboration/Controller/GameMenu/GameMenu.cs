@@ -37,8 +37,8 @@ namespace CleanCodeLaboration.Controller.GameMenu
         }
         public void MakeMenuSelection()
         {
-            int choice = PromtUserChoice();
-            GetGameStrategy(choice);
+            int userChoice = PromtUserChoice();
+            ExecuteSelectedMenuCommand(userChoice);
         }
         private int PromtUserChoice()
         {
@@ -58,7 +58,7 @@ namespace CleanCodeLaboration.Controller.GameMenu
             return iO.GetUserInput();
         }
 
-        private void GetGameStrategy(int userChoice)
+        private void ExecuteSelectedMenuCommand(int userChoice)
         {
             int indexCorrection = 1;
             menuSelections[userChoice - indexCorrection].MenuCommand.Execute();
@@ -69,22 +69,18 @@ namespace CleanCodeLaboration.Controller.GameMenu
 
             return KeepPlaying();
         }
-        private bool KeepPlaying()
-        {
-            string answer = GetUserInput();
-            bool keepPlaying = !ShouldStopPlaying(answer);
-            return keepPlaying;
-        }
-        private bool ShouldStopPlaying(string answer)
-        {
-            const string endGame = "n";
-            return !string.IsNullOrWhiteSpace(answer) && answer.StartsWith(endGame);
-        }
         private void OutputPlayAgainPrompt()
         {
             const string promptContinue = "Continue?";
 
             OutputMessage(promptContinue);
         }
+        private bool KeepPlaying()
+        {
+            string answer = GetUserInput();
+            bool keepPlaying = answer.ToLower() != "n";
+            return keepPlaying;
+        }
+
     }
 }
