@@ -15,12 +15,7 @@ namespace CleanCodeLaboration.Controller
             this.gameMenu = gameMenu;
         }
 
-        public void StartGame() //Lite osäker på namnet?
-        {
-            InitializeGameMenu();
-        }
-
-        private void InitializeGameMenu() //Denna behöver ett namnbyte.
+        public void StartGame()
         {
             InputPlayerName();
             do
