@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CleanCodeLaboration.View
 {
-    public class ConsoleView : IIO
+    public class ConsoleIO : IIO
     {
         string spacing = "\n";
         public void GameOutput(string gameOutput)

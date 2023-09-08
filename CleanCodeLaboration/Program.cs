@@ -18,7 +18,7 @@ using CleanCodeLaboration.Model.GameLogic.Strategy.QuizGameStrategy;
 using CleanCodeLaboration.Model.GameStrategyFactory;
 
 IQuizQuestionDAO quizQuestionDAO = new StarWarsQuestionDAO();
-IIO iO = new ConsoleView();
+IIO iO = new ConsoleIO();
 
 IGameDAO gameDAO = new LocalFileDAO();
 
