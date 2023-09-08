@@ -4,17 +4,18 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.Interface
 {
     public interface IGameStrategy
     {
-        void SetGameDAO(IGameDAO gameDAO);
-        string EvaluateGuess(string guess);
-        string GenerateRandomGoal();
+        string GetEvaluatedGuess(string guess);
+        string GenerateGoal();
         string GetFinishedGameMessage();
         string GetGameIntroduction();
-        bool GetGameStatus();
-        string GetGoal();
+        bool IsGameActive();
         void SetGoal(string goal);
-        string GetHighScore();
-        string GetPracticeRun();
-        void SetPlayerName(string userName);
-        void StartGame();
+        List<IPlayerScore> GetPlayerScores();
+        void ActivateGame();
+        void SaveGame(string playerName);
+        void IncrementGuessCount();
+        bool IsCorrectGuess(string guess);
+        void DeactivateGame();
+        string GetRightAnswer();
     }
 }

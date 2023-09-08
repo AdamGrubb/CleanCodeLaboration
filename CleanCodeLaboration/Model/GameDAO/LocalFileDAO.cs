@@ -7,7 +7,7 @@ namespace CleanCodeLaboration.Model.GameDAO
         private const string nameAndScoreSeperator = "#&#";
         private const string fileFormat = ".txt";
 
-        public void SavePlayerScore(string gameName, IPlayerScore player) //Här har jag kvar gameName, för att denna ska fungera som en webApi. 
+        public void SavePlayerScore(string gameName, IPlayerScore player)
         {
             StreamWriter streamWriter = new StreamWriter(gameName + fileFormat, append: true);
             streamWriter.WriteLine(player.Name + nameAndScoreSeperator + player.Guesses);
@@ -21,10 +21,10 @@ namespace CleanCodeLaboration.Model.GameDAO
             string line;
             while ((line = streamReader.ReadLine()) != null)
             {
-                string[] nameAndScore = line.Split(new string[] { nameAndScoreSeperator }, StringSplitOptions.None);
-                string name = nameAndScore[0];
-                int score = Convert.ToInt32(nameAndScore[1]);
-                playerScores.Add(new PlayerScoreDTO(name, score));
+                string[] nameAndGuesses = line.Split(new string[] { nameAndScoreSeperator }, StringSplitOptions.None);
+                string name = nameAndGuesses[0];
+                int guesses = Convert.ToInt32(nameAndGuesses[1]);
+                playerScores.Add(new PlayerScoreDTO(name, guesses));
             }
             streamReader.Close();
 

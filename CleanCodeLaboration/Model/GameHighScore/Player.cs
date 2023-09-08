@@ -1,8 +1,9 @@
-﻿namespace CleanCodeLaboration.Model.GameLogic.Strategy
-{
-    public class Player
-    {
+﻿using CleanCodeLaboration.Model.GameHighScore.Interface;
 
+namespace CleanCodeLaboration.Model.GameHighScore
+{
+    public class Player : IPlayer
+    {
         public string Name { get; private set; }
         public int NumberOfGames { get; private set; }
         public int Guesses;
@@ -20,14 +21,17 @@
             Guesses += guesses;
             NumberOfGames++;
         }
+
         public double GetAverageScore()
         {
             return (double)Guesses / NumberOfGames;
         }
+
         public override bool Equals(object p)
         {
             return Name.Equals(((Player)p).Name);
         }
+
         public override int GetHashCode()
         {
             return Name.GetHashCode();
