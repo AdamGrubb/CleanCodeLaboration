@@ -9,7 +9,6 @@ namespace CleanCodeLaboration.Controller.GameMenu
         private readonly IGameMenuSelection[] menuSelections;
         private readonly IIO iO;
 
-
         public GameMenu(IGameMenuSelection[] menuSelections, IIO iO)
         {
             this.menuSelections = menuSelections;
@@ -60,8 +59,17 @@ namespace CleanCodeLaboration.Controller.GameMenu
 
         private void ExecuteSelectedMenuCommand(int userChoice)
         {
-            int indexCorrection = 1;
-            menuSelections[userChoice - indexCorrection].MenuCommand.Execute();
+            try
+            {
+                int indexCorrection = 10;
+                menuSelections[userChoice - indexCorrection].MenuCommand.Execute();
+            }
+            catch(IndexOutOfRangeException ex)
+            {
+                string message = string.Format("Not a valid choice from the menu, please try with a number within the range {0}", ex);
+                OutputMessage(message);
+            }
+
         }
         public bool ContinuePlaying()
         {
