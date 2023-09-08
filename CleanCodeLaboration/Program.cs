@@ -24,7 +24,7 @@ IGameDAO gameDAO = new LocalFileDAO();
 
 IHighScoreReport highScoreFormatter = new HighScoreReport();
 
-IGameContext gameContext = new GameLogicContext(highScoreFormatter);
+IGameLogicContext gameContext = new GameLogicContext(highScoreFormatter);
 QuizGameStrategyFactory quizGameStrategyFactory = new QuizGameStrategyFactory(gameDAO, quizQuestionDAO);
 MooGameStrategyFactory mooGameStrategyFactory = new MooGameStrategyFactory(gameDAO);
 IGameLoop gameLoop = new GameLoop(iO, gameContext);

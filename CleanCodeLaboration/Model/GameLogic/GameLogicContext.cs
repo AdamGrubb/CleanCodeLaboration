@@ -7,11 +7,11 @@ using CleanCodeLaboration.Model.GameLogic.Strategy.Interface;
 
 namespace CleanCodeLaboration.Model.GameLogic
 {
-    public class GameLogicContext : IGameContext //Vad är GameContext? Du borde döpa om den här och fundera ut vad den har för ansvar. Läs på om strategy.
+    public class GameLogicContext : IGameLogicContext
     {
         private IGameStrategy gameStrategy;
         private readonly IHighScoreReport highScoreFormatter;
-        private string playerName;
+        private string playerName = string.Empty;
         
         public GameLogicContext(IHighScoreReport higScoreFormatter) 
         {

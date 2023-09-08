@@ -13,9 +13,9 @@ namespace CleanCodeLaboration.Controller.GameLoop
     public class GameLoop : IGameLoop
     {
         private readonly IIO iO;
-        private readonly IGameContext gameContext;
+        private readonly IGameLogicContext gameContext;
 
-        public GameLoop(IIO iO, IGameContext gameContext)
+        public GameLoop(IIO iO, IGameLogicContext gameContext)
         {
             this.iO = iO;
             this.gameContext = gameContext;

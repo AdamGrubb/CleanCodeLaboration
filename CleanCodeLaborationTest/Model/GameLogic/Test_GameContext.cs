@@ -20,7 +20,7 @@ namespace CleanCodeLaborationTest.Model.GameLogic
         private Mock<IGameStrategy> mockGameStrategy;
         private Mock<IGameDAO> mockGameDAO;
         private Mock<IHighScoreReport> mockHighScoreFormatter;
-        private IGameContext gameContext;
+        private IGameLogicContext gameContext;
 
         [TestInitialize]
         public void Initialize()
