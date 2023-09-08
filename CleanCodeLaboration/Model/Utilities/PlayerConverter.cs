@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CleanCodeLaboration.Model.Utilities
 {
-    public static class PlayerConverter //Se över denna en gång till.
+    public static class PlayerConverter
     {
         public static List<IPlayer> ToPlayer(List<IPlayerScore> playerScores)
         {

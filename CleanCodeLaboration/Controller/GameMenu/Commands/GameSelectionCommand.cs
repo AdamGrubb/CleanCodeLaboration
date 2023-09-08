@@ -15,7 +15,7 @@ namespace CleanCodeLaboration.Controller.GameMenu.Commands
         private readonly AbstractGameStrategyFactory gameFactory;
         private readonly IGameLoop gameLoop;
 
-        public GameSelectionCommand(AbstractGameStrategyFactory gameFactory, IGameLoop gameLoop) //Problemet hä är att du måste göra en specifik command för varje spel och hårdkoda gameName.
+        public GameSelectionCommand(AbstractGameStrategyFactory gameFactory, IGameLoop gameLoop)
         {
             this.gameFactory = gameFactory;
             this.gameLoop = gameLoop;

@@ -24,7 +24,7 @@ namespace CleanCodeLaboration.Controller.GameLoop
         {
             gameContext.SetGameStrategy(gameStrategy);
         }
-        public void InputPlayerName() //Lite oklart att den sätter namnet samt frågar om det.
+        public void InputPlayerName()
         {
             OutputPlayerNamePromt();
 
@@ -32,13 +32,13 @@ namespace CleanCodeLaboration.Controller.GameLoop
         }
         public void RunGameLoop()
         {
-            StartNewGame(); //Lite fortfarande för StartNewGame, det är svårt att veta vad den gör.
+            StartNewGame();
 
             OutputGameIntroduction();
 
             OutputCorrectAnswer();
 
-            PromtUserGuesses();  //PromtUserGuesses? Fundera lite mer på den. också svårt att veta vad den gör. Har sammai GameStrategyMenu nu också.
+            PromtUserGuesses();
 
             OutputHighScore();
 
@@ -49,7 +49,7 @@ namespace CleanCodeLaboration.Controller.GameLoop
             string playerNameQuestion = gameContext.GetPlayerNameQuestion();
             OutputMessage(playerNameQuestion);
         }
-        private void OutputMessage(string output) //Denna får du också kolla över namnet på.
+        private void OutputMessage(string output)
         {
             iO.GameOutput(output);
         }

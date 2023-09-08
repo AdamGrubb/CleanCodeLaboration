@@ -23,7 +23,7 @@ namespace CleanCodeLaboration.Controller.GameMenu
         private List<string> GetGameNames()
         {
             var gameNames = menuSelections
-                .Select((command, index) => $"{index + 1}. {command.Description}") //Fixa commandgrejen, det ska väl vara selection 
+                .Select((selection, index) => $"{index + 1}. {selection.Description}")
                 .ToList();
             return gameNames;
         }
@@ -35,7 +35,7 @@ namespace CleanCodeLaboration.Controller.GameMenu
         {
             names.ForEach(name => OutputMessage(name));
         }
-        public void SelectMenu() //Här så väljer man vilket val i listan.
+        public void MakeMenuSelection()
         {
             int choice = PromtUserChoice();
             GetGameStrategy(choice);
@@ -43,22 +43,22 @@ namespace CleanCodeLaboration.Controller.GameMenu
         private int PromtUserChoice()
         {
             bool validInput;
-            int choice;
-            string userSelection; //User selection och userCHoice vaddåå!???!?!?
+            int userChoice;
+            string userSelection;
             do
             {
                 userSelection = GetUserInput();
-                validInput = int.TryParse(userSelection, out choice) && choice <= menuSelections.Length && choice > 0;
+                validInput = int.TryParse(userSelection, out userChoice) && userChoice <= menuSelections.Length && userChoice > 0;
             } while (!validInput);
 
-            return choice;
+            return userChoice;
         }
         private string GetUserInput()
         {
             return iO.GetUserInput();
         }
 
-        private void GetGameStrategy(int userChoice) //Denna gör valet i listan. Här ska man låta command köra sin  metod.
+        private void GetGameStrategy(int userChoice)
         {
             int indexCorrection = 1;
             menuSelections[userChoice - indexCorrection].MenuCommand.Execute();

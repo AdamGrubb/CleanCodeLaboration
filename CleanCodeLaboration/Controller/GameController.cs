@@ -39,7 +39,7 @@ namespace CleanCodeLaboration.Controller
         }
         private void ChooseGame()
         {
-            gameMenu.SelectMenu();
+            gameMenu.MakeMenuSelection();
         }
         private bool KeepPlaying()
         {
