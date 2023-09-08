@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CleanCodeLaboration.Model.GameHighScore.Interface
 {
-    public interface IHighScoreFormatter
+    public interface IHighScoreReport
     {
         string FormatHighScores(List<IPlayerScore> players);
     }

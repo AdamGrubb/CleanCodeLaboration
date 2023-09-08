@@ -19,7 +19,7 @@ namespace CleanCodeLaborationTest.Model.GameLogic
     {
         private Mock<IGameStrategy> mockGameStrategy;
         private Mock<IGameDAO> mockGameDAO;
-        private Mock<IHighScoreFormatter> mockHighScoreFormatter;
+        private Mock<IHighScoreReport> mockHighScoreFormatter;
         private IGameContext gameContext;
 
         [TestInitialize]
@@ -27,7 +27,7 @@ namespace CleanCodeLaborationTest.Model.GameLogic
         {
             mockGameStrategy = new Mock<IGameStrategy>();
             mockGameDAO = new Mock<IGameDAO>();
-            mockHighScoreFormatter = new Mock<IHighScoreFormatter>();
+            mockHighScoreFormatter = new Mock<IHighScoreReport>();
             gameContext = new GameContext(mockGameDAO.Object, mockHighScoreFormatter.Object);
         } 
 

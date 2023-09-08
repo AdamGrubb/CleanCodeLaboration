@@ -22,7 +22,7 @@ IIO iO = new ConsoleIO();
 
 IGameDAO gameDAO = new LocalFileDAO();
 
-IHighScoreFormatter highScoreFormatter = new HighScoreFormatter();
+IHighScoreReport highScoreFormatter = new HighScoreReport();
 
 IGameContext gameContext = new GameLogicContext(highScoreFormatter);
 QuizGameStrategyFactory quizGameStrategyFactory = new QuizGameStrategyFactory(gameDAO, quizQuestionDAO);

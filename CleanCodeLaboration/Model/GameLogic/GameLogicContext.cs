@@ -10,10 +10,10 @@ namespace CleanCodeLaboration.Model.GameLogic
     public class GameLogicContext : IGameContext //Vad är GameContext? Du borde döpa om den här och fundera ut vad den har för ansvar. Läs på om strategy.
     {
         private IGameStrategy gameStrategy;
-        private readonly IHighScoreFormatter highScoreFormatter;
+        private readonly IHighScoreReport highScoreFormatter;
         private string playerName;
         
-        public GameLogicContext(IHighScoreFormatter higScoreFormatter) 
+        public GameLogicContext(IHighScoreReport higScoreFormatter) 
         {
             this.highScoreFormatter = higScoreFormatter;
         }
