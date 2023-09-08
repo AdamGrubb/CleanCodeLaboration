@@ -19,20 +19,17 @@ using CleanCodeLaboration.Model.GameStrategyFactory;
 
 IQuizQuestionDAO quizQuestionDAO = new StarWarsQuestionDAO();
 IIO iO = new ConsoleIO();
-
 IGameDAO gameDAO = new LocalFileDAO();
-
 IHighScoreReport highScoreFormatter = new HighScoreReport();
-
 IGameLogicContext gameContext = new GameLogicContext(highScoreFormatter);
+
 QuizGameStrategyFactory quizGameStrategyFactory = new QuizGameStrategyFactory(gameDAO, quizQuestionDAO);
 MooGameStrategyFactory mooGameStrategyFactory = new MooGameStrategyFactory(gameDAO);
+
 IGameLoop gameLoop = new GameLoop(iO, gameContext);
+
 IMenuCommand quizGameSelection = new GameSelectionCommand(quizGameStrategyFactory, gameLoop);
 IMenuCommand mooGameSelection = new GameSelectionCommand(mooGameStrategyFactory, gameLoop);
-
-
-
 
 IGameMenuSelection[] gameMenuSelections = new IGameMenuSelection[]
 {
@@ -42,7 +39,6 @@ IGameMenuSelection[] gameMenuSelections = new IGameMenuSelection[]
 };
 
 IGameMenu gameMenu = new GameMenu(gameMenuSelections, iO);
-
 
 GameController controller = new GameController(gameLoop, gameMenu);
 controller.StartGame();
