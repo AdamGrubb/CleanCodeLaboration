@@ -16,7 +16,6 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.QuizGameStrategy
         private IQuizQuestion quizQuestion;
         private string goal;
         private const string correctResponse = "Correct Answer!";
-        private const string incorrectResponse = "Incorrect Answer, try again";
         private int numberOfGuesses = 0;
         private bool isGameActive;
         private IGameDAO gameDAO;
@@ -45,7 +44,7 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.QuizGameStrategy
             quizQuestion = questionDAO.GetRandomQuizQuestion();
         }
 
-        private string GetQuizAnswer() //Här borde du ha en try catch.
+        private string GetQuizAnswer()
         {
             string quizAnswer = quizQuestion.Answer;
             return quizAnswer;
@@ -70,6 +69,7 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.QuizGameStrategy
 
         public string GetEvaluatedGuess(string guess)
         {
+            const string incorrectResponse = "Incorrect Answer, try again";
             string response = CompareGuessToGoal(guess) ? correctResponse : incorrectResponse;
             return response;
         }

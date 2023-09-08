@@ -51,7 +51,7 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.MooGameStrategy
             const string newGame = "New game:";
             return newGame;
         }
-        public string GetRightAnswer() 
+        public string GetRightAnswer()
         {
             string rightAnswer = "For practice, number is: " + goal;
             return rightAnswer;
@@ -67,7 +67,7 @@ namespace CleanCodeLaboration.Model.GameLogic.Strategy.MooGameStrategy
             guess = EnsureGuessLenght(guess);
             int cows = CountContainingNumbers(guess);
             int bulls = CountMatchingNumbers(guess);
-            string formatedAnswer = FormatGuess(cows, bulls); //Lite osäker på denna
+            string formatedAnswer = FormatGuess(cows, bulls);
             return formatedAnswer;
         }
         private string EnsureGuessLenght(string guess)
